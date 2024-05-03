@@ -40,7 +40,9 @@ namespace Library
 
         private void addbk_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            AddBook addBook = new AddBook();
+            addBook.ShowDialog(); 
         }
         public void LoadStudentInfo()
         {
