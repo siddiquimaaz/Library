@@ -79,7 +79,7 @@
             booktitltxt.BackColor = Color.White;
             booktitltxt.BorderStyle = BorderStyle.FixedSingle;
             booktitltxt.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            booktitltxt.ForeColor = Color.Transparent;
+            booktitltxt.ForeColor = Color.Black;
             booktitltxt.Location = new Point(119, 159);
             booktitltxt.Name = "booktitltxt";
             booktitltxt.PlaceholderText = "Enter Book name";
@@ -92,7 +92,7 @@
             authortxt.BackColor = Color.White;
             authortxt.BorderStyle = BorderStyle.FixedSingle;
             authortxt.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            authortxt.ForeColor = Color.Transparent;
+            authortxt.ForeColor = Color.Black;
             authortxt.Location = new Point(119, 208);
             authortxt.Name = "authortxt";
             authortxt.PlaceholderText = "Enter Author name";
@@ -169,6 +169,10 @@
             // 
             // booksView
             // 
+            booksView.AllowUserToAddRows = false;
+            booksView.AllowUserToDeleteRows = false;
+            booksView.AllowUserToResizeColumns = false;
+            booksView.AllowUserToResizeRows = false;
             booksView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             booksView.Location = new Point(552, 132);
             booksView.Name = "booksView";
@@ -214,8 +218,11 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            MinimizeBox = false;
             Name = "AddBook";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AddBook";
+            WindowState = FormWindowState.Maximized;
             Load += AddBook_Load;
             ((System.ComponentModel.ISupportInitialize)booksView).EndInit();
             ResumeLayout(false);
