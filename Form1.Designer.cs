@@ -47,11 +47,10 @@
             text1.BackColor = Color.Black;
             text1.BorderStyle = BorderStyle.FixedSingle;
             text1.ForeColor = Color.WhiteSmoke;
-            text1.Location = new Point(188, 264);
-            text1.Margin = new Padding(3, 4, 3, 4);
+            text1.Location = new Point(164, 198);
             text1.Name = "text1";
             text1.PlaceholderText = "Enter user name";
-            text1.Size = new Size(188, 27);
+            text1.Size = new Size(165, 23);
             text1.TabIndex = 0;
             text1.TextAlign = HorizontalAlignment.Center;
             // 
@@ -60,11 +59,10 @@
             text2.BackColor = Color.Black;
             text2.BorderStyle = BorderStyle.FixedSingle;
             text2.ForeColor = Color.White;
-            text2.Location = new Point(188, 336);
-            text2.Margin = new Padding(3, 4, 3, 4);
+            text2.Location = new Point(164, 252);
             text2.Name = "text2";
             text2.PlaceholderText = "Enter your Password";
-            text2.Size = new Size(188, 27);
+            text2.Size = new Size(165, 23);
             text2.TabIndex = 1;
             text2.TextAlign = HorizontalAlignment.Center;
             text2.UseSystemPasswordChar = true;
@@ -75,9 +73,9 @@
             userName.BackColor = Color.Transparent;
             userName.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             userName.ForeColor = Color.White;
-            userName.Location = new Point(62, 263);
+            userName.Location = new Point(54, 197);
             userName.Name = "userName";
-            userName.Size = new Size(119, 28);
+            userName.Size = new Size(95, 21);
             userName.TabIndex = 2;
             userName.Text = "User-Name:";
             // 
@@ -87,9 +85,9 @@
             Pass.BackColor = Color.Transparent;
             Pass.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             Pass.ForeColor = Color.White;
-            Pass.Location = new Point(62, 335);
+            Pass.Location = new Point(54, 251);
             Pass.Name = "Pass";
-            Pass.Size = new Size(102, 28);
+            Pass.Size = new Size(83, 21);
             Pass.TabIndex = 3;
             Pass.Text = "Password:";
             // 
@@ -99,9 +97,9 @@
             Head.BackColor = Color.Transparent;
             Head.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             Head.ForeColor = Color.White;
-            Head.Location = new Point(476, 64);
+            Head.Location = new Point(416, 48);
             Head.Name = "Head";
-            Head.Size = new Size(249, 41);
+            Head.Size = new Size(203, 32);
             Head.TabIndex = 4;
             Head.Text = "Jaun Elia Library";
             // 
@@ -111,9 +109,9 @@
             tag.BackColor = Color.Transparent;
             tag.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             tag.ForeColor = Color.White;
-            tag.Location = new Point(511, 9);
+            tag.Location = new Point(447, 7);
             tag.Name = "tag";
-            tag.Size = new Size(178, 41);
+            tag.Size = new Size(142, 32);
             tag.TabIndex = 5;
             tag.Text = "Welcome to";
             // 
@@ -121,10 +119,9 @@
             // 
             Login.BackColor = Color.Black;
             Login.ForeColor = SystemColors.Info;
-            Login.Location = new Point(228, 397);
-            Login.Margin = new Padding(3, 4, 3, 4);
+            Login.Location = new Point(200, 298);
             Login.Name = "Login";
-            Login.Size = new Size(86, 31);
+            Login.Size = new Size(75, 23);
             Login.TabIndex = 6;
             Login.Text = "Logiin";
             Login.UseVisualStyleBackColor = false;
@@ -136,9 +133,9 @@
             hehe.BackColor = Color.Transparent;
             hehe.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             hehe.ForeColor = Color.White;
-            hehe.Location = new Point(51, 483);
+            hehe.Location = new Point(45, 362);
             hehe.Name = "hehe";
-            hehe.Size = new Size(315, 23);
+            hehe.Size = new Size(256, 19);
             hehe.TabIndex = 7;
             hehe.Text = "Did not have any accout? Register here:";
             // 
@@ -146,10 +143,9 @@
             // 
             sign.BackColor = Color.Black;
             sign.ForeColor = SystemColors.Menu;
-            sign.Location = new Point(382, 475);
-            sign.Margin = new Padding(3, 4, 3, 4);
+            sign.Location = new Point(334, 356);
             sign.Name = "sign";
-            sign.Size = new Size(86, 31);
+            sign.Size = new Size(75, 23);
             sign.TabIndex = 8;
             sign.Text = "Sign-Up";
             sign.UseVisualStyleBackColor = false;
@@ -161,9 +157,10 @@
             checkBox1.BackColor = Color.Transparent;
             checkBox1.Font = new Font("Calibri", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             checkBox1.ForeColor = Color.White;
-            checkBox1.Location = new Point(382, 341);
+            checkBox1.Location = new Point(334, 256);
+            checkBox1.Margin = new Padding(3, 2, 3, 2);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(70, 25);
+            checkBox1.Size = new Size(59, 21);
             checkBox1.TabIndex = 11;
             checkBox1.Text = "show";
             checkBox1.TextAlign = ContentAlignment.MiddleCenter;
@@ -176,9 +173,10 @@
             checkadmin.BackColor = Color.Transparent;
             checkadmin.Font = new Font("Calibri", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             checkadmin.ForeColor = Color.White;
-            checkadmin.Location = new Point(320, 404);
+            checkadmin.Location = new Point(280, 303);
+            checkadmin.Margin = new Padding(3, 2, 3, 2);
             checkadmin.Name = "checkadmin";
-            checkadmin.Size = new Size(78, 25);
+            checkadmin.Size = new Size(65, 21);
             checkadmin.TabIndex = 12;
             checkadmin.Text = "Admin";
             checkadmin.TextAlign = ContentAlignment.MiddleCenter;
@@ -186,12 +184,12 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1403, 730);
+            ClientSize = new Size(1199, 548);
             Controls.Add(text1);
             Controls.Add(checkadmin);
             Controls.Add(checkBox1);
@@ -205,12 +203,12 @@
             Controls.Add(text2);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LMS";
+            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }
