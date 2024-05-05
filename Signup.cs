@@ -173,5 +173,16 @@ namespace Library
             return bitmap;
         }
 
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            panel1.BackColor = Color.FromArgb(200, 255, 255, 255);
+
+        }
     }
 }
