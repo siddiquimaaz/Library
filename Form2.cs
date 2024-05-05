@@ -66,6 +66,11 @@ namespace Library
             timer1.Interval = 10; // Shorter intervals for a smoother animation experience
             timer1.Start(); // Explicitly start the timer
         }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
 
