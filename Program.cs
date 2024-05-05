@@ -13,7 +13,7 @@ namespace Library
             Application.SetCompatibleTextRenderingDefault(false); // Must be called before any window is created
             try
             {
-                Application.Run(new Form1());
+                Application.Run(new Form2());
             }
             catch (Exception ex)
             {
