@@ -61,7 +61,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Mistral", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(407, 42);
+            label2.Location = new Point(407, 65);
             label2.Name = "label2";
             label2.Size = new Size(192, 33);
             label2.TabIndex = 1;
