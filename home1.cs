@@ -41,8 +41,8 @@ namespace Library
         private void addbk_Click(object sender, EventArgs e)
         {
             this.Hide();
-            AddBook addBook = new AddBook();
-            addBook.ShowDialog(); 
+            AddBook addBook = new AddBook(SessionInfo.CurrentStudentId);  // Pass currentStudentId
+            addBook.ShowDialog();
         }
         public void LoadStudentInfo()
         {
