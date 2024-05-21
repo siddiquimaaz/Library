@@ -218,9 +218,9 @@
             label3.ForeColor = Color.White;
             label3.Location = new Point(34, 120);
             label3.Name = "label3";
-            label3.Size = new Size(194, 25);
+            label3.Size = new Size(208, 25);
             label3.TabIndex = 17;
-            label3.Text = "Welcome! Amin";
+            label3.Text = "Welcome! Admin";
             // 
             // adminpanel
             // 
