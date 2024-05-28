@@ -18,51 +18,123 @@ namespace Library
     public partial class home : Form
     {
         private string connectionString = "server=127.0.0.1;port=3306;database=LMS;uid=root;pwd=maazsiddiqui12;";
-        public static class SessionInfo
-        {
-            public static int CurrentStudentId { get; set; }
-        }
 
         public home()
         {
             InitializeComponent();
         }
 
+        public static class SessionInfo
+        {
+            public static int CurrentStudentId { get; set; }
+            public static string CurrentStudentUsername { get; set; }
+        }
+
+        private async Task<int> GetLoggedInUserId()
+        {
+            try
+            {
+                string email = SessionInfo.CurrentStudentUsername;
+                if (string.IsNullOrEmpty(email))
+                {
+                    MessageBox.Show("Email is empty or null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return -1;
+                }
+
+                string query = "SELECT StudentID FROM Students WHERE Email = @Email";
+
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+                    using (var cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@Email", email);
+                        object result = await cmd.ExecuteScalarAsync();
+                        if (result != null)
+                        {
+                            return Convert.ToInt32(result);
+                        }
+                        else
+                        {
+                            MessageBox.Show("User with provided email not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return -1;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while retrieving user ID: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
+            }
+        }
         private void home_Load(object sender, EventArgs e)
         {
-            LoadStudentInfo(); // Load and display the info of the logged-in student
+            LoadUserData();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private async void LoadUserData()
         {
+            try
+            {
+                // Ensure that the email is not empty
+                if (string.IsNullOrWhiteSpace(SessionInfo.CurrentStudentUsername))
+                {
+                    MessageBox.Show("Email is empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
+                MessageBox.Show("Loading user ID...", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                int userId = await GetLoggedInUserId();
+
+                if (userId != -1)
+                {
+                    MessageBox.Show($"User ID: {userId}", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    await LoadStudentInfo(userId);
+                }
+                else
+                {
+                    MessageBox.Show("User ID is invalid or not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
+
+
+
 
         private void addbk_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            AddBook addBook = new AddBook(SessionInfo.CurrentStudentId);  // Pass currentStudentId
-            addBook.ShowDialog();
+            int studentId = SessionInfo.CurrentStudentId;
+            AddBook addBookForm = new AddBook(studentId);
+            addBookForm.Show();
         }
-        public void LoadStudentInfo()
+
+        public async Task LoadStudentInfo(int userId)
         {
-            int studentId = SessionInfo.CurrentStudentId; // Ensure this is correctly set
             try
             {
+                // Query to fetch user information based on user ID
+                string sql = "SELECT FirstName, LastName, Photo FROM Students WHERE StudentID = @StudentId";
+
                 using (var connection = new MySqlConnection(connectionString))
                 {
-                    connection.Open();
-                    string sql = "SELECT FirstName, LastName, Photo FROM Students WHERE StudentID = @StudentId";
+                    await connection.OpenAsync();
                     using (var cmd = new MySqlCommand(sql, connection))
                     {
-                        cmd.Parameters.AddWithValue("@StudentId", studentId);
+                        cmd.Parameters.AddWithValue("@StudentId", userId);
 
-                        using (var reader = cmd.ExecuteReader())
+                        using (var reader = await cmd.ExecuteReaderAsync())
                         {
-                            if (reader.Read())
+                            if (await reader.ReadAsync())
                             {
-                                MessageBox.Show("Data found, preparing to display..."); // Debug message
-                                DisplayStudentInfo(reader); // Display the student info
+                                DisplayStudentInfo((MySqlDataReader)reader);
                             }
                             else
                             {
@@ -74,19 +146,15 @@ namespace Library
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}");
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void DisplayStudentInfo(MySqlDataReader reader)
         {
             string firstName = reader["FirstName"].ToString();
             string lastName = reader["LastName"].ToString();
             byte[] photoBytes = reader["Photo"] as byte[];
-
-            // Debug: Check if data is correctly extracted
-            MessageBox.Show($"Name: {firstName} {lastName}\nPhoto Bytes Length: {photoBytes?.Length ?? 0}");
 
             HomeStdNameLabel.Text = $"{firstName} {lastName}";
 
@@ -97,7 +165,7 @@ namespace Library
                     Image originalImage = Image.FromStream(ms);
                     HomeStdPic.Visible = true;
                     HomeStdNameLabel.Visible = true;
-                    HomeStdPic.Image = GetEllipseImage(originalImage); // Set the elliptical image
+                    HomeStdPic.Image = GetEllipseImage(originalImage);
                 }
             }
             else
@@ -106,47 +174,36 @@ namespace Library
             }
         }
 
-
-
         private Image GetEllipseImage(Image originalImage)
         {
-            // Create a new bitmap with the same dimensions as the original image
             Bitmap bitmap = new Bitmap(originalImage.Width, originalImage.Height);
 
             using (Graphics g = Graphics.FromImage(bitmap))
             {
-                g.Clear(Color.Transparent); // Set background color to transparent
+                g.Clear(Color.Transparent);
                 GraphicsPath path = new GraphicsPath();
-
-                // Add an ellipse to the path that has the same dimensions as the image
                 path.AddEllipse(0, 0, originalImage.Width, originalImage.Height);
                 g.SetClip(path);
-
-                // Draw the original image onto the bitmap which is clipped to the ellipse
                 g.DrawImage(originalImage, 0, 0);
             }
 
-            return bitmap; // Return the elliptically clipped image
+            return bitmap;
         }
 
         private void logout_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to logout?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Logout();  // Call the logout method only if the user confirms
+                Logout();
             }
         }
+
         public void Logout()
         {
-            // Reset the session ID
             SessionInfo.CurrentStudentId = 0;
-
-            // Optionally, clear any other session-related data or perform other cleanup tasks
-
-            // Close the current form and show the login form
             this.Hide();
-            var loginForm = new Form1();  // Assuming Form1 is your login form
-            loginForm.FormClosed += (s, args) => this.Close();  // Ensure the entire application closes when the login form is closed
+            var loginForm = new Form1();
+            loginForm.FormClosed += (s, args) => this.Close();
             loginForm.Show();
         }
 
@@ -157,4 +214,6 @@ namespace Library
             adminpanel.ShowDialog();
         }
     }
+
+    
 }
