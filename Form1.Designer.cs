@@ -153,7 +153,7 @@
             checkBox1.Text = "Show Password";
             checkBox1.TextAlign = ContentAlignment.MiddleCenter;
             checkBox1.UseVisualStyleBackColor = false;
-            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            //checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // checkadmin
             // 
