@@ -39,7 +39,10 @@
             backbtn = new FontAwesome.Sharp.IconButton();
             booksView = new DataGridView();
             SearchBtn = new FontAwesome.Sharp.IconButton();
+            addbookstdname = new Label();
+            addbookstdimage = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)booksView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)addbookstdimage).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -67,7 +70,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(34, 166);
+            label3.Location = new Point(41, 261);
             label3.Name = "label3";
             label3.Size = new Size(81, 20);
             label3.TabIndex = 2;
@@ -80,12 +83,13 @@
             booktitltxt.BorderStyle = BorderStyle.FixedSingle;
             booktitltxt.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             booktitltxt.ForeColor = Color.Black;
-            booktitltxt.Location = new Point(119, 159);
+            booktitltxt.Location = new Point(126, 254);
             booktitltxt.Name = "booktitltxt";
             booktitltxt.PlaceholderText = "Enter Book name";
             booktitltxt.Size = new Size(191, 27);
             booktitltxt.TabIndex = 3;
             booktitltxt.TextAlign = HorizontalAlignment.Center;
+            booktitltxt.TextChanged += booktitltxt_TextChanged;
             // 
             // authortxt
             // 
@@ -93,7 +97,7 @@
             authortxt.BorderStyle = BorderStyle.FixedSingle;
             authortxt.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             authortxt.ForeColor = Color.Black;
-            authortxt.Location = new Point(119, 208);
+            authortxt.Location = new Point(126, 303);
             authortxt.Name = "authortxt";
             authortxt.PlaceholderText = "Enter Author name";
             authortxt.Size = new Size(191, 27);
@@ -105,7 +109,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(34, 215);
+            label4.Location = new Point(41, 310);
             label4.Name = "label4";
             label4.Size = new Size(57, 20);
             label4.TabIndex = 4;
@@ -122,7 +126,7 @@
             addToStdbtn.IconFont = FontAwesome.Sharp.IconFont.Regular;
             addToStdbtn.IconSize = 28;
             addToStdbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            addToStdbtn.Location = new Point(129, 312);
+            addToStdbtn.Location = new Point(136, 407);
             addToStdbtn.Name = "addToStdbtn";
             addToStdbtn.Size = new Size(72, 30);
             addToStdbtn.TabIndex = 6;
@@ -140,7 +144,7 @@
             cancel.IconFont = FontAwesome.Sharp.IconFont.Auto;
             cancel.IconSize = 28;
             cancel.ImageAlign = ContentAlignment.MiddleLeft;
-            cancel.Location = new Point(207, 312);
+            cancel.Location = new Point(214, 407);
             cancel.Name = "cancel";
             cancel.Size = new Size(86, 30);
             cancel.TabIndex = 7;
@@ -158,7 +162,7 @@
             backbtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
             backbtn.IconSize = 28;
             backbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            backbtn.Location = new Point(175, 358);
+            backbtn.Location = new Point(182, 453);
             backbtn.Name = "backbtn";
             backbtn.Size = new Size(76, 30);
             backbtn.TabIndex = 8;
@@ -191,7 +195,7 @@
             SearchBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             SearchBtn.IconSize = 28;
             SearchBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            SearchBtn.Location = new Point(175, 259);
+            SearchBtn.Location = new Point(182, 354);
             SearchBtn.Name = "SearchBtn";
             SearchBtn.Padding = new Padding(1);
             SearchBtn.Size = new Size(87, 34);
@@ -201,12 +205,33 @@
             SearchBtn.UseVisualStyleBackColor = true;
             SearchBtn.Click += SearchBtn_Click;
             // 
+            // addbookstdname
+            // 
+            addbookstdname.AutoSize = true;
+            addbookstdname.Location = new Point(158, 100);
+            addbookstdname.Name = "addbookstdname";
+            addbookstdname.Size = new Size(0, 20);
+            addbookstdname.TabIndex = 12;
+            addbookstdname.Visible = false;
+            // 
+            // addbookstdimage
+            // 
+            addbookstdimage.Location = new Point(12, 58);
+            addbookstdimage.Name = "addbookstdimage";
+            addbookstdimage.Size = new Size(121, 92);
+            addbookstdimage.SizeMode = PictureBoxSizeMode.StretchImage;
+            addbookstdimage.TabIndex = 13;
+            addbookstdimage.TabStop = false;
+            addbookstdimage.Visible = false;
+            // 
             // AddBook
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1314, 694);
+            Controls.Add(addbookstdimage);
+            Controls.Add(addbookstdname);
             Controls.Add(SearchBtn);
             Controls.Add(booksView);
             Controls.Add(backbtn);
@@ -225,6 +250,7 @@
             WindowState = FormWindowState.Maximized;
             Load += AddBook_Load;
             ((System.ComponentModel.ISupportInitialize)booksView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)addbookstdimage).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -242,5 +268,7 @@
         private FontAwesome.Sharp.IconButton backbtn;
         private DataGridView booksView;
         private FontAwesome.Sharp.IconButton SearchBtn;
+        private Label addbookstdname;
+        private PictureBox addbookstdimage;
     }
 }
