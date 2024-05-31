@@ -11,10 +11,10 @@ namespace Library
         {
             InitializeComponent();
         }
-
         public static class SessionInfo
         {
             public static int CurrentStudentId { get; set; }
+            public static string CurrentStudentEmail { get; set; }
         }
 
         private async Task<int> ValidateCredentialsAsync(string email, string password, bool isAdmin)
@@ -28,38 +28,38 @@ namespace Library
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
-                    MessageBox.Show("Connected to the database successfully.");
+                    MessageBox.Show("Connected to the database successfully.", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     string query = $"SELECT {idColumn}, HashedPassword FROM {table} WHERE Email = @Email";
-                    MessageBox.Show("Query: " + query);
+                    MessageBox.Show("Query: " + query, "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     using (var cmd = new MySqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@Email", email);
-                        MessageBox.Show("Email parameter added: " + email);
+                        MessageBox.Show("Email parameter added: " + email, "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
                             if (await reader.ReadAsync())
                             {
                                 string hashedPassword = reader["HashedPassword"].ToString();
-                                MessageBox.Show("Retrieved hashed password from the database: " + hashedPassword);
+                                MessageBox.Show("Retrieved hashed password from the database: " + hashedPassword, "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                                 if (BCrypt.Net.BCrypt.Verify(password, hashedPassword))
                                 {
                                     userId = Convert.ToInt32(reader[idColumn]);
-                                    MessageBox.Show("User authenticated successfully. UserID: " + userId);
+                                    MessageBox.Show("User authenticated successfully. UserID: " + userId, "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     SessionInfo.CurrentStudentId = userId;
-                                    MessageBox.Show("login finished ");
+                                    SessionInfo.CurrentStudentEmail = email;
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Password verification failed.");
+                                    MessageBox.Show("Password verification failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("No matching record found for the email: " + email);
+                                MessageBox.Show("No matching record found for the email: " + email, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
@@ -67,13 +67,13 @@ namespace Library
             }
             catch (Exception ex)
             {
-                // Log the error message to the console for debugging purposes
-                MessageBox.Show("1Error connecting to the database: " + ex.Message);
+                MessageBox.Show("Error connecting to the database: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw new Exception("Error validating credentials.", ex); // Rethrow with custom message
             }
 
             return userId;
         }
+
 
 
         private void sign_Click(object sender, EventArgs e)
@@ -107,33 +107,26 @@ namespace Library
                 string password = text2.Text;
                 bool isAdmin = checkadmin.Checked;
 
-                int userId = await ValidateCredentialsAsync(email, password, isAdmin); // Await the async method
+                int userId = await ValidateCredentialsAsync(email, password, isAdmin);
                 if (userId != -1)
                 {
-                    MessageBox.Show($"User ID: {userId}", "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    SessionInfo.CurrentStudentId = userId;
-
                     if (isAdmin)
                     {
-                        // If the user is an admin, show the admin panel
                         adminpanel adminForm = new adminpanel();
                         this.Hide();
                         adminForm.ShowDialog();
-                        this.Close();
                     }
                     else
                     {
-                        // If the user is not an admin, show the home form
                         home homeForm = new home();
                         this.Hide();
                         await homeForm.LoadStudentInfo(userId); // Load student info
                         homeForm.ShowDialog();
-                        this.Close();
                     }
+                    this.Close();
                 }
                 else
                 {
-                    // Display "Invalid credentials" message only when authentication fails
                     MessageBox.Show("Invalid credentials, please try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -143,6 +136,11 @@ namespace Library
             }
         }
 
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            text2.UseSystemPasswordChar = !checkBox1.Checked;
+        }
     }
 
 }
