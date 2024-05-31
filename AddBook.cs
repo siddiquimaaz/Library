@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BCrypt.Net;
+using System.Drawing.Drawing2D;
 
 namespace Library
 {
@@ -17,16 +18,82 @@ namespace Library
         string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
         private int currentStudentId;  // Field to store the current student's ID
 
-        public AddBook(int studentId)
+        public AddBook(string username)
         {
             InitializeComponent();
-            currentStudentId = studentId;
+            // Initialize the form and then start the async process to get the student ID and load data
+            Task.Run(async () => await InitializeFormAsync(username)).Wait();
         }
-
-
-        private void AddBook_Load(object sender, EventArgs e)
+        private async Task InitializeFormAsync(string username)
         {
-            LoadBooksAsync();
+            try
+            {
+                currentStudentId = await GetStudentId(username);
+                await FetchAndDisplayStudentInfo(currentStudentId);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error initializing form: {ex.Message}", "Initialization Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private async Task<int> GetStudentId(string username)
+        {
+            try
+            {
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+                    string sql = "SELECT StudentID FROM Students WHERE Username = @Username";
+                    using (var cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@Username", username);
+                        object result = await cmd.ExecuteScalarAsync();
+                        if (result != null)
+                        {
+                            return Convert.ToInt32(result);
+                        }
+                        else
+                        {
+                            throw new Exception("User not found.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error retrieving student ID: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+        }
+        private async Task FetchAndDisplayStudentInfo(int studentId)
+        {
+            string connectionString = "your_connection_string"; // Replace with your actual connection string
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                string query = "SELECT FirstName, LastName, Photo FROM Students WHERE StudentId = @StudentId";
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@StudentId", studentId);
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync()) // Ensure there's data to read
+                        {
+                            // Casting DbDataReader to MySqlDataReader
+                            DisplayStudentInfo((MySqlDataReader)reader);
+                        }
+                        else
+                        {
+                            MessageBox.Show("No student data found.");
+                        }
+                    }
+                }
+            }
+        }
+        private async void AddBook_Load(object sender, EventArgs e)
+        {
+            await LoadBooksAsync();
+            await FetchAndDisplayStudentInfo(currentStudentId); // Pass the student ID
         }
 
         private void backbtn_Click(object sender, EventArgs e)
@@ -45,7 +112,7 @@ namespace Library
             LoadBooksAsync();  // Assuming LoadBooks() resets the DataGridView to show all books
 
             // Reset any other UI elements that might have changed
-            
+
         }
 
         private void SearchBtn_Click(object sender, EventArgs e)
@@ -121,7 +188,8 @@ namespace Library
                         {
                             // Asynchronously fill the DataTable
                             await Task.Run(() => adapter.Fill(dt));  // Consider using FillAsync if available
-                            booksView.Invoke(new Action(() => {
+                            booksView.Invoke(new Action(() =>
+                            {
                                 booksView.DataSource = dt;
                             }));
                         }
@@ -212,8 +280,6 @@ namespace Library
                 MessageBox.Show($"Failed to update checkboxes: {ex.Message}", "Checkbox Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
         private async void addToStdbtn_Click(object sender, EventArgs e)
         {
             bool anyBookSelected = false;
@@ -344,6 +410,49 @@ namespace Library
                 }
             }
         }
+        private void DisplayStudentInfo(MySqlDataReader reader)
+        {
+            string firstName = reader["FirstName"].ToString();
+            string lastName = reader["LastName"].ToString();
+            byte[] photoBytes = reader["Photo"] as byte[];
 
+            addbookstdname.Text = $"{firstName} {lastName}";
+
+            if (photoBytes != null && photoBytes.Length > 0)
+            {
+                using (var ms = new MemoryStream(photoBytes))
+                {
+                    Image originalImage = Image.FromStream(ms);
+                    addbookstdname.Visible = true;
+                    addbookstdimage.Visible = true;
+                    addbookstdimage.Image = GetEllipseImage(originalImage);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Student image not found.");
+            }
+        }
+
+        private Image GetEllipseImage(Image originalImage)
+        {
+            Bitmap bitmap = new Bitmap(originalImage.Width, originalImage.Height);
+
+            using (Graphics g = Graphics.FromImage(bitmap))
+            {
+                g.Clear(Color.Transparent);
+                GraphicsPath path = new GraphicsPath();
+                path.AddEllipse(0, 0, originalImage.Width, originalImage.Height);
+                g.SetClip(path);
+                g.DrawImage(originalImage, 0, 0);
+            }
+
+            return bitmap;
+        }
+
+        private void booktitltxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
