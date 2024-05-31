@@ -24,13 +24,8 @@ namespace Library
             InitializeComponent();
         }
 
-        public static class SessionInfo
-        {
-            public static int CurrentStudentId { get; set; }
-            public static string CurrentStudentUsername { get; set; }
-        }
 
-        private async Task<int> GetLoggedInUserId()
+        /*private async Task<int> GetLoggedInUserId()
         {
             try
             {
@@ -67,7 +62,7 @@ namespace Library
                 MessageBox.Show($"An error occurred while retrieving user ID: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -1;
             }
-        }
+        }*/
         private void home_Load(object sender, EventArgs e)
         {
             LoadUserData();
@@ -77,20 +72,9 @@ namespace Library
         {
             try
             {
-                // Ensure that the email is not empty
-                if (string.IsNullOrWhiteSpace(SessionInfo.CurrentStudentUsername))
-                {
-                    MessageBox.Show("Email is empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                MessageBox.Show("Loading user ID...", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                int userId = await GetLoggedInUserId();
-
+                int userId = Form1.SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
                 if (userId != -1)
                 {
-                    MessageBox.Show($"User ID: {userId}", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await LoadStudentInfo(userId);
                 }
                 else
@@ -102,17 +86,14 @@ namespace Library
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        
+            
         }
-
-
-
-
-
 
         private void addbk_Click(object sender, EventArgs e)
         {
-            int studentId = SessionInfo.CurrentStudentId;
-            AddBook addBookForm = new AddBook(studentId);
+            int studentId = Form1.SessionInfo.CurrentStudentId;
+            AddBook addBookForm = new AddBook(studentId.ToString());
             addBookForm.Show();
         }
 
@@ -200,7 +181,8 @@ namespace Library
 
         public void Logout()
         {
-            SessionInfo.CurrentStudentId = 0;
+            Form1.SessionInfo.CurrentStudentId = 0;
+            Form1.SessionInfo.CurrentStudentEmail = null;
             this.Hide();
             var loginForm = new Form1();
             loginForm.FormClosed += (s, args) => this.Close();

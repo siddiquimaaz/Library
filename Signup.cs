@@ -81,9 +81,9 @@ namespace Library
             {
                 int studentId = InsertUserIntoDatabase("Students", firstName, lastName, email, hashedPassword, phoneNumber, imageBytes);
                 MessageBox.Show("Registration Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                SessionInfo.CurrentStudentId = studentId;
+                Form1.SessionInfo.CurrentStudentId = studentId;
                 // Debug output to verify the ID
-                MessageBox.Show($"Current Student ID: {SessionInfo.CurrentStudentId}");
+                MessageBox.Show($"Current Student ID: {Form1.SessionInfo.CurrentStudentId}");
                 this.Close();
                 new home().ShowDialog();
             }
