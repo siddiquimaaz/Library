@@ -55,7 +55,6 @@ namespace Library
             int studentId = Form1.SessionInfo.CurrentStudentId;
             AddBook addBookForm = new AddBook();
             addBookForm.Show();
-            this.Close();
         }
 
         public async Task LoadStudentInfo(int userId)
@@ -137,8 +136,6 @@ namespace Library
             if (MessageBox.Show("Are you sure you want to logout?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Logout();
-                this.Close();
-                Application.Exit();
             }
         }
 

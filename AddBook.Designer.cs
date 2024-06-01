@@ -89,7 +89,7 @@
             booktitltxt.Size = new Size(191, 27);
             booktitltxt.TabIndex = 3;
             booktitltxt.TextAlign = HorizontalAlignment.Center;
-            booktitltxt.TextChanged += booktitltxt_TextChanged;
+            //booktitltxt.TextChanged += booktitltxt_TextChanged;
             // 
             // authortxt
             // 
@@ -184,6 +184,7 @@
             booksView.RowTemplate.Height = 29;
             booksView.Size = new Size(758, 564);
             booksView.TabIndex = 9;
+           // booksView.CellContentClick += booksView_CellContentClick;
             // 
             // SearchBtn
             // 

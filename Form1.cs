@@ -10,6 +10,7 @@ namespace Library
         public Form1()
         {
             InitializeComponent();
+            FormManager.Show(this); // Use FormManager to show the form
         }
         public static class SessionInfo
         {
@@ -112,18 +113,15 @@ namespace Library
                 {
                     if (isAdmin)
                     {
-                        adminpanel adminForm = new adminpanel();
-                        this.Close();
-                        adminForm.ShowDialog();
+                        FormManager.Show(new adminpanel());
                     }
                     else
                     {
                         home homeForm = new home();
-                        this.Close();
                         await homeForm.LoadStudentInfo(userId); // Load student info
-                        homeForm.ShowDialog();
+                        FormManager.Show(homeForm);
                     }
-                    this.Close();
+                    // Do not close the current form here
                 }
                 else
                 {

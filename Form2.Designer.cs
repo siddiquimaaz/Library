@@ -54,19 +54,19 @@
             // panel1
             // 
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 446);
+            panel1.Location = new Point(0, 450);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(651, 21);
+            panel1.Size = new Size(651, 17);
             panel1.TabIndex = 1;
             // 
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(192, 192, 255);
-            panel2.Location = new Point(0, 446);
+            panel2.Location = new Point(0, 450);
             panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(139, 20);
+            panel2.Size = new Size(139, 16);
             panel2.TabIndex = 2;
             // 
             // pictureBox1

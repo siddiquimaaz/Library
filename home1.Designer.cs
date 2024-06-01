@@ -41,7 +41,6 @@
             HomeStdNameLabel = new Label();
             logout = new Button();
             label3 = new Label();
-            showAdminpanael = new Button();
             ((System.ComponentModel.ISupportInitialize)HomeStdPic).BeginInit();
             SuspendLayout();
             // 
@@ -175,10 +174,10 @@
             logout.FlatStyle = FlatStyle.Popup;
             logout.ForeColor = Color.Black;
             logout.Image = (Image)resources.GetObject("logout.Image");
-            logout.Location = new Point(20, 644);
+            logout.Location = new Point(20, 647);
             logout.Margin = new Padding(0);
             logout.Name = "logout";
-            logout.Size = new Size(58, 38);
+            logout.Size = new Size(83, 38);
             logout.TabIndex = 10;
             logout.UseVisualStyleBackColor = false;
             logout.Click += logout_Click;
@@ -194,16 +193,6 @@
             label3.TabIndex = 11;
             label3.Text = "LogOut";
             // 
-            // showAdminpanael
-            // 
-            showAdminpanael.Location = new Point(198, 663);
-            showAdminpanael.Name = "showAdminpanael";
-            showAdminpanael.Size = new Size(94, 29);
-            showAdminpanael.TabIndex = 12;
-            showAdminpanael.Text = "button1";
-            showAdminpanael.UseVisualStyleBackColor = true;
-            showAdminpanael.Click += showAdminpanael_Click;
-            // 
             // home
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -211,7 +200,6 @@
             BackColor = Color.White;
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(1393, 727);
-            Controls.Add(showAdminpanael);
             Controls.Add(label3);
             Controls.Add(logout);
             Controls.Add(HomeStdNameLabel);
@@ -250,6 +238,5 @@
         private Label HomeStdNameLabel;
         private Button logout;
         private Label label3;
-        private Button showAdminpanael;
     }
 }

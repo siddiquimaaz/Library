@@ -21,9 +21,9 @@ namespace Library
         public AddBook()
         {
             InitializeComponent();
-            // Initialize the form and then start the async process to load data
             currentStudentId = Form1.SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
             Task.Run(async () => await InitializeFormAsync()).Wait();
+            FormManager.Show(this); // Use FormManager to show the form
         }
         private async Task InitializeFormAsync()
         {
@@ -91,26 +91,22 @@ namespace Library
         }
         private async void AddBook_Load(object sender, EventArgs e)
         {
-            await LoadBooksAsync();
             await FetchAndDisplayStudentInfo(currentStudentId); // Pass the student ID
+            await LoadBooksAsync(); // Load books when the form is loaded
         }
 
         private void backbtn_Click(object sender, EventArgs e)
         {
-            this.Close();
-            home home = new home();
-            home.ShowDialog();
+            FormManager.CloseCurrentForm();
+            FormManager.Show(new home());
         }
 
         private void cancel_Click(object sender, EventArgs e)
         {
             booktitltxt.Text = "";
             authortxt.Text = "";
-            this.Close();
-            home home = new home();
-            home.ShowDialog();
-            // Reload all books to reset the DataGridView's display
-            LoadBooksAsync();  // Assuming LoadBooks() resets the DataGridView to show all books
+            FormManager.CloseCurrentForm(); // Close the current form
+            FormManager.Show(new home()); // Show the existing home form
 
             // Reset any other UI elements that might have changed
 
@@ -206,7 +202,6 @@ namespace Library
             }
         }
 
-
         private void SetupDataGridView()
         {
             try
@@ -214,12 +209,22 @@ namespace Library
                 booksView.AutoGenerateColumns = false;
                 booksView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+                // Add columns in the desired order
                 AddColumnIfMissing("Title", "Title");
                 AddColumnIfMissing("Author", "Author");
                 AddColumnIfMissing("ISBN", "ISBN");
                 AddColumnIfMissing("PublicationYear", "Year", "Year");
                 AddColumnIfMissing("Genre", "Genre");
                 AddCheckboxColumnIfMissing("IsAvailable", "Available?", "IsAvailable");
+
+                // Adjust column widths
+                booksView.Columns["Title"].Width = 160; // Adjust width for the Title column
+                booksView.Columns["Author"].Width = 100;
+                booksView.Columns["ISBN"].Width = 80;
+                booksView.Columns["Genre"].Width = 60; // Adjust width for the Genre column
+
+                // Hide the empty ID column
+                //booksView.Columns["BookID"].Visible = false;
 
                 UpdateCheckBoxes();  // This method should also ensure correct read-only state
             }
@@ -228,6 +233,7 @@ namespace Library
                 MessageBox.Show($"Error setting up data grid view: {ex.Message}", "UI Setup Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void AddColumnIfMissing(string columnName, string headerText, string dataPropertyName = null)
@@ -447,6 +453,7 @@ namespace Library
             }
         }
 
+
         private Image GetEllipseImage(Image originalImage)
         {
             Bitmap bitmap = new Bitmap(originalImage.Width, originalImage.Height);
@@ -463,9 +470,8 @@ namespace Library
             return bitmap;
         }
 
-        private void booktitltxt_TextChanged(object sender, EventArgs e)
-        {
+        
 
-        }
+        
     }
 }
