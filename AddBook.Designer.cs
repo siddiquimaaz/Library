@@ -219,7 +219,7 @@
             addbookstdimage.Location = new Point(12, 58);
             addbookstdimage.Name = "addbookstdimage";
             addbookstdimage.Size = new Size(121, 92);
-            addbookstdimage.SizeMode = PictureBoxSizeMode.StretchImage;
+            addbookstdimage.SizeMode = PictureBoxSizeMode.Zoom;
             addbookstdimage.TabIndex = 13;
             addbookstdimage.TabStop = false;
             addbookstdimage.Visible = false;

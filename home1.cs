@@ -53,8 +53,9 @@ namespace Library
         private void addbk_Click(object sender, EventArgs e)
         {
             int studentId = Form1.SessionInfo.CurrentStudentId;
-            AddBook addBookForm = new AddBook(studentId.ToString());
+            AddBook addBookForm = new AddBook();
             addBookForm.Show();
+            this.Close();
         }
 
         public async Task LoadStudentInfo(int userId)

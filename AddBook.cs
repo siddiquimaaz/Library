@@ -18,17 +18,17 @@ namespace Library
         string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
         private int currentStudentId;  // Field to store the current student's ID
 
-        public AddBook(string username)
+        public AddBook()
         {
             InitializeComponent();
-            // Initialize the form and then start the async process to get the student ID and load data
-            Task.Run(async () => await InitializeFormAsync(username)).Wait();
+            // Initialize the form and then start the async process to load data
+            currentStudentId = Form1.SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
+            Task.Run(async () => await InitializeFormAsync()).Wait();
         }
-        private async Task InitializeFormAsync(string username)
+        private async Task InitializeFormAsync()
         {
             try
             {
-                currentStudentId = await GetStudentId(username);
                 await FetchAndDisplayStudentInfo(currentStudentId);
             }
             catch (Exception ex)
@@ -67,7 +67,6 @@ namespace Library
         }
         private async Task FetchAndDisplayStudentInfo(int studentId)
         {
-            string connectionString = "your_connection_string"; // Replace with your actual connection string
             using (var connection = new MySqlConnection(connectionString))
             {
                 await connection.OpenAsync();
@@ -98,7 +97,7 @@ namespace Library
 
         private void backbtn_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             home home = new home();
             home.ShowDialog();
         }
@@ -107,7 +106,9 @@ namespace Library
         {
             booktitltxt.Text = "";
             authortxt.Text = "";
-
+            this.Close();
+            home home = new home();
+            home.ShowDialog();
             // Reload all books to reset the DataGridView's display
             LoadBooksAsync();  // Assuming LoadBooks() resets the DataGridView to show all books
 
@@ -173,6 +174,7 @@ namespace Library
         }
 
 
+
         private async Task LoadBooksAsync()
         {
             try
@@ -203,6 +205,7 @@ namespace Library
                 // Consider retry logic or alternative recovery measures here
             }
         }
+
 
         private void SetupDataGridView()
         {
@@ -306,27 +309,25 @@ namespace Library
                     catch (Exception ex)
                     {
                         // Log or handle the exception as needed
-                        MessageBox.Show($"Failed to borrow book with ID {bookId}: {ex.Message}", "Borrowing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        allSuccessfullyBorrowed = false;
-                        // If an error occurs, do not change the availability state
+                        MessageBox.Show($"Error borrowing book ID {bookId}: {ex.Message}", "Borrow Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
 
             if (!anyBookSelected)
             {
-                MessageBox.Show("Please select an available book to borrow.");
+                MessageBox.Show("Please select at least one available book to borrow.", "No Book Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (!allSuccessfullyBorrowed)
+            else if (allSuccessfullyBorrowed)
             {
-                MessageBox.Show("Some of the selected books could not be borrowed as they may already be borrowed or are no longer available.");
+                MessageBox.Show("All selected books have been successfully borrowed.", "Borrow Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("All selected books have been successfully borrowed.");
+                MessageBox.Show("Some selected books could not be borrowed.", "Partial Borrow Success", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-            booksView.Refresh(); // Always refresh to reflect current state
+            booksView.Refresh();
+            await LoadBooksAsync(); // Refresh the list of books after borrowing
         }
 
 
@@ -361,55 +362,67 @@ namespace Library
 
         private async Task<bool> BorrowBookAsync(int bookId)
         {
+            bool isAvailable;
+            int currentStudentId = Form1.SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
+
             using (var connection = new MySqlConnection(connectionString))
             {
                 await connection.OpenAsync();
+
+                // Check if the book is still available
+                using (var cmdCheckAvailability = new MySqlCommand("SELECT IsAvailable FROM Books WHERE BookID = @BookID", connection))
+                {
+                    cmdCheckAvailability.Parameters.AddWithValue("@BookID", bookId);
+                    var result = await cmdCheckAvailability.ExecuteScalarAsync();
+                    isAvailable = result != DBNull.Value && Convert.ToBoolean(result);
+                }
+
+                if (!isAvailable)
+                {
+                    this.Invoke((MethodInvoker)(() =>
+                        MessageBox.Show($"Book with ID {bookId} is no longer available.", "Unavailable", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ));
+                    return false; // Indicate that borrowing failed
+                }
+
+                // If available, proceed to borrow
                 using (var transaction = await connection.BeginTransactionAsync())
                 {
                     try
                     {
-                        // Check if the book is currently available
-                        string checkAvailableSql = "SELECT 1 FROM Books WHERE BookID = @BookId AND IsAvailable = true FOR UPDATE";
-                        using (var checkCmd = new MySqlCommand(checkAvailableSql, connection, transaction))
+                        // Update the book status
+                        using (var cmdUpdateBook = new MySqlCommand("UPDATE Books SET IsAvailable = 0 WHERE BookID = @BookID", connection, transaction))
                         {
-                            checkCmd.Parameters.AddWithValue("@BookId", bookId);
-                            var isAvailable = await checkCmd.ExecuteScalarAsync();
-
-                            if (isAvailable == null)
-                            {
-                                throw new InvalidOperationException("This book is currently unavailable for borrowing.");
-                            }
-
-                            // Update the book's availability
-                            string updateSql = "UPDATE Books SET IsAvailable = false WHERE BookID = @BookId";
-                            using (var updateCmd = new MySqlCommand(updateSql, connection, transaction))
-                            {
-                                updateCmd.Parameters.AddWithValue("@BookId", bookId);
-                                await updateCmd.ExecuteNonQueryAsync();
-                            }
-
-                            // Log the borrowing
-                            string insertSql = "INSERT INTO BorrowedBooks (StudentID, BookID, DateBorrowed, DueDate) VALUES (@StudentId, @BookId, NOW(), DATE_ADD(NOW(), INTERVAL 14 DAY))";
-                            using (var insertCmd = new MySqlCommand(insertSql, connection, transaction))
-                            {
-                                insertCmd.Parameters.AddWithValue("@StudentId", currentStudentId);
-                                insertCmd.Parameters.AddWithValue("@BookId", bookId);
-                                await insertCmd.ExecuteNonQueryAsync();
-                            }
-
-                            await transaction.CommitAsync();
-                            return true;
+                            cmdUpdateBook.Parameters.AddWithValue("@BookID", bookId);
+                            await cmdUpdateBook.ExecuteNonQueryAsync();
                         }
+
+                        // Record the borrowing
+                        using (var cmdInsertBorrowing = new MySqlCommand("INSERT INTO BorrowedBooks (StudentID, BookID, DateBorrowed, DueDate) VALUES (@StudentID, @BookID, @DateBorrowed, @DueDate)", connection, transaction))
+                        {
+                            cmdInsertBorrowing.Parameters.AddWithValue("@StudentID", currentStudentId);
+                            cmdInsertBorrowing.Parameters.AddWithValue("@BookID", bookId);
+                            cmdInsertBorrowing.Parameters.AddWithValue("@DateBorrowed", DateTime.Now);
+                            cmdInsertBorrowing.Parameters.AddWithValue("@DueDate", DateTime.Now.AddDays(14)); // Assuming a 2-week borrowing period
+                            await cmdInsertBorrowing.ExecuteNonQueryAsync();
+                        }
+
+                        await transaction.CommitAsync();
+                        return true; // Indicate that borrowing was successful
                     }
                     catch (Exception ex)
                     {
                         await transaction.RollbackAsync();
-                        MessageBox.Show($"An error occurred while borrowing the book: {ex.Message}", "Borrow Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
+                        this.Invoke((MethodInvoker)(() =>
+                            MessageBox.Show($"Failed to borrow book ID {bookId}: {ex.Message}", "Borrow Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        ));
+                        return false; // Indicate that borrowing failed
                     }
                 }
             }
         }
+
+
         private void DisplayStudentInfo(MySqlDataReader reader)
         {
             string firstName = reader["FirstName"].ToString();
