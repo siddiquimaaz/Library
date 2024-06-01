@@ -78,7 +78,7 @@ namespace Library
 
         private void sign_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             Signup signup = new Signup();
             signup.ShowDialog();
         }
@@ -113,13 +113,13 @@ namespace Library
                     if (isAdmin)
                     {
                         adminpanel adminForm = new adminpanel();
-                        this.Hide();
+                        this.Close();
                         adminForm.ShowDialog();
                     }
                     else
                     {
                         home homeForm = new home();
-                        this.Hide();
+                        this.Close();
                         await homeForm.LoadStudentInfo(userId); // Load student info
                         homeForm.ShowDialog();
                     }

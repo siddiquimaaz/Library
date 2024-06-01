@@ -23,46 +23,6 @@ namespace Library
         {
             InitializeComponent();
         }
-
-
-        /*private async Task<int> GetLoggedInUserId()
-        {
-            try
-            {
-                string email = SessionInfo.CurrentStudentUsername;
-                if (string.IsNullOrEmpty(email))
-                {
-                    MessageBox.Show("Email is empty or null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return -1;
-                }
-
-                string query = "SELECT StudentID FROM Students WHERE Email = @Email";
-
-                using (var connection = new MySqlConnection(connectionString))
-                {
-                    await connection.OpenAsync();
-                    using (var cmd = new MySqlCommand(query, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@Email", email);
-                        object result = await cmd.ExecuteScalarAsync();
-                        if (result != null)
-                        {
-                            return Convert.ToInt32(result);
-                        }
-                        else
-                        {
-                            MessageBox.Show("User with provided email not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return -1;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred while retrieving user ID: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return -1;
-            }
-        }*/
         private void home_Load(object sender, EventArgs e)
         {
             LoadUserData();
@@ -176,6 +136,8 @@ namespace Library
             if (MessageBox.Show("Are you sure you want to logout?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Logout();
+                this.Close();
+                Application.Exit();
             }
         }
 
@@ -183,7 +145,7 @@ namespace Library
         {
             Form1.SessionInfo.CurrentStudentId = 0;
             Form1.SessionInfo.CurrentStudentEmail = null;
-            this.Hide();
+            this.Close();
             var loginForm = new Form1();
             loginForm.FormClosed += (s, args) => this.Close();
             loginForm.Show();
@@ -191,7 +153,7 @@ namespace Library
 
         private void showAdminpanael_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             adminpanel adminpanel = new adminpanel();
             adminpanel.ShowDialog();
         }
