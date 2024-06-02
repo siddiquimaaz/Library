@@ -56,7 +56,7 @@
             text1.Margin = new Padding(3, 4, 3, 4);
             text1.Name = "text1";
             text1.PlaceholderText = "Enter username";
-            text1.Size = new Size(360, 27);
+            text1.Size = new Size(422, 23);
             text1.TabIndex = 0;
             text1.TextAlign = HorizontalAlignment.Center;
             // 
@@ -70,7 +70,7 @@
             text2.Margin = new Padding(3, 4, 3, 4);
             text2.Name = "text2";
             text2.PlaceholderText = "Enter your Password";
-            text2.Size = new Size(360, 27);
+            text2.Size = new Size(422, 23);
             text2.TabIndex = 1;
             text2.TextAlign = HorizontalAlignment.Center;
             text2.UseSystemPasswordChar = true;
@@ -83,7 +83,7 @@
             userName.ForeColor = Color.Black;
             userName.Location = new Point(10, 236);
             userName.Name = "userName";
-            userName.Size = new Size(110, 23);
+            userName.Size = new Size(87, 18);
             userName.TabIndex = 2;
             userName.Text = "User-Name:";
             // 
@@ -95,7 +95,7 @@
             Pass.ForeColor = Color.Black;
             Pass.Location = new Point(10, 307);
             Pass.Name = "Pass";
-            Pass.Size = new Size(95, 23);
+            Pass.Size = new Size(74, 18);
             Pass.TabIndex = 3;
             Pass.Text = "Password:";
             // 
@@ -107,7 +107,7 @@
             Login.Location = new Point(18, 388);
             Login.Margin = new Padding(3, 4, 3, 4);
             Login.Name = "Login";
-            Login.Size = new Size(362, 48);
+            Login.Size = new Size(425, 48);
             Login.TabIndex = 6;
             Login.Text = "Login";
             Login.UseVisualStyleBackColor = false;
@@ -121,7 +121,7 @@
             hehe.ForeColor = Color.Black;
             hehe.Location = new Point(19, 476);
             hehe.Name = "hehe";
-            hehe.Size = new Size(238, 18);
+            hehe.Size = new Size(202, 14);
             hehe.TabIndex = 7;
             hehe.Text = "Don't have account? Register here:";
             // 
@@ -133,7 +133,7 @@
             sign.Location = new Point(21, 499);
             sign.Margin = new Padding(3, 4, 3, 4);
             sign.Name = "sign";
-            sign.Size = new Size(357, 56);
+            sign.Size = new Size(420, 56);
             sign.TabIndex = 8;
             sign.Text = "Sign-Up";
             sign.UseVisualStyleBackColor = false;
@@ -148,7 +148,7 @@
             checkBox1.Location = new Point(14, 362);
             checkBox1.Margin = new Padding(3, 2, 3, 2);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(130, 22);
+            checkBox1.Size = new Size(112, 18);
             checkBox1.TabIndex = 11;
             checkBox1.Text = "Show Password";
             checkBox1.TextAlign = ContentAlignment.MiddleCenter;
@@ -161,10 +161,10 @@
             checkadmin.BackColor = Color.Transparent;
             checkadmin.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point);
             checkadmin.ForeColor = Color.Black;
-            checkadmin.Location = new Point(311, 362);
+            checkadmin.Location = new Point(381, 360);
             checkadmin.Margin = new Padding(3, 2, 3, 2);
             checkadmin.Name = "checkadmin";
-            checkadmin.Size = new Size(70, 22);
+            checkadmin.Size = new Size(60, 18);
             checkadmin.TabIndex = 12;
             checkadmin.Text = "Admin";
             checkadmin.TextAlign = ContentAlignment.MiddleCenter;
@@ -179,7 +179,7 @@
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(2);
-            panel1.Size = new Size(387, 41);
+            panel1.Size = new Size(453, 41);
             panel1.TabIndex = 13;
             // 
             // label1
@@ -187,9 +187,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(361, 13);
+            label1.Location = new Point(426, 9);
             label1.Name = "label1";
-            label1.Size = new Size(19, 20);
+            label1.Size = new Size(15, 15);
             label1.TabIndex = 14;
             label1.Text = "X";
             label1.Click += label1_Click;
@@ -199,7 +199,7 @@
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.BackgroundImageLayout = ImageLayout.Center;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(147, 58);
+            pictureBox1.Location = new Point(165, 58);
             pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(104, 98);
@@ -211,19 +211,19 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Forte", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(135, 160);
+            label2.Location = new Point(164, 166);
             label2.Name = "label2";
-            label2.Size = new Size(129, 32);
+            label2.Size = new Size(104, 26);
             label2.TabIndex = 15;
             label2.Text = "Welcome";
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 23F);
+            AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(387, 570);
+            ClientSize = new Size(453, 570);
             Controls.Add(label2);
             Controls.Add(pictureBox1);
             Controls.Add(panel1);

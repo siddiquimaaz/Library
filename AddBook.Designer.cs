@@ -54,7 +54,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(41, 259);
+            label3.Location = new Point(64, 205);
             label3.Name = "label3";
             label3.Size = new Size(81, 20);
             label3.TabIndex = 2;
@@ -67,10 +67,11 @@
             booktitltxt.BorderStyle = BorderStyle.FixedSingle;
             booktitltxt.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             booktitltxt.ForeColor = Color.Black;
-            booktitltxt.Location = new Point(126, 256);
+            booktitltxt.Location = new Point(138, 203);
+            booktitltxt.Margin = new Padding(3, 2, 3, 2);
             booktitltxt.Name = "booktitltxt";
             booktitltxt.PlaceholderText = "Enter Book name";
-            booktitltxt.Size = new Size(191, 27);
+            booktitltxt.Size = new Size(235, 27);
             booktitltxt.TabIndex = 3;
             booktitltxt.TextAlign = HorizontalAlignment.Center;
             // 
@@ -80,10 +81,11 @@
             authortxt.BorderStyle = BorderStyle.FixedSingle;
             authortxt.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             authortxt.ForeColor = Color.Black;
-            authortxt.Location = new Point(126, 305);
+            authortxt.Location = new Point(138, 240);
+            authortxt.Margin = new Padding(3, 2, 3, 2);
             authortxt.Name = "authortxt";
             authortxt.PlaceholderText = "Enter Author name";
-            authortxt.Size = new Size(191, 27);
+            authortxt.Size = new Size(235, 27);
             authortxt.TabIndex = 5;
             authortxt.TextAlign = HorizontalAlignment.Center;
             // 
@@ -92,7 +94,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(41, 307);
+            label4.Location = new Point(64, 241);
             label4.Name = "label4";
             label4.Size = new Size(57, 20);
             label4.TabIndex = 4;
@@ -101,57 +103,63 @@
             // 
             // addToStdbtn
             // 
-            addToStdbtn.BackColor = Color.Transparent;
+            addToStdbtn.BackColor = Color.FromArgb(192, 192, 255);
             addToStdbtn.FlatStyle = FlatStyle.Popup;
             addToStdbtn.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            addToStdbtn.ForeColor = Color.White;
             addToStdbtn.IconChar = FontAwesome.Sharp.IconChar.CheckCircle;
-            addToStdbtn.IconColor = Color.Black;
+            addToStdbtn.IconColor = Color.White;
             addToStdbtn.IconFont = FontAwesome.Sharp.IconFont.Regular;
-            addToStdbtn.IconSize = 28;
+            addToStdbtn.IconSize = 20;
             addToStdbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            addToStdbtn.Location = new Point(136, 512);
+            addToStdbtn.Location = new Point(176, 339);
+            addToStdbtn.Margin = new Padding(3, 2, 3, 2);
             addToStdbtn.Name = "addToStdbtn";
-            addToStdbtn.Size = new Size(72, 29);
+            addToStdbtn.Size = new Size(140, 26);
             addToStdbtn.TabIndex = 6;
-            addToStdbtn.Text = "Add";
-            addToStdbtn.TextAlign = ContentAlignment.MiddleRight;
+            addToStdbtn.Text = "Issue Book";
             addToStdbtn.UseVisualStyleBackColor = false;
             addToStdbtn.Click += addToStdbtn_Click;
             // 
             // cancel
             // 
+            cancel.BackColor = Color.FromArgb(192, 192, 255);
             cancel.FlatStyle = FlatStyle.Popup;
             cancel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            cancel.ForeColor = Color.White;
             cancel.IconChar = FontAwesome.Sharp.IconChar.Recycle;
-            cancel.IconColor = Color.Black;
+            cancel.IconColor = Color.White;
             cancel.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            cancel.IconSize = 28;
+            cancel.IconSize = 20;
             cancel.ImageAlign = ContentAlignment.MiddleLeft;
-            cancel.Location = new Point(214, 512);
+            cancel.Location = new Point(176, 376);
+            cancel.Margin = new Padding(3, 2, 3, 2);
             cancel.Name = "cancel";
-            cancel.Size = new Size(86, 29);
+            cancel.Size = new Size(140, 28);
             cancel.TabIndex = 7;
             cancel.Text = "Cancel";
-            cancel.TextAlign = ContentAlignment.MiddleRight;
-            cancel.UseVisualStyleBackColor = true;
+            cancel.UseVisualStyleBackColor = false;
             cancel.Click += cancel_Click;
             // 
             // backbtn
             // 
+            backbtn.BackColor = Color.FromArgb(192, 192, 255);
             backbtn.FlatStyle = FlatStyle.Popup;
             backbtn.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            backbtn.ForeColor = Color.White;
             backbtn.IconChar = FontAwesome.Sharp.IconChar.Backspace;
-            backbtn.IconColor = Color.Black;
+            backbtn.IconColor = Color.White;
             backbtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            backbtn.IconSize = 28;
+            backbtn.IconSize = 20;
             backbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            backbtn.Location = new Point(182, 559);
+            backbtn.Location = new Point(12, 482);
+            backbtn.Margin = new Padding(3, 2, 3, 2);
             backbtn.Name = "backbtn";
-            backbtn.Size = new Size(75, 29);
+            backbtn.Size = new Size(68, 27);
             backbtn.TabIndex = 8;
             backbtn.Text = "Back";
             backbtn.TextAlign = ContentAlignment.MiddleRight;
-            backbtn.UseVisualStyleBackColor = true;
+            backbtn.UseVisualStyleBackColor = false;
             backbtn.Click += backbtn_Click;
             // 
             // booksView
@@ -160,17 +168,20 @@
             booksView.AllowUserToDeleteRows = false;
             booksView.AllowUserToResizeColumns = false;
             booksView.AllowUserToResizeRows = false;
+            booksView.BackgroundColor = Color.White;
             booksView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            booksView.Location = new Point(519, 128);
+            booksView.Location = new Point(454, 66);
+            booksView.Margin = new Padding(3, 2, 3, 2);
             booksView.Name = "booksView";
             booksView.RowHeadersWidth = 51;
             booksView.RowTemplate.Height = 29;
-            booksView.Size = new Size(791, 561);
+            booksView.Size = new Size(692, 451);
             booksView.TabIndex = 9;
             booksView.CellContentClick += booksView_CellContentClick;
             // 
             // SearchBtn
             // 
+            SearchBtn.BackColor = Color.FromArgb(224, 224, 224);
             SearchBtn.Cursor = Cursors.Hand;
             SearchBtn.FlatStyle = FlatStyle.Popup;
             SearchBtn.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -179,13 +190,14 @@
             SearchBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             SearchBtn.IconSize = 20;
             SearchBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            SearchBtn.Location = new Point(126, 356);
+            SearchBtn.Location = new Point(138, 278);
+            SearchBtn.Margin = new Padding(3, 2, 3, 2);
             SearchBtn.Name = "SearchBtn";
             SearchBtn.Padding = new Padding(1);
-            SearchBtn.Size = new Size(191, 35);
+            SearchBtn.Size = new Size(235, 38);
             SearchBtn.TabIndex = 11;
             SearchBtn.Text = "Search";
-            SearchBtn.UseVisualStyleBackColor = true;
+            SearchBtn.UseVisualStyleBackColor = false;
             SearchBtn.Click += SearchBtn_Click;
             // 
             // addbookstdname
@@ -233,17 +245,16 @@
             // 
             panel2.BackColor = Color.FromArgb(192, 192, 255);
             panel2.Controls.Add(label1);
-            panel2.Location = new Point(513, 55);
-            panel2.Margin = new Padding(3, 4, 3, 4);
+            panel2.Location = new Point(449, 35);
             panel2.Name = "panel2";
-            panel2.Size = new Size(801, 639);
+            panel2.Size = new Size(701, 494);
             panel2.TabIndex = 15;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(360, 20);
+            label1.Location = new Point(279, 1);
             label1.Name = "label1";
             label1.Size = new Size(221, 37);
             label1.TabIndex = 16;
@@ -272,7 +283,7 @@
             MinimizeBox = false;
             Name = "AddBook";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "AddBook";
+            Text = "4";
             WindowState = FormWindowState.Maximized;
             Load += AddBook_Load;
             ((System.ComponentModel.ISupportInitialize)booksView).EndInit();
