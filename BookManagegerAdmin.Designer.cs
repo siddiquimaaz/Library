@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BookManagegerAdmin));
             panel1 = new Panel();
             label1 = new Label();
             label2 = new Label();
@@ -42,12 +43,15 @@
             dateTimePicker = new DateTimePicker();
             submitBtn = new FontAwesome.Sharp.IconButton();
             BackBtn = new FontAwesome.Sharp.IconButton();
+            pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(BackBtn);
             panel1.Controls.Add(submitBtn);
             panel1.Controls.Add(dateTimePicker);
@@ -191,6 +195,18 @@
             BackBtn.Text = "Back";
             BackBtn.UseVisualStyleBackColor = false;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(498, 90);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(203, 231);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 11;
+            pictureBox1.TabStop = false;
+            // 
             // BookManagegerAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -206,6 +222,7 @@
             Text = "BookManagegerAdmin";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -225,5 +242,6 @@
         private Label label6;
         private FontAwesome.Sharp.IconButton submitBtn;
         private FontAwesome.Sharp.IconButton BackBtn;
+        private PictureBox pictureBox1;
     }
 }
