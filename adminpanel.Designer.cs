@@ -35,7 +35,6 @@
             adminDataGridView = new DataGridView();
             panel1 = new Panel();
             label2 = new Label();
-            label1 = new Label();
             panel2 = new Panel();
             showAllStdBtn = new FontAwesome.Sharp.IconButton();
             AdminLogOutBtn = new FontAwesome.Sharp.IconButton();
@@ -100,12 +99,12 @@
             adminDataGridView.AllowUserToDeleteRows = false;
             adminDataGridView.BackgroundColor = Color.LightGray;
             adminDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            adminDataGridView.Location = new Point(291, 48);
+            adminDataGridView.Location = new Point(298, 48);
             adminDataGridView.Name = "adminDataGridView";
             adminDataGridView.ReadOnly = true;
             adminDataGridView.RowHeadersWidth = 51;
             adminDataGridView.RowTemplate.Height = 29;
-            adminDataGridView.Size = new Size(1190, 739);
+            adminDataGridView.Size = new Size(1031, 674);
             adminDataGridView.TabIndex = 14;
             adminDataGridView.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -113,12 +112,11 @@
             // 
             panel1.BackColor = Color.Black;
             panel1.Controls.Add(label2);
-            panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1484, 48);
+            panel1.Size = new Size(1332, 48);
             panel1.TabIndex = 15;
             // 
             // label2
@@ -131,18 +129,6 @@
             label2.Size = new Size(382, 25);
             label2.TabIndex = 1;
             label2.Text = "Library Management System | Admin Panel";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Microsoft JhengHei", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.Transparent;
-            label1.Location = new Point(1451, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(21, 22);
-            label1.TabIndex = 0;
-            label1.Text = "X";
-            label1.Click += label1_Click;
             // 
             // panel2
             // 
@@ -212,7 +198,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1484, 789);
+            ClientSize = new Size(1332, 721);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(adminDataGridView);
@@ -221,7 +207,6 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "adminpanel";
-            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Admin-Panel";
             Load += adminpanel_Load;
@@ -241,7 +226,6 @@
         private DataGridView adminDataGridView;
         private Panel panel1;
         private Label label2;
-        private Label label1;
         private Panel panel2;
         private Label label3;
         private FontAwesome.Sharp.IconButton AdminLogOutBtn;

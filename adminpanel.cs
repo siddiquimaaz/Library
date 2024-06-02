@@ -69,10 +69,7 @@ namespace Library
             await LoadBorrowedBooksWithStudentDetailsAsync();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        
 
         private void iconButton1_Click(object sender, EventArgs e)
         {
