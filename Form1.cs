@@ -1,6 +1,8 @@
 using MySql.Data.MySqlClient;
 using BCrypt.Net;
 using static Library.home;
+using System.Data;
+using System.Security.Cryptography.X509Certificates;
 namespace Library
 {
     public partial class Form1 : Form
@@ -16,12 +18,14 @@ namespace Library
         {
             public static int CurrentStudentId { get; set; }
             public static string CurrentStudentEmail { get; set; }
+            public static int CurrentAdminId { get; set; }
+            public static string CurrentAdminEmail { get; set; }
         }
 
         private async Task<int> ValidateCredentialsAsync(string email, string password, bool isAdmin)
         {
             string table = isAdmin ? "AdminUsers" : "Students";
-            string idColumn = isAdmin ? "AdminID" : "StudentID";
+            string idColumn = isAdmin ? "UserID" : "StudentID"; // Remove the space before "UserID"
             int userId = -1;
 
             try
@@ -29,38 +33,49 @@ namespace Library
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
-                    MessageBox.Show("Connected to the database successfully.", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     string query = $"SELECT {idColumn}, HashedPassword FROM {table} WHERE Email = @Email";
-                    MessageBox.Show("Query: " + query, "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                     using (var cmd = new MySqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@Email", email);
-                        MessageBox.Show("Email parameter added: " + email, "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
                             if (await reader.ReadAsync())
                             {
-                                string hashedPassword = reader["HashedPassword"].ToString();
-                                MessageBox.Show("Retrieved hashed password from the database: " + hashedPassword, "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                string hashedPassword = reader.GetString("HashedPassword");
 
-                                if (BCrypt.Net.BCrypt.Verify(password, hashedPassword))
+                                // For admin users, check password directly (since it's not hashed)
+                                if (isAdmin)
                                 {
-                                    userId = Convert.ToInt32(reader[idColumn]);
-                                    MessageBox.Show("User authenticated successfully. UserID: " + userId, "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    SessionInfo.CurrentStudentId = userId;
-                                    SessionInfo.CurrentStudentEmail = email;
+                                    if (password == hashedPassword)
+                                    {
+                                        userId = reader.GetInt32(idColumn);
+                                        SessionInfo.CurrentAdminId = userId;
+                                        SessionInfo.CurrentAdminEmail = email;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Invalid password for admin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
                                 }
-                                else
+                                else  // For student users, verify hashed password
                                 {
-                                    MessageBox.Show("Password verification failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    if (BCrypt.Net.BCrypt.Verify(password, hashedPassword))
+                                    {
+                                        userId = reader.GetInt32(idColumn);
+                                        SessionInfo.CurrentStudentId = userId;
+                                        SessionInfo.CurrentStudentEmail = email;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Invalid password for student.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("No matching record found for the email: " + email, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show($"No matching record found for the email: {email}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
@@ -68,12 +83,15 @@ namespace Library
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error connecting to the database: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw new Exception("Error validating credentials.", ex); // Rethrow with custom message
+                MessageBox.Show($"Error connecting to the database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw new Exception("Error validating credentials.", ex);
             }
 
             return userId;
         }
+
+
+
 
 
 
@@ -131,8 +149,10 @@ namespace Library
             catch (Exception ex)
             {
                 MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Log the exception or take appropriate action
             }
         }
+
 
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

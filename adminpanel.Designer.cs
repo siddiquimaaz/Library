@@ -29,130 +29,118 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(adminpanel));
-            adminpic = new PictureBox();
             adminNamelbl = new Label();
-            iconButton2 = new FontAwesome.Sharp.IconButton();
-            iconButton3 = new FontAwesome.Sharp.IconButton();
-            iconButton4 = new FontAwesome.Sharp.IconButton();
-            dataGridView1 = new DataGridView();
+            regBtnAdmin = new FontAwesome.Sharp.IconButton();
+            AddBookBtnAdmin = new FontAwesome.Sharp.IconButton();
+            ShowBorrrwedBookAdmin = new FontAwesome.Sharp.IconButton();
+            adminDataGridView = new DataGridView();
             panel1 = new Panel();
             label2 = new Label();
             label1 = new Label();
             panel2 = new Panel();
-            iconButton1 = new FontAwesome.Sharp.IconButton();
+            showAllStdBtn = new FontAwesome.Sharp.IconButton();
+            AdminLogOutBtn = new FontAwesome.Sharp.IconButton();
             label3 = new Label();
-            ((System.ComponentModel.ISupportInitialize)adminpic).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)adminDataGridView).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
-            // adminpic
-            // 
-            adminpic.Image = (Image)resources.GetObject("adminpic.Image");
-            adminpic.Location = new Point(92, 35);
-            adminpic.Margin = new Padding(3, 2, 3, 2);
-            adminpic.Name = "adminpic";
-            adminpic.Size = new Size(69, 73);
-            adminpic.TabIndex = 1;
-            adminpic.TabStop = false;
-            adminpic.Click += adminpic_Click;
-            // 
             // adminNamelbl
             // 
             adminNamelbl.AutoSize = true;
-            adminNamelbl.Location = new Point(417, 109);
+            adminNamelbl.Location = new Point(477, 145);
             adminNamelbl.Name = "adminNamelbl";
-            adminNamelbl.Size = new Size(0, 15);
+            adminNamelbl.Size = new Size(0, 20);
             adminNamelbl.TabIndex = 2;
             adminNamelbl.Visible = false;
             // 
-            // iconButton2
+            // regBtnAdmin
             // 
-            iconButton2.BackgroundImageLayout = ImageLayout.None;
-            iconButton2.FlatAppearance.MouseOverBackColor = SystemColors.ButtonShadow;
-            iconButton2.FlatStyle = FlatStyle.Flat;
-            iconButton2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            iconButton2.ForeColor = Color.Black;
-            iconButton2.IconChar = FontAwesome.Sharp.IconChar.GraduationCap;
-            iconButton2.IconColor = Color.Black;
-            iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton2.IconSize = 42;
-            iconButton2.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton2.Location = new Point(11, 174);
-            iconButton2.Margin = new Padding(3, 2, 3, 2);
-            iconButton2.Name = "iconButton2";
-            iconButton2.Size = new Size(238, 70);
-            iconButton2.TabIndex = 11;
-            iconButton2.Text = "Register";
-            iconButton2.UseVisualStyleBackColor = true;
+            regBtnAdmin.BackColor = Color.Transparent;
+            regBtnAdmin.BackgroundImageLayout = ImageLayout.None;
+            regBtnAdmin.FlatAppearance.MouseOverBackColor = SystemColors.ButtonShadow;
+            regBtnAdmin.FlatStyle = FlatStyle.Flat;
+            regBtnAdmin.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            regBtnAdmin.ForeColor = Color.White;
+            regBtnAdmin.IconChar = FontAwesome.Sharp.IconChar.GraduationCap;
+            regBtnAdmin.IconColor = Color.White;
+            regBtnAdmin.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            regBtnAdmin.IconSize = 42;
+            regBtnAdmin.ImageAlign = ContentAlignment.MiddleLeft;
+            regBtnAdmin.Location = new Point(14, 110);
+            regBtnAdmin.Name = "regBtnAdmin";
+            regBtnAdmin.Size = new Size(231, 74);
+            regBtnAdmin.TabIndex = 11;
+            regBtnAdmin.Text = "Register";
+            regBtnAdmin.UseVisualStyleBackColor = false;
             // 
-            // iconButton3
+            // AddBookBtnAdmin
             // 
-            iconButton3.BackgroundImageLayout = ImageLayout.None;
-            iconButton3.FlatAppearance.MouseOverBackColor = SystemColors.ButtonShadow;
-            iconButton3.FlatStyle = FlatStyle.Flat;
-            iconButton3.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            iconButton3.ForeColor = Color.Black;
-            iconButton3.IconChar = FontAwesome.Sharp.IconChar.BookOpenReader;
-            iconButton3.IconColor = Color.Black;
-            iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton3.IconSize = 42;
-            iconButton3.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton3.Location = new Point(11, 257);
-            iconButton3.Margin = new Padding(3, 2, 3, 2);
-            iconButton3.Name = "iconButton3";
-            iconButton3.Size = new Size(238, 70);
-            iconButton3.TabIndex = 12;
-            iconButton3.Text = "Add Books";
-            iconButton3.UseVisualStyleBackColor = true;
-            iconButton3.Click += iconButton3_Click;
+            AddBookBtnAdmin.BackColor = Color.Transparent;
+            AddBookBtnAdmin.BackgroundImageLayout = ImageLayout.None;
+            AddBookBtnAdmin.FlatAppearance.MouseOverBackColor = SystemColors.ButtonShadow;
+            AddBookBtnAdmin.FlatStyle = FlatStyle.Flat;
+            AddBookBtnAdmin.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            AddBookBtnAdmin.ForeColor = Color.White;
+            AddBookBtnAdmin.IconChar = FontAwesome.Sharp.IconChar.BookOpenReader;
+            AddBookBtnAdmin.IconColor = Color.White;
+            AddBookBtnAdmin.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            AddBookBtnAdmin.IconSize = 42;
+            AddBookBtnAdmin.ImageAlign = ContentAlignment.MiddleLeft;
+            AddBookBtnAdmin.Location = new Point(13, 210);
+            AddBookBtnAdmin.Name = "AddBookBtnAdmin";
+            AddBookBtnAdmin.Size = new Size(232, 74);
+            AddBookBtnAdmin.TabIndex = 12;
+            AddBookBtnAdmin.Text = "Add Books";
+            AddBookBtnAdmin.UseVisualStyleBackColor = false;
+            AddBookBtnAdmin.Click += iconButton3_Click;
             // 
-            // iconButton4
+            // ShowBorrrwedBookAdmin
             // 
-            iconButton4.BackgroundImageLayout = ImageLayout.None;
-            iconButton4.FlatStyle = FlatStyle.Flat;
-            iconButton4.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            iconButton4.ForeColor = Color.Black;
-            iconButton4.IconChar = FontAwesome.Sharp.IconChar.AddressCard;
-            iconButton4.IconColor = Color.Black;
-            iconButton4.IconFont = FontAwesome.Sharp.IconFont.Regular;
-            iconButton4.IconSize = 42;
-            iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton4.Location = new Point(11, 341);
-            iconButton4.Margin = new Padding(3, 2, 3, 2);
-            iconButton4.Name = "iconButton4";
-            iconButton4.Size = new Size(238, 70);
-            iconButton4.TabIndex = 13;
-            iconButton4.Text = "Borrowed Books";
-            iconButton4.UseVisualStyleBackColor = true;
-            iconButton4.Click += iconButton4_Click;
+            ShowBorrrwedBookAdmin.BackColor = Color.Transparent;
+            ShowBorrrwedBookAdmin.BackgroundImageLayout = ImageLayout.None;
+            ShowBorrrwedBookAdmin.FlatStyle = FlatStyle.Flat;
+            ShowBorrrwedBookAdmin.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            ShowBorrrwedBookAdmin.ForeColor = Color.White;
+            ShowBorrrwedBookAdmin.IconChar = FontAwesome.Sharp.IconChar.AddressCard;
+            ShowBorrrwedBookAdmin.IconColor = Color.White;
+            ShowBorrrwedBookAdmin.IconFont = FontAwesome.Sharp.IconFont.Regular;
+            ShowBorrrwedBookAdmin.IconSize = 42;
+            ShowBorrrwedBookAdmin.ImageAlign = ContentAlignment.MiddleLeft;
+            ShowBorrrwedBookAdmin.Location = new Point(14, 312);
+            ShowBorrrwedBookAdmin.Name = "ShowBorrrwedBookAdmin";
+            ShowBorrrwedBookAdmin.Size = new Size(231, 74);
+            ShowBorrrwedBookAdmin.TabIndex = 13;
+            ShowBorrrwedBookAdmin.Text = "Borrowed Books";
+            ShowBorrrwedBookAdmin.UseVisualStyleBackColor = false;
+           // ShowBorrrwedBookAdmin.Click += iconButton4_Click;
             // 
-            // dataGridView1
+            // adminDataGridView
             // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.BackgroundColor = Color.LightGray;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(255, 36);
-            dataGridView1.Margin = new Padding(3, 2, 3, 2);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(799, 530);
-            dataGridView1.TabIndex = 14;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            adminDataGridView.AllowUserToAddRows = false;
+            adminDataGridView.AllowUserToDeleteRows = false;
+            adminDataGridView.BackgroundColor = Color.LightGray;
+            adminDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            adminDataGridView.Location = new Point(291, 48);
+            adminDataGridView.Name = "adminDataGridView";
+            adminDataGridView.ReadOnly = true;
+            adminDataGridView.RowHeadersWidth = 51;
+            adminDataGridView.RowTemplate.Height = 29;
+            adminDataGridView.Size = new Size(913, 707);
+            adminDataGridView.TabIndex = 14;
+            adminDataGridView.CellContentClick += dataGridView1_CellContentClick;
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(192, 192, 255);
+            panel1.BackColor = Color.Black;
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1057, 36);
+            panel1.Size = new Size(1208, 48);
             panel1.TabIndex = 15;
             // 
             // label2
@@ -160,9 +148,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(3, 9);
+            label2.Location = new Point(3, 12);
             label2.Name = "label2";
-            label2.Size = new Size(304, 20);
+            label2.Size = new Size(382, 25);
             label2.TabIndex = 1;
             label2.Text = "Library Management System | Admin Panel";
             // 
@@ -171,69 +159,88 @@
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft JhengHei", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Transparent;
-            label1.Location = new Point(1014, 10);
+            label1.Location = new Point(1159, 13);
             label1.Name = "label1";
-            label1.Size = new Size(17, 17);
+            label1.Size = new Size(21, 22);
             label1.TabIndex = 0;
             label1.Text = "X";
             label1.Click += label1_Click;
             // 
             // panel2
             // 
-            panel2.BackColor = Color.FromArgb(192, 192, 255);
-            panel2.Controls.Add(iconButton1);
+            panel2.BackColor = Color.Black;
+            panel2.Controls.Add(showAllStdBtn);
+            panel2.Controls.Add(AdminLogOutBtn);
             panel2.Controls.Add(label3);
-            panel2.Controls.Add(adminpic);
-            panel2.Controls.Add(iconButton2);
-            panel2.Controls.Add(iconButton4);
-            panel2.Controls.Add(iconButton3);
-            panel2.Location = new Point(0, 36);
+            panel2.Controls.Add(regBtnAdmin);
+            panel2.Controls.Add(ShowBorrrwedBookAdmin);
+            panel2.Controls.Add(AddBookBtnAdmin);
+            panel2.Location = new Point(0, 48);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(258, 543);
+            panel2.Size = new Size(295, 724);
             panel2.TabIndex = 16;
             panel2.Paint += panel2_Paint;
             // 
-            // iconButton1
+            // showAllStdBtn
             // 
-            iconButton1.BackColor = Color.FromArgb(192, 192, 255);
-            iconButton1.BackgroundImage = (Image)resources.GetObject("iconButton1.BackgroundImage");
-            iconButton1.BackgroundImageLayout = ImageLayout.None;
-            iconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
-            iconButton1.IconColor = Color.Black;
-            iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton1.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton1.Location = new Point(12, 497);
-            iconButton1.Name = "iconButton1";
-            iconButton1.Size = new Size(82, 33);
-            iconButton1.TabIndex = 18;
-            iconButton1.Text = "Log out";
-            iconButton1.TextAlign = ContentAlignment.MiddleRight;
-            iconButton1.UseVisualStyleBackColor = false;
-            iconButton1.Click += iconButton1_Click;
+            showAllStdBtn.BackColor = Color.Transparent;
+            showAllStdBtn.BackgroundImageLayout = ImageLayout.None;
+            showAllStdBtn.FlatStyle = FlatStyle.Flat;
+            showAllStdBtn.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            showAllStdBtn.ForeColor = Color.White;
+            showAllStdBtn.IconChar = FontAwesome.Sharp.IconChar.AddressCard;
+            showAllStdBtn.IconColor = Color.White;
+            showAllStdBtn.IconFont = FontAwesome.Sharp.IconFont.Regular;
+            showAllStdBtn.IconSize = 42;
+            showAllStdBtn.ImageAlign = ContentAlignment.MiddleLeft;
+            showAllStdBtn.Location = new Point(14, 421);
+            showAllStdBtn.Name = "showAllStdBtn";
+            showAllStdBtn.Size = new Size(231, 74);
+            showAllStdBtn.TabIndex = 19;
+            showAllStdBtn.Text = "showAllStudents";
+            showAllStdBtn.UseVisualStyleBackColor = false;
+            showAllStdBtn.Click += showAllStdBtn_Click;
+            // 
+            // AdminLogOutBtn
+            // 
+            AdminLogOutBtn.BackColor = Color.Transparent;
+            AdminLogOutBtn.BackgroundImage = (Image)resources.GetObject("AdminLogOutBtn.BackgroundImage");
+            AdminLogOutBtn.BackgroundImageLayout = ImageLayout.None;
+            AdminLogOutBtn.IconChar = FontAwesome.Sharp.IconChar.None;
+            AdminLogOutBtn.IconColor = Color.White;
+            AdminLogOutBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            AdminLogOutBtn.Location = new Point(14, 666);
+            AdminLogOutBtn.Margin = new Padding(3, 4, 3, 4);
+            AdminLogOutBtn.Name = "AdminLogOutBtn";
+            AdminLogOutBtn.Size = new Size(110, 34);
+            AdminLogOutBtn.TabIndex = 18;
+            AdminLogOutBtn.Text = "Log out";
+            AdminLogOutBtn.UseVisualStyleBackColor = false;
+            AdminLogOutBtn.Click += iconButton1_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Magneto", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(34, 120);
+            label3.Location = new Point(3, 42);
             label3.Name = "label3";
-            label3.Size = new Size(208, 25);
+            label3.Size = new Size(267, 32);
             label3.TabIndex = 17;
             label3.Text = "Welcome! Admin";
             // 
             // adminpanel
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1057, 571);
+            ClientSize = new Size(1208, 761);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Controls.Add(dataGridView1);
+            Controls.Add(adminDataGridView);
             Controls.Add(adminNamelbl);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "adminpanel";
@@ -241,8 +248,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Admin-Panel";
             Load += adminpanel_Load;
-            ((System.ComponentModel.ISupportInitialize)adminpic).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)adminDataGridView).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -252,17 +258,17 @@
         }
 
         #endregion
-        private PictureBox adminpic;
         private Label adminNamelbl;
-        private FontAwesome.Sharp.IconButton iconButton2;
-        private FontAwesome.Sharp.IconButton iconButton3;
-        private FontAwesome.Sharp.IconButton iconButton4;
-        private DataGridView dataGridView1;
+        private FontAwesome.Sharp.IconButton regBtnAdmin;
+        private FontAwesome.Sharp.IconButton AddBookBtnAdmin;
+        private FontAwesome.Sharp.IconButton ShowBorrrwedBookAdmin;
+        private DataGridView adminDataGridView;
         private Panel panel1;
         private Label label2;
         private Label label1;
         private Panel panel2;
         private Label label3;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton AdminLogOutBtn;
+        private FontAwesome.Sharp.IconButton showAllStdBtn;
     }
 }
