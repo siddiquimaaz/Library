@@ -200,7 +200,7 @@
             pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
             pictureBox1.BackgroundImageLayout = ImageLayout.Center;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(498, 90);
+            pictureBox1.Location = new Point(494, 105);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(203, 231);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
