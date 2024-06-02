@@ -25,7 +25,7 @@ namespace Library
             this.Load += adminpanel_Load;
             ShowBorrrwedBookAdmin.Click += async (s, e) => await iconButton4_Click(s, e);
         }
-    
+
         public class BorrowedBookDetails
         {
             public int BorrowID { get; set; }
@@ -69,7 +69,7 @@ namespace Library
             await LoadBorrowedBooksWithStudentDetailsAsync();
         }
 
-        
+
 
         private void iconButton1_Click(object sender, EventArgs e)
         {
@@ -215,6 +215,11 @@ namespace Library
         private void showAllStdBtn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void AdminPanelBackBtn_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

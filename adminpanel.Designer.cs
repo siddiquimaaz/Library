@@ -39,6 +39,7 @@
             showAllStdBtn = new FontAwesome.Sharp.IconButton();
             AdminLogOutBtn = new FontAwesome.Sharp.IconButton();
             label3 = new Label();
+            AdminPanelBackBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)adminDataGridView).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -47,9 +48,9 @@
             // adminNamelbl
             // 
             adminNamelbl.AutoSize = true;
-            adminNamelbl.Location = new Point(477, 145);
+            adminNamelbl.Location = new Point(417, 109);
             adminNamelbl.Name = "adminNamelbl";
-            adminNamelbl.Size = new Size(0, 20);
+            adminNamelbl.Size = new Size(0, 15);
             adminNamelbl.TabIndex = 2;
             adminNamelbl.Visible = false;
             // 
@@ -66,9 +67,10 @@
             AddBookBtnAdmin.IconFont = FontAwesome.Sharp.IconFont.Auto;
             AddBookBtnAdmin.IconSize = 42;
             AddBookBtnAdmin.ImageAlign = ContentAlignment.MiddleLeft;
-            AddBookBtnAdmin.Location = new Point(22, 156);
+            AddBookBtnAdmin.Location = new Point(19, 117);
+            AddBookBtnAdmin.Margin = new Padding(3, 2, 3, 2);
             AddBookBtnAdmin.Name = "AddBookBtnAdmin";
-            AddBookBtnAdmin.Size = new Size(259, 74);
+            AddBookBtnAdmin.Size = new Size(227, 56);
             AddBookBtnAdmin.TabIndex = 12;
             AddBookBtnAdmin.Text = "Book Management";
             AddBookBtnAdmin.UseVisualStyleBackColor = false;
@@ -86,9 +88,10 @@
             ShowBorrrwedBookAdmin.IconFont = FontAwesome.Sharp.IconFont.Regular;
             ShowBorrrwedBookAdmin.IconSize = 42;
             ShowBorrrwedBookAdmin.ImageAlign = ContentAlignment.MiddleLeft;
-            ShowBorrrwedBookAdmin.Location = new Point(23, 258);
+            ShowBorrrwedBookAdmin.Location = new Point(20, 194);
+            ShowBorrrwedBookAdmin.Margin = new Padding(3, 2, 3, 2);
             ShowBorrrwedBookAdmin.Name = "ShowBorrrwedBookAdmin";
-            ShowBorrrwedBookAdmin.Size = new Size(258, 74);
+            ShowBorrrwedBookAdmin.Size = new Size(226, 56);
             ShowBorrrwedBookAdmin.TabIndex = 13;
             ShowBorrrwedBookAdmin.Text = "Borrowed Books";
             ShowBorrrwedBookAdmin.UseVisualStyleBackColor = false;
@@ -99,12 +102,13 @@
             adminDataGridView.AllowUserToDeleteRows = false;
             adminDataGridView.BackgroundColor = Color.LightGray;
             adminDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            adminDataGridView.Location = new Point(298, 48);
+            adminDataGridView.Location = new Point(261, 36);
+            adminDataGridView.Margin = new Padding(3, 2, 3, 2);
             adminDataGridView.Name = "adminDataGridView";
             adminDataGridView.ReadOnly = true;
             adminDataGridView.RowHeadersWidth = 51;
             adminDataGridView.RowTemplate.Height = 29;
-            adminDataGridView.Size = new Size(1031, 674);
+            adminDataGridView.Size = new Size(902, 506);
             adminDataGridView.TabIndex = 14;
             adminDataGridView.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -114,9 +118,8 @@
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1332, 48);
+            panel1.Size = new Size(1166, 36);
             panel1.TabIndex = 15;
             // 
             // label2
@@ -124,24 +127,24 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(3, 5);
+            label2.Location = new Point(3, 4);
             label2.Name = "label2";
-            label2.Size = new Size(382, 25);
+            label2.Size = new Size(304, 20);
             label2.TabIndex = 1;
             label2.Text = "Library Management System | Admin Panel";
             // 
             // panel2
             // 
             panel2.BackColor = Color.Black;
+            panel2.Controls.Add(AdminPanelBackBtn);
             panel2.Controls.Add(showAllStdBtn);
             panel2.Controls.Add(AdminLogOutBtn);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(ShowBorrrwedBookAdmin);
             panel2.Controls.Add(AddBookBtnAdmin);
-            panel2.Location = new Point(0, 48);
-            panel2.Margin = new Padding(3, 4, 3, 4);
+            panel2.Location = new Point(0, 36);
             panel2.Name = "panel2";
-            panel2.Size = new Size(295, 748);
+            panel2.Size = new Size(258, 561);
             panel2.TabIndex = 16;
             panel2.Paint += panel2_Paint;
             // 
@@ -157,9 +160,10 @@
             showAllStdBtn.IconFont = FontAwesome.Sharp.IconFont.Regular;
             showAllStdBtn.IconSize = 42;
             showAllStdBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            showAllStdBtn.Location = new Point(23, 367);
+            showAllStdBtn.Location = new Point(20, 275);
+            showAllStdBtn.Margin = new Padding(3, 2, 3, 2);
             showAllStdBtn.Name = "showAllStdBtn";
-            showAllStdBtn.Size = new Size(258, 74);
+            showAllStdBtn.Size = new Size(226, 56);
             showAllStdBtn.TabIndex = 19;
             showAllStdBtn.Text = "showAllStudents";
             showAllStdBtn.UseVisualStyleBackColor = false;
@@ -173,10 +177,9 @@
             AdminLogOutBtn.IconChar = FontAwesome.Sharp.IconChar.None;
             AdminLogOutBtn.IconColor = Color.White;
             AdminLogOutBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            AdminLogOutBtn.Location = new Point(12, 694);
-            AdminLogOutBtn.Margin = new Padding(3, 4, 3, 4);
+            AdminLogOutBtn.Location = new Point(10, 520);
             AdminLogOutBtn.Name = "AdminLogOutBtn";
-            AdminLogOutBtn.Size = new Size(110, 34);
+            AdminLogOutBtn.Size = new Size(96, 26);
             AdminLogOutBtn.TabIndex = 18;
             AdminLogOutBtn.Text = "Log out";
             AdminLogOutBtn.UseVisualStyleBackColor = false;
@@ -187,23 +190,34 @@
             label3.AutoSize = true;
             label3.Font = new Font("Magneto", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(3, 42);
+            label3.Location = new Point(19, 32);
             label3.Name = "label3";
-            label3.Size = new Size(267, 32);
+            label3.Size = new Size(208, 25);
             label3.TabIndex = 17;
             label3.Text = "Welcome! Admin";
             // 
+            // AdminPanelBackBtn
+            // 
+            AdminPanelBackBtn.Location = new Point(20, 470);
+            AdminPanelBackBtn.Name = "AdminPanelBackBtn";
+            AdminPanelBackBtn.Size = new Size(75, 23);
+            AdminPanelBackBtn.TabIndex = 20;
+            AdminPanelBackBtn.Text = "Back";
+            AdminPanelBackBtn.UseVisualStyleBackColor = true;
+            AdminPanelBackBtn.Click += AdminPanelBackBtn_Click;
+            // 
             // adminpanel
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1332, 721);
+            ClientSize = new Size(1166, 541);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(adminDataGridView);
             Controls.Add(adminNamelbl);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "adminpanel";
@@ -230,5 +244,6 @@
         private Label label3;
         private FontAwesome.Sharp.IconButton AdminLogOutBtn;
         private FontAwesome.Sharp.IconButton showAllStdBtn;
+        private Button AdminPanelBackBtn;
     }
 }

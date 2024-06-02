@@ -44,8 +44,11 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
+            panel2 = new Panel();
+            label7 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -206,12 +209,34 @@
             label1.TabIndex = 0;
             label1.Text = "Book Title";
             // 
+            // panel2
+            // 
+            panel2.BackColor = Color.Black;
+            panel2.Controls.Add(label7);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1199, 36);
+            panel2.TabIndex = 16;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.ForeColor = Color.White;
+            label7.Location = new Point(3, 6);
+            label7.Name = "label7";
+            label7.Size = new Size(446, 20);
+            label7.TabIndex = 1;
+            label7.Text = "Library Management System | Admin Panel | Book Management";
+            // 
             // BookManagegerAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
             ClientSize = new Size(1199, 552);
+            Controls.Add(panel2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 2, 3, 2);
@@ -222,6 +247,8 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -242,5 +269,7 @@
         private FontAwesome.Sharp.IconButton submitBtn;
         private FontAwesome.Sharp.IconButton BackBtn;
         private PictureBox pictureBox1;
+        private Panel panel2;
+        private Label label7;
     }
 }
