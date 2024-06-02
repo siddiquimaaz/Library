@@ -37,6 +37,8 @@
             HomeStdNameLabel = new Label();
             logout = new Button();
             label3 = new Label();
+            DetailsBtn = new Button();
+            ReaderDetails = new Label();
             ((System.ComponentModel.ISupportInitialize)HomeStdPic).BeginInit();
             SuspendLayout();
             // 
@@ -48,7 +50,7 @@
             addbk.FlatAppearance.BorderSize = 0;
             addbk.FlatStyle = FlatStyle.Popup;
             addbk.ForeColor = Color.Transparent;
-            addbk.Location = new Point(476, 141);
+            addbk.Location = new Point(371, 145);
             addbk.Name = "addbk";
             addbk.Size = new Size(117, 95);
             addbk.TabIndex = 0;
@@ -63,7 +65,7 @@
             button3.FlatAppearance.BorderSize = 0;
             button3.FlatStyle = FlatStyle.Popup;
             button3.ForeColor = Color.White;
-            button3.Location = new Point(663, 141);
+            button3.Location = new Point(558, 145);
             button3.Name = "button3";
             button3.Size = new Size(117, 95);
             button3.TabIndex = 2;
@@ -74,7 +76,7 @@
             ad.AutoSize = true;
             ad.BackColor = Color.Transparent;
             ad.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            ad.Location = new Point(494, 248);
+            ad.Location = new Point(389, 252);
             ad.Name = "ad";
             ad.Size = new Size(76, 20);
             ad.TabIndex = 4;
@@ -85,7 +87,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI Semibold", 10.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(653, 248);
+            label1.Location = new Point(548, 252);
             label1.Name = "label1";
             label1.Size = new Size(133, 19);
             label1.TabIndex = 6;
@@ -143,6 +145,31 @@
             label3.TabIndex = 11;
             label3.Text = "LogOut";
             // 
+            // DetailsBtn
+            // 
+            DetailsBtn.BackColor = Color.LightGray;
+            DetailsBtn.BackgroundImage = (Image)resources.GetObject("DetailsBtn.BackgroundImage");
+            DetailsBtn.BackgroundImageLayout = ImageLayout.Center;
+            DetailsBtn.FlatAppearance.BorderSize = 0;
+            DetailsBtn.FlatStyle = FlatStyle.Popup;
+            DetailsBtn.ForeColor = Color.White;
+            DetailsBtn.Location = new Point(730, 145);
+            DetailsBtn.Name = "DetailsBtn";
+            DetailsBtn.Size = new Size(117, 95);
+            DetailsBtn.TabIndex = 12;
+            DetailsBtn.UseVisualStyleBackColor = false;
+            // 
+            // ReaderDetails
+            // 
+            ReaderDetails.AutoSize = true;
+            ReaderDetails.BackColor = Color.Transparent;
+            ReaderDetails.Font = new Font("Segoe UI Semibold", 10.25F, FontStyle.Bold, GraphicsUnit.Point);
+            ReaderDetails.Location = new Point(767, 252);
+            ReaderDetails.Name = "ReaderDetails";
+            ReaderDetails.Size = new Size(52, 19);
+            ReaderDetails.TabIndex = 13;
+            ReaderDetails.Text = "Details";
+            // 
             // home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -151,6 +178,8 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1199, 552);
+            Controls.Add(ReaderDetails);
+            Controls.Add(DetailsBtn);
             Controls.Add(label3);
             Controls.Add(logout);
             Controls.Add(HomeStdNameLabel);
@@ -181,5 +210,7 @@
         private Label HomeStdNameLabel;
         private Button logout;
         private Label label3;
+        private Button DetailsBtn;
+        private Label ReaderDetails;
     }
 }
