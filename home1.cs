@@ -46,8 +46,8 @@ namespace Library
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        
-            
+
+
         }
 
         private void addbk_Click(object sender, EventArgs e)
@@ -151,11 +151,14 @@ namespace Library
 
         private void showAdminpanael_Click(object sender, EventArgs e)
         {
-            this.Close();
-            adminpanel adminpanel = new adminpanel();
-            adminpanel.ShowDialog();
+            FormManager.Show(new adminpanel());
+        }
+
+        private void DetailsBtn_Click(object sender, EventArgs e)
+        {
+            FormManager.Show(new ReaderCredentials());
         }
     }
 
-    
+
 }

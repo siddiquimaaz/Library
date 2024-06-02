@@ -154,19 +154,20 @@
             DetailsBtn.FlatAppearance.BorderSize = 0;
             DetailsBtn.FlatStyle = FlatStyle.Popup;
             DetailsBtn.ForeColor = Color.White;
-            DetailsBtn.Location = new Point(834, 193);
+            DetailsBtn.Location = new Point(829, 193);
             DetailsBtn.Margin = new Padding(3, 4, 3, 4);
             DetailsBtn.Name = "DetailsBtn";
             DetailsBtn.Size = new Size(134, 127);
             DetailsBtn.TabIndex = 12;
             DetailsBtn.UseVisualStyleBackColor = false;
+            DetailsBtn.Click += DetailsBtn_Click;
             // 
             // ReaderDetails
             // 
             ReaderDetails.AutoSize = true;
             ReaderDetails.BackColor = Color.Transparent;
             ReaderDetails.Font = new Font("Segoe UI Semibold", 10.25F, FontStyle.Bold, GraphicsUnit.Point);
-            ReaderDetails.Location = new Point(876, 336);
+            ReaderDetails.Location = new Point(862, 336);
             ReaderDetails.Name = "ReaderDetails";
             ReaderDetails.Size = new Size(69, 25);
             ReaderDetails.TabIndex = 13;
