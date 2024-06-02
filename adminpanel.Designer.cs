@@ -119,7 +119,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1199, 37);
+            panel1.Size = new Size(1199, 39);
             panel1.TabIndex = 15;
             // 
             // label2
@@ -144,7 +144,7 @@
             panel2.Controls.Add(AddBookBtnAdmin);
             panel2.Location = new Point(0, 36);
             panel2.Name = "panel2";
-            panel2.Size = new Size(258, 561);
+            panel2.Size = new Size(258, 516);
             panel2.TabIndex = 16;
             panel2.Paint += panel2_Paint;
             // 
@@ -152,7 +152,7 @@
             // 
             AdminPanelBackBtn.BackColor = Color.White;
             AdminPanelBackBtn.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            AdminPanelBackBtn.Location = new Point(20, 481);
+            AdminPanelBackBtn.Location = new Point(170, 478);
             AdminPanelBackBtn.Name = "AdminPanelBackBtn";
             AdminPanelBackBtn.Size = new Size(75, 23);
             AdminPanelBackBtn.TabIndex = 20;
@@ -162,13 +162,13 @@
             // 
             // AdminLogOutBtn
             // 
-            AdminLogOutBtn.BackColor = Color.Transparent;
+            AdminLogOutBtn.BackColor = Color.White;
             AdminLogOutBtn.BackgroundImage = (Image)resources.GetObject("AdminLogOutBtn.BackgroundImage");
             AdminLogOutBtn.BackgroundImageLayout = ImageLayout.None;
             AdminLogOutBtn.IconChar = FontAwesome.Sharp.IconChar.None;
             AdminLogOutBtn.IconColor = Color.White;
             AdminLogOutBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            AdminLogOutBtn.Location = new Point(10, 520);
+            AdminLogOutBtn.Location = new Point(19, 478);
             AdminLogOutBtn.Name = "AdminLogOutBtn";
             AdminLogOutBtn.Size = new Size(96, 26);
             AdminLogOutBtn.TabIndex = 18;
