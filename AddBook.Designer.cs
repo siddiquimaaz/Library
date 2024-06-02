@@ -54,7 +54,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(10, 194);
+            label3.Location = new Point(64, 205);
             label3.Name = "label3";
             label3.Size = new Size(63, 15);
             label3.TabIndex = 2;
@@ -67,11 +67,11 @@
             booktitltxt.BorderStyle = BorderStyle.FixedSingle;
             booktitltxt.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             booktitltxt.ForeColor = Color.Black;
-            booktitltxt.Location = new Point(84, 192);
+            booktitltxt.Location = new Point(138, 203);
             booktitltxt.Margin = new Padding(3, 2, 3, 2);
             booktitltxt.Name = "booktitltxt";
             booktitltxt.PlaceholderText = "Enter Book name";
-            booktitltxt.Size = new Size(167, 23);
+            booktitltxt.Size = new Size(235, 23);
             booktitltxt.TabIndex = 3;
             booktitltxt.TextAlign = HorizontalAlignment.Center;
             // 
@@ -81,11 +81,11 @@
             authortxt.BorderStyle = BorderStyle.FixedSingle;
             authortxt.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             authortxt.ForeColor = Color.Black;
-            authortxt.Location = new Point(84, 229);
+            authortxt.Location = new Point(138, 240);
             authortxt.Margin = new Padding(3, 2, 3, 2);
             authortxt.Name = "authortxt";
             authortxt.PlaceholderText = "Enter Author name";
-            authortxt.Size = new Size(167, 23);
+            authortxt.Size = new Size(235, 23);
             authortxt.TabIndex = 5;
             authortxt.TextAlign = HorizontalAlignment.Center;
             // 
@@ -94,7 +94,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(10, 230);
+            label4.Location = new Point(64, 241);
             label4.Name = "label4";
             label4.Size = new Size(44, 15);
             label4.TabIndex = 4;
@@ -112,7 +112,7 @@
             addToStdbtn.IconFont = FontAwesome.Sharp.IconFont.Regular;
             addToStdbtn.IconSize = 20;
             addToStdbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            addToStdbtn.Location = new Point(99, 328);
+            addToStdbtn.Location = new Point(176, 339);
             addToStdbtn.Margin = new Padding(3, 2, 3, 2);
             addToStdbtn.Name = "addToStdbtn";
             addToStdbtn.Size = new Size(140, 26);
@@ -132,7 +132,7 @@
             cancel.IconFont = FontAwesome.Sharp.IconFont.Auto;
             cancel.IconSize = 20;
             cancel.ImageAlign = ContentAlignment.MiddleLeft;
-            cancel.Location = new Point(99, 365);
+            cancel.Location = new Point(176, 376);
             cancel.Margin = new Padding(3, 2, 3, 2);
             cancel.Name = "cancel";
             cancel.Size = new Size(140, 28);
@@ -190,11 +190,11 @@
             SearchBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             SearchBtn.IconSize = 20;
             SearchBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            SearchBtn.Location = new Point(84, 267);
+            SearchBtn.Location = new Point(138, 278);
             SearchBtn.Margin = new Padding(3, 2, 3, 2);
             SearchBtn.Name = "SearchBtn";
             SearchBtn.Padding = new Padding(1);
-            SearchBtn.Size = new Size(167, 26);
+            SearchBtn.Size = new Size(235, 38);
             SearchBtn.TabIndex = 11;
             SearchBtn.Text = "Search";
             SearchBtn.UseVisualStyleBackColor = false;
