@@ -37,7 +37,6 @@
             label2 = new Label();
             panel2 = new Panel();
             RemoveStdBtn = new FontAwesome.Sharp.IconButton();
-            AdminPanelBackBtn = new Button();
             AdminLogOutBtn = new FontAwesome.Sharp.IconButton();
             label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)adminDataGridView).BeginInit();
@@ -136,7 +135,6 @@
             // 
             panel2.BackColor = Color.Black;
             panel2.Controls.Add(RemoveStdBtn);
-            panel2.Controls.Add(AdminPanelBackBtn);
             panel2.Controls.Add(AdminLogOutBtn);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(ShowBorrrwedBookAdmin);
@@ -167,19 +165,6 @@
             RemoveStdBtn.Text = "Delete Membership";
             RemoveStdBtn.UseVisualStyleBackColor = false;
             RemoveStdBtn.Click += RemoveStdBtn_Click;
-            // 
-            // AdminPanelBackBtn
-            // 
-            AdminPanelBackBtn.BackColor = Color.White;
-            AdminPanelBackBtn.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            AdminPanelBackBtn.Location = new Point(194, 637);
-            AdminPanelBackBtn.Margin = new Padding(3, 4, 3, 4);
-            AdminPanelBackBtn.Name = "AdminPanelBackBtn";
-            AdminPanelBackBtn.Size = new Size(86, 31);
-            AdminPanelBackBtn.TabIndex = 20;
-            AdminPanelBackBtn.Text = "Back";
-            AdminPanelBackBtn.UseVisualStyleBackColor = false;
-            AdminPanelBackBtn.Click += AdminPanelBackBtn_Click;
             // 
             // AdminLogOutBtn
             // 
@@ -246,7 +231,6 @@
         private Panel panel2;
         private Label label3;
         private FontAwesome.Sharp.IconButton AdminLogOutBtn;
-        private Button AdminPanelBackBtn;
         private FontAwesome.Sharp.IconButton RemoveStdBtn;
     }
 }

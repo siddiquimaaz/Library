@@ -219,11 +219,6 @@ namespace Library
 
         }
 
-        private void AdminPanelBackBtn_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ShowBorrrwedBookAdmin_Click(object sender, EventArgs e)
         {
             FormManager.Show(new AdminBorrowedBook());
