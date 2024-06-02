@@ -130,10 +130,10 @@
             sign.BackColor = Color.White;
             sign.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             sign.ForeColor = Color.FromArgb(192, 192, 255);
-            sign.Location = new Point(21, 499);
+            sign.Location = new Point(14, 499);
             sign.Margin = new Padding(3, 4, 3, 4);
             sign.Name = "sign";
-            sign.Size = new Size(420, 56);
+            sign.Size = new Size(427, 56);
             sign.TabIndex = 8;
             sign.Text = "Sign-Up";
             sign.UseVisualStyleBackColor = false;
