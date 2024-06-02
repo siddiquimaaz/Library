@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            label2 = new Label();
             label3 = new Label();
             booktitltxt = new TextBox();
             authortxt = new TextBox();
@@ -41,38 +39,21 @@
             SearchBtn = new FontAwesome.Sharp.IconButton();
             addbookstdname = new Label();
             addbookstdimage = new PictureBox();
+            panel1 = new Panel();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)booksView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)addbookstdimage).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Calibri", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(458, 23);
-            label1.Name = "label1";
-            label1.Size = new Size(321, 54);
-            label1.TabIndex = 0;
-            label1.Text = "Jaun Elia Library";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(490, 77);
-            label2.Name = "label2";
-            label2.Size = new Size(256, 31);
-            label2.TabIndex = 1;
-            label2.Text = "Add Books to your cart";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(41, 261);
+            label3.Location = new Point(36, 196);
             label3.Name = "label3";
-            label3.Size = new Size(81, 20);
+            label3.Size = new Size(63, 15);
             label3.TabIndex = 2;
             label3.Text = "Book Title:";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -83,13 +64,13 @@
             booktitltxt.BorderStyle = BorderStyle.FixedSingle;
             booktitltxt.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             booktitltxt.ForeColor = Color.Black;
-            booktitltxt.Location = new Point(126, 254);
+            booktitltxt.Location = new Point(110, 190);
+            booktitltxt.Margin = new Padding(3, 2, 3, 2);
             booktitltxt.Name = "booktitltxt";
             booktitltxt.PlaceholderText = "Enter Book name";
-            booktitltxt.Size = new Size(191, 27);
+            booktitltxt.Size = new Size(167, 23);
             booktitltxt.TabIndex = 3;
             booktitltxt.TextAlign = HorizontalAlignment.Center;
-            //booktitltxt.TextChanged += booktitltxt_TextChanged;
             // 
             // authortxt
             // 
@@ -97,10 +78,11 @@
             authortxt.BorderStyle = BorderStyle.FixedSingle;
             authortxt.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             authortxt.ForeColor = Color.Black;
-            authortxt.Location = new Point(126, 303);
+            authortxt.Location = new Point(110, 227);
+            authortxt.Margin = new Padding(3, 2, 3, 2);
             authortxt.Name = "authortxt";
             authortxt.PlaceholderText = "Enter Author name";
-            authortxt.Size = new Size(191, 27);
+            authortxt.Size = new Size(167, 23);
             authortxt.TabIndex = 5;
             authortxt.TextAlign = HorizontalAlignment.Center;
             // 
@@ -109,9 +91,9 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(41, 310);
+            label4.Location = new Point(36, 232);
             label4.Name = "label4";
-            label4.Size = new Size(57, 20);
+            label4.Size = new Size(44, 15);
             label4.TabIndex = 4;
             label4.Text = "Author";
             label4.TextAlign = ContentAlignment.MiddleCenter;
@@ -126,9 +108,10 @@
             addToStdbtn.IconFont = FontAwesome.Sharp.IconFont.Regular;
             addToStdbtn.IconSize = 28;
             addToStdbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            addToStdbtn.Location = new Point(136, 407);
+            addToStdbtn.Location = new Point(119, 305);
+            addToStdbtn.Margin = new Padding(3, 2, 3, 2);
             addToStdbtn.Name = "addToStdbtn";
-            addToStdbtn.Size = new Size(72, 30);
+            addToStdbtn.Size = new Size(63, 22);
             addToStdbtn.TabIndex = 6;
             addToStdbtn.Text = "Add";
             addToStdbtn.TextAlign = ContentAlignment.MiddleRight;
@@ -144,9 +127,10 @@
             cancel.IconFont = FontAwesome.Sharp.IconFont.Auto;
             cancel.IconSize = 28;
             cancel.ImageAlign = ContentAlignment.MiddleLeft;
-            cancel.Location = new Point(214, 407);
+            cancel.Location = new Point(187, 305);
+            cancel.Margin = new Padding(3, 2, 3, 2);
             cancel.Name = "cancel";
-            cancel.Size = new Size(86, 30);
+            cancel.Size = new Size(75, 22);
             cancel.TabIndex = 7;
             cancel.Text = "Cancel";
             cancel.TextAlign = ContentAlignment.MiddleRight;
@@ -162,9 +146,10 @@
             backbtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
             backbtn.IconSize = 28;
             backbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            backbtn.Location = new Point(182, 453);
+            backbtn.Location = new Point(159, 340);
+            backbtn.Margin = new Padding(3, 2, 3, 2);
             backbtn.Name = "backbtn";
-            backbtn.Size = new Size(76, 30);
+            backbtn.Size = new Size(66, 22);
             backbtn.TabIndex = 8;
             backbtn.Text = "Back";
             backbtn.TextAlign = ContentAlignment.MiddleRight;
@@ -178,13 +163,14 @@
             booksView.AllowUserToResizeColumns = false;
             booksView.AllowUserToResizeRows = false;
             booksView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            booksView.Location = new Point(552, 132);
+            booksView.Location = new Point(458, 75);
+            booksView.Margin = new Padding(3, 2, 3, 2);
             booksView.Name = "booksView";
             booksView.RowHeadersWidth = 51;
             booksView.RowTemplate.Height = 29;
-            booksView.Size = new Size(758, 564);
+            booksView.Size = new Size(663, 423);
             booksView.TabIndex = 9;
-           // booksView.CellContentClick += booksView_CellContentClick;
+            booksView.CellContentClick += booksView_CellContentClick;
             // 
             // SearchBtn
             // 
@@ -196,10 +182,11 @@
             SearchBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             SearchBtn.IconSize = 28;
             SearchBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            SearchBtn.Location = new Point(182, 354);
+            SearchBtn.Location = new Point(159, 266);
+            SearchBtn.Margin = new Padding(3, 2, 3, 2);
             SearchBtn.Name = "SearchBtn";
             SearchBtn.Padding = new Padding(1);
-            SearchBtn.Size = new Size(87, 34);
+            SearchBtn.Size = new Size(76, 26);
             SearchBtn.TabIndex = 11;
             SearchBtn.Text = "Search";
             SearchBtn.TextAlign = ContentAlignment.MiddleRight;
@@ -209,28 +196,50 @@
             // addbookstdname
             // 
             addbookstdname.AutoSize = true;
-            addbookstdname.Location = new Point(158, 100);
+            addbookstdname.Location = new Point(138, 75);
             addbookstdname.Name = "addbookstdname";
-            addbookstdname.Size = new Size(0, 20);
+            addbookstdname.Size = new Size(0, 15);
             addbookstdname.TabIndex = 12;
             addbookstdname.Visible = false;
             // 
             // addbookstdimage
             // 
-            addbookstdimage.Location = new Point(12, 58);
+            addbookstdimage.Location = new Point(12, 65);
+            addbookstdimage.Margin = new Padding(3, 2, 3, 2);
             addbookstdimage.Name = "addbookstdimage";
-            addbookstdimage.Size = new Size(121, 92);
+            addbookstdimage.Size = new Size(106, 69);
             addbookstdimage.SizeMode = PictureBoxSizeMode.Zoom;
             addbookstdimage.TabIndex = 13;
             addbookstdimage.TabStop = false;
             addbookstdimage.Visible = false;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Black;
+            panel1.Controls.Add(label1);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1150, 35);
+            panel1.TabIndex = 14;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(12, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(244, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Library Management System | Admin Panel | ";
+            // 
             // AddBook
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1314, 694);
+            ClientSize = new Size(1150, 520);
+            Controls.Add(panel1);
             Controls.Add(addbookstdimage);
             Controls.Add(addbookstdname);
             Controls.Add(SearchBtn);
@@ -242,8 +251,8 @@
             Controls.Add(label4);
             Controls.Add(booktitltxt);
             Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             MinimizeBox = false;
             Name = "AddBook";
             StartPosition = FormStartPosition.CenterScreen;
@@ -252,14 +261,13 @@
             Load += AddBook_Load;
             ((System.ComponentModel.ISupportInitialize)booksView).EndInit();
             ((System.ComponentModel.ISupportInitialize)addbookstdimage).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Label label1;
-        private Label label2;
         private Label label3;
         private TextBox booktitltxt;
         private TextBox authortxt;
@@ -271,5 +279,7 @@
         private FontAwesome.Sharp.IconButton SearchBtn;
         private Label addbookstdname;
         private PictureBox addbookstdimage;
+        private Panel panel1;
+        private Label label1;
     }
 }

@@ -470,8 +470,9 @@ namespace Library
             return bitmap;
         }
 
-        
-
-        
+        private void booksView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
     }
 }
