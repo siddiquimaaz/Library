@@ -36,10 +36,10 @@
             panel1 = new Panel();
             label2 = new Label();
             panel2 = new Panel();
+            AdminPanelBackBtn = new Button();
             showAllStdBtn = new FontAwesome.Sharp.IconButton();
             AdminLogOutBtn = new FontAwesome.Sharp.IconButton();
             label3 = new Label();
-            AdminPanelBackBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)adminDataGridView).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -102,13 +102,13 @@
             adminDataGridView.AllowUserToDeleteRows = false;
             adminDataGridView.BackgroundColor = Color.LightGray;
             adminDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            adminDataGridView.Location = new Point(261, 36);
+            adminDataGridView.Location = new Point(252, 36);
             adminDataGridView.Margin = new Padding(3, 2, 3, 2);
             adminDataGridView.Name = "adminDataGridView";
             adminDataGridView.ReadOnly = true;
             adminDataGridView.RowHeadersWidth = 51;
             adminDataGridView.RowTemplate.Height = 29;
-            adminDataGridView.Size = new Size(902, 506);
+            adminDataGridView.Size = new Size(911, 488);
             adminDataGridView.TabIndex = 14;
             adminDataGridView.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -119,7 +119,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1166, 36);
+            panel1.Size = new Size(1150, 36);
             panel1.TabIndex = 15;
             // 
             // label2
@@ -147,6 +147,16 @@
             panel2.Size = new Size(258, 561);
             panel2.TabIndex = 16;
             panel2.Paint += panel2_Paint;
+            // 
+            // AdminPanelBackBtn
+            // 
+            AdminPanelBackBtn.Location = new Point(20, 452);
+            AdminPanelBackBtn.Name = "AdminPanelBackBtn";
+            AdminPanelBackBtn.Size = new Size(75, 23);
+            AdminPanelBackBtn.TabIndex = 20;
+            AdminPanelBackBtn.Text = "Back";
+            AdminPanelBackBtn.UseVisualStyleBackColor = true;
+            AdminPanelBackBtn.Click += AdminPanelBackBtn_Click;
             // 
             // showAllStdBtn
             // 
@@ -196,22 +206,12 @@
             label3.TabIndex = 17;
             label3.Text = "Welcome! Admin";
             // 
-            // AdminPanelBackBtn
-            // 
-            AdminPanelBackBtn.Location = new Point(20, 470);
-            AdminPanelBackBtn.Name = "AdminPanelBackBtn";
-            AdminPanelBackBtn.Size = new Size(75, 23);
-            AdminPanelBackBtn.TabIndex = 20;
-            AdminPanelBackBtn.Text = "Back";
-            AdminPanelBackBtn.UseVisualStyleBackColor = true;
-            AdminPanelBackBtn.Click += AdminPanelBackBtn_Click;
-            // 
             // adminpanel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1166, 541);
+            ClientSize = new Size(1150, 520);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(adminDataGridView);
