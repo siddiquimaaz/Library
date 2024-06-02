@@ -472,7 +472,12 @@ namespace Library
 
         private void booksView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
+        }
+
+        private void booktitltxt_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

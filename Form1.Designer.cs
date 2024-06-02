@@ -52,7 +52,7 @@
             text1.BorderStyle = BorderStyle.FixedSingle;
             text1.Font = new Font("Tahoma", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             text1.ForeColor = Color.Black;
-            text1.Location = new Point(19, 259);
+            text1.Location = new Point(14, 257);
             text1.Margin = new Padding(3, 4, 3, 4);
             text1.Name = "text1";
             text1.PlaceholderText = "Enter username";
@@ -66,7 +66,7 @@
             text2.BorderStyle = BorderStyle.FixedSingle;
             text2.Font = new Font("Tahoma", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             text2.ForeColor = Color.Black;
-            text2.Location = new Point(19, 331);
+            text2.Location = new Point(14, 323);
             text2.Margin = new Padding(3, 4, 3, 4);
             text2.Name = "text2";
             text2.PlaceholderText = "Enter your Password";
@@ -93,7 +93,7 @@
             Pass.BackColor = Color.Transparent;
             Pass.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             Pass.ForeColor = Color.Black;
-            Pass.Location = new Point(10, 307);
+            Pass.Location = new Point(10, 301);
             Pass.Name = "Pass";
             Pass.Size = new Size(74, 18);
             Pass.TabIndex = 3;
@@ -104,7 +104,7 @@
             Login.BackColor = Color.FromArgb(192, 192, 255);
             Login.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             Login.ForeColor = Color.White;
-            Login.Location = new Point(18, 388);
+            Login.Location = new Point(11, 386);
             Login.Margin = new Padding(3, 4, 3, 4);
             Login.Name = "Login";
             Login.Size = new Size(425, 48);
@@ -199,7 +199,7 @@
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.BackgroundImageLayout = ImageLayout.Center;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(165, 58);
+            pictureBox1.Location = new Point(171, 58);
             pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(104, 98);
@@ -211,7 +211,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Forte", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(164, 166);
+            label2.Location = new Point(170, 166);
             label2.Name = "label2";
             label2.Size = new Size(104, 26);
             label2.TabIndex = 15;
