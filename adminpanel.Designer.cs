@@ -58,7 +58,7 @@
             AddBookBtnAdmin.BackColor = Color.Transparent;
             AddBookBtnAdmin.BackgroundImageLayout = ImageLayout.None;
             AddBookBtnAdmin.FlatAppearance.MouseOverBackColor = SystemColors.ButtonShadow;
-            AddBookBtnAdmin.FlatStyle = FlatStyle.Flat;
+            AddBookBtnAdmin.FlatStyle = FlatStyle.Popup;
             AddBookBtnAdmin.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             AddBookBtnAdmin.ForeColor = Color.White;
             AddBookBtnAdmin.IconChar = FontAwesome.Sharp.IconChar.BookOpenReader;
@@ -78,7 +78,7 @@
             // 
             ShowBorrrwedBookAdmin.BackColor = Color.Transparent;
             ShowBorrrwedBookAdmin.BackgroundImageLayout = ImageLayout.None;
-            ShowBorrrwedBookAdmin.FlatStyle = FlatStyle.Flat;
+            ShowBorrrwedBookAdmin.FlatStyle = FlatStyle.Popup;
             ShowBorrrwedBookAdmin.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             ShowBorrrwedBookAdmin.ForeColor = Color.White;
             ShowBorrrwedBookAdmin.IconChar = FontAwesome.Sharp.IconChar.AddressCard;
@@ -100,7 +100,7 @@
             adminDataGridView.AllowUserToDeleteRows = false;
             adminDataGridView.BackgroundColor = Color.LightGray;
             adminDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            adminDataGridView.Location = new Point(288, 49);
+            adminDataGridView.Location = new Point(288, 51);
             adminDataGridView.Name = "adminDataGridView";
             adminDataGridView.ReadOnly = true;
             adminDataGridView.RowHeadersWidth = 51;
@@ -150,7 +150,7 @@
             // 
             RemoveStdBtn.BackColor = Color.Transparent;
             RemoveStdBtn.BackgroundImageLayout = ImageLayout.None;
-            RemoveStdBtn.FlatStyle = FlatStyle.Flat;
+            RemoveStdBtn.FlatStyle = FlatStyle.Popup;
             RemoveStdBtn.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             RemoveStdBtn.ForeColor = Color.White;
             RemoveStdBtn.IconChar = FontAwesome.Sharp.IconChar.AddressCard;
@@ -188,7 +188,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(32, 155);
+            label3.Location = new Point(23, 157);
             label3.Name = "label3";
             label3.Size = new Size(259, 41);
             label3.TabIndex = 17;
