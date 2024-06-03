@@ -175,7 +175,7 @@ namespace Library
 
         private async void AdminBorrowedBook_Load(object sender, EventArgs e)
         {
-            //BorrowedBookAdminPanel.Dock = DockStyle.Fill;
+            
             await ShowAllBorrowedBooksAsync();
         }
 
