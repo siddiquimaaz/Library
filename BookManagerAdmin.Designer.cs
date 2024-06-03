@@ -1,6 +1,6 @@
 ﻿namespace Library
 {
-    partial class BookManagegerAdmin
+    partial class BookManagerAdmin
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BookManagegerAdmin));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BookManagerAdmin));
             panel1 = new Panel();
-            pictureBox1 = new PictureBox();
             BackBtn = new FontAwesome.Sharp.IconButton();
+            pictureBox1 = new PictureBox();
             submitBtn = new FontAwesome.Sharp.IconButton();
             dateTimePicker = new DateTimePicker();
             Genre = new TextBox();
@@ -56,13 +56,13 @@
             panel1.BackColor = Color.White;
             panel1.Controls.Add(BackBtn);
             panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(label6);
             panel1.Controls.Add(submitBtn);
             panel1.Controls.Add(dateTimePicker);
             panel1.Controls.Add(Genre);
             panel1.Controls.Add(ISBNNo);
             panel1.Controls.Add(BookAuthor);
             panel1.Controls.Add(BooKNameAdmin);
-            panel1.Controls.Add(label6);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
@@ -71,21 +71,9 @@
             panel1.Location = new Point(279, 105);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(824, 532);
+            panel1.Size = new Size(956, 532);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BackgroundImageLayout = ImageLayout.Center;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(542, 117);
-            pictureBox1.Margin = new Padding(3, 4, 3, 4);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(255, 331);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 11;
-            pictureBox1.TabStop = false;
             // 
             // BackBtn
             // 
@@ -103,6 +91,18 @@
             BackBtn.Text = "Back";
             BackBtn.UseVisualStyleBackColor = false;
             BackBtn.Click += BackBtn_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(613, 117);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(255, 331);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 11;
+            pictureBox1.TabStop = false;
             // 
             // submitBtn
             // 
@@ -167,11 +167,11 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Bahnschrift SemiBold", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(296, 32);
+            label6.Location = new Point(321, 39);
             label6.Name = "label6";
-            label6.Size = new Size(168, 36);
+            label6.Size = new Size(335, 36);
             label6.TabIndex = 5;
-            label6.Text = "Add A Book";
+            label6.Text = "Add A Book in Database";
             // 
             // label5
             // 
@@ -245,7 +245,7 @@
             label7.TabIndex = 1;
             label7.Text = "Library Management System | Admin Panel | Book Management";
             // 
-            // BookManagegerAdmin
+            // BookManagerAdmin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -256,7 +256,7 @@
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "BookManagegerAdmin";
+            Name = "BookManagerAdmin";
             Text = "BookManagegerAdmin";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

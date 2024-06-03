@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace Library
 {
-    public partial class BookManagegerAdmin : Form
+    public partial class BookManagerAdmin : Form
     {
         string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
-        public BookManagegerAdmin()
+        public BookManagerAdmin()
         {
             InitializeComponent();
             submitBtn.Click += new EventHandler(submitBtn_Click); // Correct event handler assignment
