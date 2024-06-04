@@ -38,17 +38,15 @@
             signdash = new Label();
             label2 = new Label();
             PrintReaderIDCard = new FontAwesome.Sharp.IconButton();
-            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.Location = new Point(130, 140);
-            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Location = new Point(131, 105);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(114, 107);
+            pictureBox1.Size = new Size(100, 80);
             pictureBox1.TabIndex = 15;
             pictureBox1.TabStop = false;
             // 
@@ -57,9 +55,9 @@
             readerid.AutoSize = true;
             readerid.BackColor = Color.Transparent;
             readerid.ForeColor = Color.White;
-            readerid.Location = new Point(29, 299);
+            readerid.Location = new Point(25, 224);
             readerid.Name = "readerid";
-            readerid.Size = new Size(50, 20);
+            readerid.Size = new Size(38, 15);
             readerid.TabIndex = 16;
             readerid.Text = "label2";
             // 
@@ -68,9 +66,9 @@
             readername.AutoSize = true;
             readername.BackColor = Color.Transparent;
             readername.ForeColor = Color.White;
-            readername.Location = new Point(29, 343);
+            readername.Location = new Point(25, 257);
             readername.Name = "readername";
-            readername.Size = new Size(50, 20);
+            readername.Size = new Size(38, 15);
             readername.TabIndex = 17;
             readername.Text = "label3";
             // 
@@ -79,9 +77,9 @@
             readerphoneno.AutoSize = true;
             readerphoneno.BackColor = Color.Transparent;
             readerphoneno.ForeColor = Color.White;
-            readerphoneno.Location = new Point(29, 389);
+            readerphoneno.Location = new Point(25, 292);
             readerphoneno.Name = "readerphoneno";
-            readerphoneno.Size = new Size(50, 20);
+            readerphoneno.Size = new Size(38, 15);
             readerphoneno.TabIndex = 18;
             readerphoneno.Text = "label3";
             // 
@@ -90,9 +88,9 @@
             readeremail.AutoSize = true;
             readeremail.BackColor = Color.Transparent;
             readeremail.ForeColor = Color.White;
-            readeremail.Location = new Point(29, 439);
+            readeremail.Location = new Point(25, 329);
             readeremail.Name = "readeremail";
-            readeremail.Size = new Size(50, 20);
+            readeremail.Size = new Size(38, 15);
             readeremail.TabIndex = 19;
             readeremail.Text = "label3";
             // 
@@ -102,9 +100,9 @@
             heading.BackColor = Color.Transparent;
             heading.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             heading.ForeColor = Color.White;
-            heading.Location = new Point(113, 56);
+            heading.Location = new Point(116, 42);
             heading.Name = "heading";
-            heading.Size = new Size(166, 37);
+            heading.Size = new Size(131, 30);
             heading.TabIndex = 20;
             heading.Text = "Library Card";
             // 
@@ -113,9 +111,9 @@
             signdash.AutoSize = true;
             signdash.BackColor = Color.Transparent;
             signdash.ForeColor = Color.White;
-            signdash.Location = new Point(248, 620);
+            signdash.Location = new Point(217, 465);
             signdash.Name = "signdash";
-            signdash.Size = new Size(141, 20);
+            signdash.Size = new Size(117, 15);
             signdash.TabIndex = 21;
             signdash.Text = "______________________";
             // 
@@ -125,9 +123,9 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(250, 648);
+            label2.Location = new Point(219, 486);
             label2.Name = "label2";
-            label2.Size = new Size(134, 20);
+            label2.Size = new Size(113, 15);
             label2.TabIndex = 22;
             label2.Text = "Reader's Signnature";
             label2.Click += label2_Click;
@@ -140,30 +138,19 @@
             PrintReaderIDCard.IconColor = Color.White;
             PrintReaderIDCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
             PrintReaderIDCard.IconSize = 28;
-            PrintReaderIDCard.Location = new Point(329, 55);
-            PrintReaderIDCard.Margin = new Padding(3, 4, 3, 4);
+            PrintReaderIDCard.Location = new Point(288, 41);
             PrintReaderIDCard.Name = "PrintReaderIDCard";
-            PrintReaderIDCard.Size = new Size(57, 47);
+            PrintReaderIDCard.Size = new Size(50, 35);
             PrintReaderIDCard.TabIndex = 23;
             PrintReaderIDCard.UseVisualStyleBackColor = false;
             // 
-            // panel1
-            // 
-            panel1.BackColor = Color.Transparent;
-            panel1.BackgroundImage = (Image)resources.GetObject("panel1.BackgroundImage");
-            panel1.BackgroundImageLayout = ImageLayout.Stretch;
-            panel1.Location = new Point(7, 9);
-            panel1.Margin = new Padding(3, 4, 3, 4);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(409, 704);
-            panel1.TabIndex = 24;
-            // 
             // ReaderCredentials
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(428, 721);
+            ClientSize = new Size(374, 541);
             Controls.Add(PrintReaderIDCard);
             Controls.Add(label2);
             Controls.Add(signdash);
@@ -173,9 +160,7 @@
             Controls.Add(readername);
             Controls.Add(readerid);
             Controls.Add(pictureBox1);
-            Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "ReaderCredentials";
             Text = "ReaderCredentials";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -193,6 +178,5 @@
         private Label signdash;
         private Label label2;
         private FontAwesome.Sharp.IconButton PrintReaderIDCard;
-        private Panel panel1;
     }
 }
