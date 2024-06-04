@@ -54,9 +54,9 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(17, 194);
+            label3.Location = new Point(19, 259);
             label3.Name = "label3";
-            label3.Size = new Size(75, 17);
+            label3.Size = new Size(97, 23);
             label3.TabIndex = 2;
             label3.Text = "Book Title:";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -67,11 +67,10 @@
             booktitltxt.BorderStyle = BorderStyle.FixedSingle;
             booktitltxt.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             booktitltxt.ForeColor = Color.Black;
-            booktitltxt.Location = new Point(22, 213);
-            booktitltxt.Margin = new Padding(3, 2, 3, 2);
+            booktitltxt.Location = new Point(25, 284);
             booktitltxt.Name = "booktitltxt";
             booktitltxt.PlaceholderText = "Enter Book name";
-            booktitltxt.Size = new Size(210, 23);
+            booktitltxt.Size = new Size(240, 27);
             booktitltxt.TabIndex = 3;
             booktitltxt.TextAlign = HorizontalAlignment.Center;
             booktitltxt.TextChanged += booktitltxt_TextChanged;
@@ -82,11 +81,10 @@
             authortxt.BorderStyle = BorderStyle.FixedSingle;
             authortxt.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             authortxt.ForeColor = Color.Black;
-            authortxt.Location = new Point(21, 264);
-            authortxt.Margin = new Padding(3, 2, 3, 2);
+            authortxt.Location = new Point(24, 352);
             authortxt.Name = "authortxt";
             authortxt.PlaceholderText = "Enter Author name";
-            authortxt.Size = new Size(210, 23);
+            authortxt.Size = new Size(240, 27);
             authortxt.TabIndex = 5;
             authortxt.TextAlign = HorizontalAlignment.Center;
             // 
@@ -95,9 +93,9 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(17, 245);
+            label4.Location = new Point(19, 327);
             label4.Name = "label4";
-            label4.Size = new Size(51, 17);
+            label4.Size = new Size(66, 23);
             label4.TabIndex = 4;
             label4.Text = "Author";
             label4.TextAlign = ContentAlignment.MiddleCenter;
@@ -113,10 +111,9 @@
             addToStdbtn.IconFont = FontAwesome.Sharp.IconFont.Regular;
             addToStdbtn.IconSize = 28;
             addToStdbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            addToStdbtn.Location = new Point(21, 348);
-            addToStdbtn.Margin = new Padding(3, 2, 3, 2);
+            addToStdbtn.Location = new Point(24, 464);
             addToStdbtn.Name = "addToStdbtn";
-            addToStdbtn.Size = new Size(211, 40);
+            addToStdbtn.Size = new Size(241, 53);
             addToStdbtn.TabIndex = 6;
             addToStdbtn.Text = "Issue Book";
             addToStdbtn.UseVisualStyleBackColor = false;
@@ -133,10 +130,9 @@
             cancel.IconFont = FontAwesome.Sharp.IconFont.Auto;
             cancel.IconSize = 20;
             cancel.ImageAlign = ContentAlignment.MiddleLeft;
-            cancel.Location = new Point(155, 478);
-            cancel.Margin = new Padding(3, 2, 3, 2);
+            cancel.Location = new Point(177, 637);
             cancel.Name = "cancel";
-            cancel.Size = new Size(76, 31);
+            cancel.Size = new Size(87, 41);
             cancel.TabIndex = 7;
             cancel.Text = "Cancel";
             cancel.TextAlign = ContentAlignment.MiddleRight;
@@ -154,10 +150,9 @@
             backbtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
             backbtn.IconSize = 20;
             backbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            backbtn.Location = new Point(16, 478);
-            backbtn.Margin = new Padding(3, 2, 3, 2);
+            backbtn.Location = new Point(18, 637);
             backbtn.Name = "backbtn";
-            backbtn.Size = new Size(64, 31);
+            backbtn.Size = new Size(73, 41);
             backbtn.TabIndex = 8;
             backbtn.Text = "Back";
             backbtn.TextAlign = ContentAlignment.MiddleRight;
@@ -172,12 +167,11 @@
             booksView.AllowUserToResizeRows = false;
             booksView.BackgroundColor = Color.White;
             booksView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            booksView.Location = new Point(4, 31);
-            booksView.Margin = new Padding(3, 2, 3, 2);
+            booksView.Location = new Point(5, 41);
             booksView.Name = "booksView";
             booksView.RowHeadersWidth = 51;
             booksView.RowTemplate.Height = 29;
-            booksView.Size = new Size(882, 454);
+            booksView.Size = new Size(1169, 704);
             booksView.TabIndex = 9;
             booksView.CellContentClick += booksView_CellContentClick;
             // 
@@ -193,11 +187,10 @@
             SearchBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             SearchBtn.IconSize = 20;
             SearchBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            SearchBtn.Location = new Point(22, 299);
-            SearchBtn.Margin = new Padding(3, 2, 3, 2);
+            SearchBtn.Location = new Point(25, 399);
             SearchBtn.Name = "SearchBtn";
             SearchBtn.Padding = new Padding(1);
-            SearchBtn.Size = new Size(81, 26);
+            SearchBtn.Size = new Size(93, 35);
             SearchBtn.TabIndex = 11;
             SearchBtn.Text = "Search";
             SearchBtn.TextAlign = ContentAlignment.MiddleRight;
@@ -207,18 +200,17 @@
             // addbookstdname
             // 
             addbookstdname.AutoSize = true;
-            addbookstdname.Location = new Point(114, 129);
+            addbookstdname.Location = new Point(130, 172);
             addbookstdname.Name = "addbookstdname";
-            addbookstdname.Size = new Size(0, 15);
+            addbookstdname.Size = new Size(0, 20);
             addbookstdname.TabIndex = 12;
             addbookstdname.Visible = false;
             // 
             // addbookstdimage
             // 
-            addbookstdimage.Location = new Point(16, 65);
-            addbookstdimage.Margin = new Padding(3, 2, 3, 2);
+            addbookstdimage.Location = new Point(18, 87);
             addbookstdimage.Name = "addbookstdimage";
-            addbookstdimage.Size = new Size(87, 79);
+            addbookstdimage.Size = new Size(99, 105);
             addbookstdimage.SizeMode = PictureBoxSizeMode.Zoom;
             addbookstdimage.TabIndex = 13;
             addbookstdimage.TabStop = false;
@@ -230,8 +222,9 @@
             panel1.Controls.Add(label7);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1150, 35);
+            panel1.Size = new Size(1472, 47);
             panel1.TabIndex = 14;
             // 
             // label7
@@ -239,9 +232,9 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(3, 9);
+            label7.Location = new Point(3, 12);
             label7.Name = "label7";
-            label7.Size = new Size(391, 20);
+            label7.Size = new Size(490, 25);
             label7.TabIndex = 2;
             label7.Text = "Library Management System | Reader Panel | Issue Book";
             // 
@@ -250,28 +243,27 @@
             panel2.BackColor = Color.FromArgb(192, 192, 255);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(booksView);
-            panel2.Location = new Point(261, 34);
-            panel2.Margin = new Padding(3, 2, 3, 2);
+            panel2.Location = new Point(298, 45);
             panel2.Name = "panel2";
-            panel2.Size = new Size(889, 487);
+            panel2.Size = new Size(1174, 748);
             panel2.TabIndex = 15;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(371, 1);
+            label1.Location = new Point(424, 1);
             label1.Name = "label1";
-            label1.Size = new Size(169, 30);
+            label1.Size = new Size(221, 37);
             label1.TabIndex = 16;
             label1.Text = "Books Available";
             // 
             // AddBook
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1150, 520);
+            ClientSize = new Size(1472, 790);
             Controls.Add(panel1);
             Controls.Add(addbookstdimage);
             Controls.Add(addbookstdname);
@@ -285,7 +277,6 @@
             Controls.Add(label3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 2, 3, 2);
             MinimizeBox = false;
             Name = "AddBook";
             StartPosition = FormStartPosition.CenterScreen;
