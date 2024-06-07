@@ -31,14 +31,40 @@ namespace Library
             {
                 await FetchAndDisplayStudentInfo(currentStudentId);
                 LoadBooksAsync();  // Always reload books to refresh the grid, ensuring consistency with the database
-                UpdateCheckBoxes();
-                booksView.Refresh();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error initializing form: {ex.Message}", "Initialization Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private async void AddBook_Load(object? sender, EventArgs? e)
+        {
+            await FetchAndDisplayStudentInfo(currentStudentId); // Pass the student ID
+            await LoadBooksAsync(); // Load books when the form is loaded
+        }
+
+        private void backbtn_Click(object sender, EventArgs e)
+        {
+            FormManager.CloseCurrentForm();
+            FormManager.Show(new home());
+        }
+
+        private void cancel_Click(object sender, EventArgs e)
+        {
+            booktitltxt.Text = "";
+            authortxt.Text = "";
+            FormManager.CloseCurrentForm(); // Close the current form
+            FormManager.Show(new AddBook()); // Show the existing home form
+
+            // Reset any other UI elements that might have changed
+
+        }
+
+        private void SearchBtn_Click(object? sender, EventArgs? e)
+        {
+            SearchBooksAsync();
+        }
+
         private async Task<int> GetStudentId(string username)
         {
             try
@@ -92,46 +118,17 @@ namespace Library
                 }
             }
         }
-        private async void AddBook_Load(object? sender, EventArgs? e)
-        {
-            await FetchAndDisplayStudentInfo(currentStudentId); // Pass the student ID
-            await LoadBooksAsync(); // Load books when the form is loaded
-        }
-
-        private void backbtn_Click(object sender, EventArgs e)
-        {
-            FormManager.CloseCurrentForm();
-            FormManager.Show(new home());
-        }
-
-        private void cancel_Click(object sender, EventArgs e)
-        {
-            booktitltxt.Text = "";
-            authortxt.Text = "";
-            FormManager.CloseCurrentForm(); // Close the current form
-            FormManager.Show(new home()); // Show the existing home form
-
-            // Reset any other UI elements that might have changed
-
-        }
-
-        private void SearchBtn_Click(object? sender, EventArgs? e)
-        {
-            SearchBooksAsync();
-        }
         private async Task SearchBooksAsync()
         {
             string title = booktitltxt.Text.Trim();
             string author = authortxt.Text.Trim();
 
-            // Build the SQL query dynamically based on user input
             var filters = new List<string>();
             if (!string.IsNullOrEmpty(title))
                 filters.Add("Title LIKE @Title");
             if (!string.IsNullOrEmpty(author))
                 filters.Add("Author LIKE @Author");
 
-            // Only proceed if there is at least one filter
             if (filters.Count == 0)
             {
                 MessageBox.Show("Please enter a title or author to search.");
@@ -156,12 +153,11 @@ namespace Library
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
                         {
                             await Task.Run(() => adapter.Fill(dt));
-                            booksView.DataSource = dt;
-
-                            if (dt.Rows.Count == 0)
+                            booksView.Invoke(new Action(() =>
                             {
-                                MessageBox.Show("No books found matching your criteria.");
-                            }
+                                booksView.DataSource = dt;
+                                UpdateCheckBoxes();
+                            }));
                         }
                     }
                 }
@@ -171,8 +167,6 @@ namespace Library
                 MessageBox.Show($"An error occurred while searching for books: {ex.Message}", "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
 
         private async Task LoadBooksAsync()
         {
@@ -187,11 +181,11 @@ namespace Library
                         DataTable dt = new DataTable();
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
                         {
-                            // Asynchronously fill the DataTable
-                            await Task.Run(() => adapter.Fill(dt));  // Consider using FillAsync if available
+                            await Task.Run(() => adapter.Fill(dt));
                             booksView.Invoke(new Action(() =>
                             {
                                 booksView.DataSource = dt;
+                                UpdateCheckBoxes();
                             }));
                         }
                     }
@@ -201,7 +195,6 @@ namespace Library
             catch (Exception ex)
             {
                 MessageBox.Show($"Failed to load books: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // Consider retry logic or alternative recovery measures here
             }
         }
 
@@ -269,7 +262,6 @@ namespace Library
                 booksView.Columns.Add(checkBoxColumn);
             }
         }
-
         private void UpdateCheckBoxes()
         {
             try
@@ -282,8 +274,8 @@ namespace Library
                     if (chkCell != null)
                     {
                         bool isAvailable = Convert.ToBoolean(row.Cells["IsAvailable"].Value);
-                        chkCell.Value = !isAvailable;  // Check if not available
-                        chkCell.ReadOnly = !isAvailable; // Read-only if not available
+                        chkCell.Value = isAvailable;  // Reflect the correct availability
+                        chkCell.ReadOnly = !isAvailable; // Make read-only if not available
                     }
                 }
             }
@@ -311,13 +303,10 @@ namespace Library
                         if (!wasBorrowedSuccessfully)
                         {
                             allSuccessfullyBorrowed = false;
-                            // Ensure the UI reflects the actual availability (i.e., not available)
-                            row.Cells["IsAvailable"].Value = false;
                         }
                     }
                     catch (Exception ex)
                     {
-                        // Log or handle the exception as needed
                         MessageBox.Show($"Error borrowing book ID {bookId}: {ex.Message}", "Borrow Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -335,9 +324,10 @@ namespace Library
             {
                 MessageBox.Show("Some selected books could not be borrowed.", "Partial Borrow Success", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            booksView.Refresh();
-            await LoadBooksAsync(); // Refresh the list of books after borrowing
+
+            await LoadBooksAsync();  // Refresh the list of books after borrowing
         }
+
 
 
         private async void booksView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -348,9 +338,9 @@ namespace Library
                 if (cell != null && !cell.ReadOnly)
                 {
                     bool isChecked = Convert.ToBoolean(cell.Value);
-                    cell.Value = !isChecked; // Toggle the checkbox state
+                    cell.Value = !isChecked;
 
-                    if (!isChecked) // If it was unchecked before, now it is checked
+                    if (!isChecked)
                     {
                         int bookId = Convert.ToInt32(booksView.Rows[e.RowIndex].Cells["BookID"].Value);
                         bool wasBorrowedSuccessfully = await BorrowBookAsync(bookId);
@@ -361,9 +351,9 @@ namespace Library
                         else
                         {
                             MessageBox.Show("Book could not be borrowed. It may already be borrowed.");
-                            cell.Value = isChecked; // Revert checkbox if operation failed
+                            cell.Value = isChecked;
                         }
-                        LoadBooksAsync();  // Always reload books to refresh the grid, ensuring consistency with the database
+                        await LoadBooksAsync();
                     }
                 }
             }
@@ -432,6 +422,8 @@ namespace Library
         }
 
 
+
+
         private void DisplayStudentInfo(MySqlDataReader reader)
         {
             string firstName = reader["FirstName"].ToString();
@@ -473,14 +465,7 @@ namespace Library
             return bitmap;
         }
 
-        private void booksView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void booktitltxt_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void booksView_CellContentClick(object sender, DataGridViewCellEventArgs e){}
+        private void booktitltxt_TextChanged(object sender, EventArgs e){}
     }
 }
