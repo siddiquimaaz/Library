@@ -102,7 +102,10 @@ namespace Library
             signup.ShowDialog();
         }
 
-        private void Form1_Load(object sender, EventArgs e) { }
+        private void Form1_Load(object sender, EventArgs e) {
+
+        
+        }
 
         private void Head_Click(object sender, EventArgs e) { }
 
@@ -158,6 +161,11 @@ namespace Library
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             text2.UseSystemPasswordChar = !checkBox1.Checked;
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
