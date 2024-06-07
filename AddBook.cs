@@ -30,6 +30,9 @@ namespace Library
             try
             {
                 await FetchAndDisplayStudentInfo(currentStudentId);
+                LoadBooksAsync();  // Always reload books to refresh the grid, ensuring consistency with the database
+                UpdateCheckBoxes();
+                booksView.Refresh();
             }
             catch (Exception ex)
             {
@@ -89,7 +92,7 @@ namespace Library
                 }
             }
         }
-        private async void AddBook_Load(object sender, EventArgs e)
+        private async void AddBook_Load(object? sender, EventArgs? e)
         {
             await FetchAndDisplayStudentInfo(currentStudentId); // Pass the student ID
             await LoadBooksAsync(); // Load books when the form is loaded
@@ -112,7 +115,7 @@ namespace Library
 
         }
 
-        private void SearchBtn_Click(object sender, EventArgs e)
+        private void SearchBtn_Click(object? sender, EventArgs? e)
         {
             SearchBooksAsync();
         }

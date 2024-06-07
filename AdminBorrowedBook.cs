@@ -74,8 +74,6 @@ namespace Library
                 MessageBox.Show($"Error: {ex.Message}");
             }
         }
-
-
         private async void BorrowBookSearch_Click(object? sender, EventArgs? e)
         {
             string bookName = BorrowedBook.Text;
@@ -102,17 +100,16 @@ namespace Library
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
-                    string query = @"SELECT bb.BorrowID, b.Title, s.FirstName, s.LastName, bb.DateBorrowed, bb.DueDate 
+                    string query = @"SELECT bb.BorrowID 
                              FROM BorrowedBooks bb
                              JOIN Books b ON bb.BookID = b.BookID
-                             JOIN Students s ON bb.StudentID = s.StudentID
                              WHERE b.Title LIKE @BookName";
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@BookName", "%" + bookName + "%");
 
                         object result = await cmd.ExecuteScalarAsync();
-                        if (result != null)
+                        if (result != null && result != DBNull.Value)
                         {
                             // If book is found, return its BorrowID
                             return Convert.ToInt32(result);
@@ -130,40 +127,54 @@ namespace Library
                 return -1;
             }
         }
+
         private void SelectRowByBorrowID(int borrowID)
         {
             // Iterate through DataGridView rows to find the row with the matching BorrowID
             foreach (DataGridViewRow row in BorrowedBookAdminPanel.Rows)
             {
-                if (row.Cells["BorrowID"].Value != null && Convert.ToInt32(row.Cells["BorrowID"].Value) == borrowID)
+                try
                 {
-                    // Select the row and scroll it into view
-                    row.Selected = true;
-                    BorrowedBookAdminPanel.CurrentCell = row.Cells[0];
-                    BorrowedBookAdminPanel.FirstDisplayedScrollingRowIndex = row.Index;
-                    break;
+                    if (row.Cells["BorrowID"].Value != null && row.Cells["BorrowID"].Value != DBNull.Value
+                        && Convert.ToInt32(row.Cells["BorrowID"].Value) == borrowID)
+                    {
+                        // Select the row and scroll it into view
+                        row.Selected = true;
+                        BorrowedBookAdminPanel.CurrentCell = row.Cells[0];
+                        BorrowedBookAdminPanel.FirstDisplayedScrollingRowIndex = row.Index;
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
                 }
             }
         }
 
-
         private void CustomizeDataGridView()
         {
-            // Minimal and clean appearance customization
+            BorrowedBookAdminPanel.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            BorrowedBookAdminPanel.MultiSelect = false;
             BorrowedBookAdminPanel.BorderStyle = BorderStyle.Fixed3D;
             BorrowedBookAdminPanel.BackgroundColor = Color.White;
-            BorrowedBookAdminPanel.DefaultCellStyle.SelectionBackColor = Color.LightGray;
+            BorrowedBookAdminPanel.DefaultCellStyle.SelectionBackColor = Color.Gray;
             BorrowedBookAdminPanel.DefaultCellStyle.SelectionForeColor = Color.Black;
-            BorrowedBookAdminPanel.RowHeadersVisible = false; // Hide row headers for a cleaner look
-            BorrowedBookAdminPanel.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Use full space
+            BorrowedBookAdminPanel.RowHeadersVisible = false;
+            BorrowedBookAdminPanel.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             // Set column headers style
-            DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
-            columnHeaderStyle.BackColor = Color.Navy;
-            columnHeaderStyle.ForeColor = Color.White;
-            columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
+            DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.Navy,
+                ForeColor = Color.White,
+                Font = new Font("Verdana", 10, FontStyle.Bold),
+                Alignment = DataGridViewContentAlignment.MiddleCenter
+            };
             BorrowedBookAdminPanel.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+            BorrowedBookAdminPanel.EnableHeadersVisualStyles = false; // Apply custom header styles
         }
+
 
 
         private void AddEmptyRowForSpacing(DataTable dataTable)
@@ -175,7 +186,7 @@ namespace Library
 
         private async void AdminBorrowedBook_Load(object sender, EventArgs e)
         {
-            
+
             await ShowAllBorrowedBooksAsync();
         }
 

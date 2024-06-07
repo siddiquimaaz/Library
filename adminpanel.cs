@@ -39,20 +39,11 @@ namespace Library
             public DateTime DueDate { get; set; }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e){}
 
-        }
+        private void adminpic_Click(object sender, EventArgs e){}
 
-        private void adminpic_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        private void panel2_Paint(object sender, PaintEventArgs e){}
 
         private async Task iconButton4_Click(object sender, EventArgs e)
         {
@@ -227,6 +218,11 @@ namespace Library
         private void RemoveStdBtn_Click(object sender, EventArgs e)
         {
             FormManager.Show(new AdminRemoveStudent());
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
