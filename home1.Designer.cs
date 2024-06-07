@@ -112,7 +112,7 @@
             // HomeStdNameLabel
             // 
             HomeStdNameLabel.AutoSize = true;
-            HomeStdNameLabel.Location = new Point(21, 172);
+            HomeStdNameLabel.Location = new Point(14, 143);
             HomeStdNameLabel.Name = "HomeStdNameLabel";
             HomeStdNameLabel.Size = new Size(0, 20);
             HomeStdNameLabel.TabIndex = 9;
@@ -154,7 +154,7 @@
             DetailsBtn.FlatAppearance.BorderSize = 0;
             DetailsBtn.FlatStyle = FlatStyle.Popup;
             DetailsBtn.ForeColor = Color.White;
-            DetailsBtn.Location = new Point(829, 193);
+            DetailsBtn.Location = new Point(830, 193);
             DetailsBtn.Margin = new Padding(3, 4, 3, 4);
             DetailsBtn.Name = "DetailsBtn";
             DetailsBtn.Size = new Size(134, 127);
@@ -180,7 +180,7 @@
             BackColor = Color.LightGray;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1370, 736);
+            ClientSize = new Size(1470, 750);
             Controls.Add(ReaderDetails);
             Controls.Add(DetailsBtn);
             Controls.Add(label3);
