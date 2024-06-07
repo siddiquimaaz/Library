@@ -89,7 +89,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI Semibold", 10.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(619, 336);
+            label1.Location = new Point(616, 336);
             label1.Name = "label1";
             label1.Size = new Size(178, 25);
             label1.TabIndex = 6;
@@ -127,7 +127,7 @@
             logout.FlatStyle = FlatStyle.Popup;
             logout.ForeColor = Color.Black;
             logout.Image = (Image)resources.GetObject("logout.Image");
-            logout.Location = new Point(21, 647);
+            logout.Location = new Point(14, 537);
             logout.Margin = new Padding(0);
             logout.Name = "logout";
             logout.Size = new Size(83, 51);
@@ -140,7 +140,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(21, 691);
+            label3.Location = new Point(14, 581);
             label3.Name = "label3";
             label3.Size = new Size(59, 20);
             label3.TabIndex = 11;
@@ -180,7 +180,7 @@
             BackColor = Color.LightGray;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1470, 750);
+            ClientSize = new Size(1400, 700);
             Controls.Add(ReaderDetails);
             Controls.Add(DetailsBtn);
             Controls.Add(label3);

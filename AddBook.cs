@@ -24,13 +24,14 @@ namespace Library
             currentStudentId = Form1.SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
             Task.Run(async () => await InitializeFormAsync()).Wait();
             FormManager.Show(this); // Use FormManager to show the form
+           
         }
         private async Task InitializeFormAsync()
         {
             try
             {
-                await FetchAndDisplayStudentInfo(currentStudentId);
-                LoadBooksAsync();  // Always reload books to refresh the grid, ensuring consistency with the database
+                //await FetchAndDisplayStudentInfo(currentStudentId);
+                await LoadBooksAsync();  // Always reload books to refresh the grid, ensuring consistency with the database
             }
             catch (Exception ex)
             {
@@ -54,7 +55,7 @@ namespace Library
             booktitltxt.Text = "";
             authortxt.Text = "";
             FormManager.CloseCurrentForm(); // Close the current form
-            FormManager.Show(new AddBook()); // Show the existing home form
+            FormManager.Show(new home()); // Show the existing home form
 
             // Reset any other UI elements that might have changed
 
@@ -175,7 +176,9 @@ namespace Library
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
-                    string sql = "SELECT BookID, Title, Author, ISBN, PublicationYear, Genre, IsAvailable FROM Books";
+                    string sql = "SELECT BookID, Title, Author, ISBN, PublicationYear, Genre, " +
+                                 "CASE WHEN EXISTS (SELECT * FROM BorrowedBooks WHERE BookID = Books.BookID) THEN 'False' ELSE 'True' END AS IsAvailable " +
+                                 "FROM Books";
                     using (var cmd = new MySqlCommand(sql, connection))
                     {
                         DataTable dt = new DataTable();
@@ -185,12 +188,11 @@ namespace Library
                             booksView.Invoke(new Action(() =>
                             {
                                 booksView.DataSource = dt;
-                                UpdateCheckBoxes();
+                                SetupDataGridView();
                             }));
                         }
                     }
                 }
-                this.Invoke(new Action(() => SetupDataGridView()));
             }
             catch (Exception ex)
             {
@@ -198,10 +200,12 @@ namespace Library
             }
         }
 
-        private void SetupDataGridView()
+        private async void SetupDataGridView()
         {
             try
             {
+                await Task.Delay(1); // Ensure async method
+
                 booksView.AutoGenerateColumns = false;
                 booksView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
@@ -209,9 +213,9 @@ namespace Library
                 AddColumnIfMissing("Title", "Title");
                 AddColumnIfMissing("Author", "Author");
                 AddColumnIfMissing("ISBN", "ISBN");
-                AddColumnIfMissing("PublicationYear", "Year", "Year");
+                AddColumnIfMissing("PublicationYear", "Year");
                 AddColumnIfMissing("Genre", "Genre");
-                AddCheckboxColumnIfMissing("IsAvailable", "Available?", "IsAvailable");
+                AddCheckboxColumnIfMissing("IsAvailable", "Available?", "IsAvailable"); // Provide the data property name
 
                 // Adjust column widths
                 booksView.Columns["Title"].Width = 160; // Adjust width for the Title column
@@ -219,16 +223,16 @@ namespace Library
                 booksView.Columns["ISBN"].Width = 80;
                 booksView.Columns["Genre"].Width = 60; // Adjust width for the Genre column
 
-                // Hide the empty ID column
-                //booksView.Columns["BookID"].Visible = false;
-
-                UpdateCheckBoxes();  // This method should also ensure correct read-only state
+                // Update checkboxes after adding columns
+                UpdateCheckBoxes();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error setting up data grid view: {ex.Message}", "UI Setup Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
 
 
