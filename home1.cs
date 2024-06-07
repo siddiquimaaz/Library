@@ -158,6 +158,11 @@ namespace Library
         {
             FormManager.Show(new ReaderCredentials());
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 
