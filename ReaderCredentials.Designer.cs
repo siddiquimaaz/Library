@@ -43,7 +43,7 @@
             // readerPicture
             // 
             readerPicture.BackColor = Color.Transparent;
-            readerPicture.Location = new Point(150, 108);
+            readerPicture.Location = new Point(363, 134);
             readerPicture.Margin = new Padding(3, 4, 3, 4);
             readerPicture.Name = "readerPicture";
             readerPicture.Size = new Size(139, 114);
@@ -57,7 +57,7 @@
             readerid.AutoSize = true;
             readerid.BackColor = Color.Transparent;
             readerid.ForeColor = Color.Black;
-            readerid.Location = new Point(150, 333);
+            readerid.Location = new Point(407, 373);
             readerid.Name = "readerid";
             readerid.Size = new Size(50, 20);
             readerid.TabIndex = 16;
@@ -68,7 +68,7 @@
             readername.AutoSize = true;
             readername.BackColor = Color.Transparent;
             readername.ForeColor = Color.Black;
-            readername.Location = new Point(150, 377);
+            readername.Location = new Point(407, 417);
             readername.Name = "readername";
             readername.Size = new Size(50, 20);
             readername.TabIndex = 17;
@@ -79,7 +79,7 @@
             readerphoneno.AutoSize = true;
             readerphoneno.BackColor = Color.Transparent;
             readerphoneno.ForeColor = Color.Black;
-            readerphoneno.Location = new Point(150, 423);
+            readerphoneno.Location = new Point(407, 463);
             readerphoneno.Name = "readerphoneno";
             readerphoneno.Size = new Size(50, 20);
             readerphoneno.TabIndex = 18;
@@ -90,7 +90,7 @@
             readeremail.AutoSize = true;
             readeremail.BackColor = Color.Transparent;
             readeremail.ForeColor = Color.Black;
-            readeremail.Location = new Point(150, 473);
+            readeremail.Location = new Point(407, 513);
             readeremail.Name = "readeremail";
             readeremail.Size = new Size(50, 20);
             readeremail.TabIndex = 19;
@@ -102,7 +102,7 @@
             heading.BackColor = Color.Transparent;
             heading.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             heading.ForeColor = Color.Black;
-            heading.Location = new Point(133, 56);
+            heading.Location = new Point(349, 82);
             heading.Name = "heading";
             heading.Size = new Size(166, 37);
             heading.TabIndex = 20;
@@ -113,7 +113,7 @@
             signdash.AutoSize = true;
             signdash.BackColor = Color.Transparent;
             signdash.ForeColor = Color.Black;
-            signdash.Location = new Point(148, 264);
+            signdash.Location = new Point(362, 290);
             signdash.Name = "signdash";
             signdash.Size = new Size(141, 20);
             signdash.TabIndex = 21;
@@ -125,7 +125,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(170, 292);
+            label2.Location = new Point(365, 318);
             label2.Name = "label2";
             label2.Size = new Size(134, 20);
             label2.TabIndex = 22;
@@ -142,7 +142,7 @@
             printIdCard.IconColor = Color.WhiteSmoke;
             printIdCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
             printIdCard.IconSize = 38;
-            printIdCard.Location = new Point(296, 362);
+            printIdCard.Location = new Point(396, 579);
             printIdCard.Margin = new Padding(3, 4, 3, 4);
             printIdCard.Name = "printIdCard";
             printIdCard.Size = new Size(73, 63);
@@ -156,7 +156,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(468, 727);
+            ClientSize = new Size(900, 900);
             Controls.Add(printIdCard);
             Controls.Add(readerPicture);
             Controls.Add(label2);

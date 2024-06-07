@@ -1,44 +1,41 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using iText.Kernel.Pdf;
-using iText.Layout;
-using iText.Layout.Element;
-using iText.IO.Image;
+using System.Drawing.Text;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 
 namespace Library
 {
     public partial class ReaderCredentials : Form
     {
         private string connectionString = "server=127.0.0.1;port=3306;database=LMS;uid=root;pwd=maazsiddiqui12;";
+        
+
 
         public ReaderCredentials()
         {
             InitializeComponent();
-
+    
         }
 
         private void label2_Click(object sender, EventArgs e) { }
 
         private void readerid_Click(object sender, EventArgs e) { }
 
-        private void ReaderCredentials_Load(object sender, EventArgs e)
+        private async void ReaderCredentials_Load(object sender, EventArgs e)
         {
-            LoadUserData();
-
+            await LoadUserData();
         }
 
-        private async void LoadUserData()
+        private async Task LoadUserData()
         {
             try
             {
@@ -116,26 +113,17 @@ namespace Library
                         readerPicture.Visible = true;
                         readerPicture.SizeMode = PictureBoxSizeMode.StretchImage;
                         readerPicture.Image = GetEllipseImage(originalImage);
-
-                        // Debug message to confirm the image is set
-                        MessageBox.Show("Image loaded and set to PictureBox successfully.");
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"An error occurred while loading the image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    // Debug message for image loading failure
-                    MessageBox.Show($"An error occurred while loading the image: {ex.Message}");
                 }
             }
             else
             {
-                MessageBox.Show("Student image not found.");
                 readerPicture.Image = null; // Clear the picture box
-
-                // Debug message when image is not found
-                MessageBox.Show("Student image not found in the database.");
+                MessageBox.Show("Student image not found.");
             }
         }
 
@@ -155,7 +143,7 @@ namespace Library
             return bitmap;
         }
 
-        private async void printIdCard_Click(object sender, EventArgs e)
+        private async void printIdCard_Click(object? sender, EventArgs? e)
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
@@ -168,53 +156,65 @@ namespace Library
                     string fileName = saveFileDialog.FileName;
                     try
                     {
-                        Task.Run(async () => await CreatePdfWithStudentInfo(fileName)).Wait();
+                        //await CreatePdfWithStudentInfo(fileName);
                         MessageBox.Show("PDF created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show($"An error occurred while creating the PDF: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Console.WriteLine($"An error occurred while creating the PDF: {ex.Message}");
                     }
                 }
             }
         }
-
-        private async Task CreatePdfWithStudentInfo(string fileName)
+       
+        /* private async Task CreatePdfWithStudentInfo(string fileName)
         {
             try
             {
-                using (PdfWriter writer = new PdfWriter(fileName))
+                await Task.Run(() =>
                 {
-                    PdfDocument pdf = new PdfDocument(writer);
-                    Document document = new Document(pdf);
-
-                    // Add the student information to the PDF
-                    document.Add(new Paragraph($"Name: {readername.Text}"));
-                    document.Add(new Paragraph($"ID: {readerid.Text}"));
-                    document.Add(new Paragraph($"Email: {readeremail.Text}"));
-                    document.Add(new Paragraph($"Phone Number: {readerphoneno.Text}"));
-
-                    // Add the student photo to the PDF
-                    if (readerPicture.Image != null)
+                    using (PdfDocument document = new PdfDocument())
                     {
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            readerPicture.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                            ImageData imageData = ImageDataFactory.Create(ms.ToArray());
-                            iText.Layout.Element.Image pdfImage = new iText.Layout.Element.Image(imageData);
-                            document.Add(pdfImage);
-                        }
-                    }
+                        PdfPage page = document.AddPage();
+                        XGraphics gfx = XGraphics.FromPdfPage(page);
+                        XFont fontRegular = new XFont("Arial", 12);
+                        XFont fontBold = new XFont("Arial", 20);
 
-                    document.Close();
-                }
+                        // Draw the title
+                        gfx.DrawString("Library Card", fontBold, XBrushes.Black,
+                            new XRect(0, 0, page.Width, 50), XStringFormats.TopCenter);
+
+                        // Draw the image
+                        if (readerPicture.Image != null)
+                        {
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                readerPicture.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                                XImage xImage = XImage.FromStream(ms);
+                                gfx.DrawImage(xImage, (page.Width - 100) / 2, 60, 100, 100);
+                            }
+                        }
+
+                        // Draw the student information
+                        gfx.DrawString("Name: " + readername.Text, fontRegular, XBrushes.Black,
+                            new XRect(40, 200, page.Width - 80, 20), XStringFormats.TopLeft);
+                        gfx.DrawString("ID: " + readerid.Text, fontRegular, XBrushes.Black,
+                            new XRect(40, 230, page.Width - 80, 20), XStringFormats.TopLeft);
+                        gfx.DrawString("Email: " + readeremail.Text, fontRegular, XBrushes.Black,
+                            new XRect(40, 260, page.Width - 80, 20), XStringFormats.TopLeft);
+                        gfx.DrawString("Phone Number: " + readerphoneno.Text, fontRegular, XBrushes.Black,
+                            new XRect(40, 290, page.Width - 80, 20), XStringFormats.TopLeft);
+
+                        // Save the document
+                        document.Save(fileName);
+                    }
+                });
             }
             catch (Exception ex)
             {
-                throw new Exception($"An error occurred while creating the PDF: {ex.Message}", ex);
+                MessageBox.Show($"An error occurred while creating the PDF: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }*/
 
 
 
