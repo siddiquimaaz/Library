@@ -37,14 +37,14 @@
             AdminLogOutBtn = new FontAwesome.Sharp.IconButton();
             RemoveStdBtn = new FontAwesome.Sharp.IconButton();
             panel2 = new Panel();
+            pictureBox1 = new PictureBox();
             panel1 = new Panel();
             label4 = new Label();
             label1 = new Label();
-            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)adminDataGridView).BeginInit();
             panel2.SuspendLayout();
-            panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // adminNamelbl
@@ -135,6 +135,12 @@
             panel2.Name = "panel2";
             panel2.Paint += panel2_Paint;
             // 
+            // pictureBox1
+            // 
+            resources.ApplyResources(pictureBox1, "pictureBox1");
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.TabStop = false;
+            // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(204, 203, 200);
@@ -155,12 +161,6 @@
             label1.ForeColor = Color.White;
             label1.Name = "label1";
             // 
-            // pictureBox1
-            // 
-            resources.ApplyResources(pictureBox1, "pictureBox1");
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.TabStop = false;
-            // 
             // adminpanel
             // 
             resources.ApplyResources(this, "$this");
@@ -178,9 +178,9 @@
             ((System.ComponentModel.ISupportInitialize)adminDataGridView).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
