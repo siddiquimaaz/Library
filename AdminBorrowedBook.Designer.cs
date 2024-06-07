@@ -50,10 +50,9 @@
             panel2.Controls.Add(BorrowedBook);
             panel2.Controls.Add(Bookname);
             panel2.Controls.Add(BorrowBookBackBtn);
-            panel2.Location = new Point(0, -8);
-            panel2.Margin = new Padding(3, 4, 3, 4);
+            panel2.Location = new Point(0, -6);
             panel2.Name = "panel2";
-            panel2.Size = new Size(296, 801);
+            panel2.Size = new Size(259, 601);
             panel2.TabIndex = 18;
             panel2.Paint += panel2_Paint;
             // 
@@ -66,10 +65,9 @@
             DeleteBoorowBookBtn.IconColor = Color.Black;
             DeleteBoorowBookBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             DeleteBoorowBookBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            DeleteBoorowBookBtn.Location = new Point(20, 394);
-            DeleteBoorowBookBtn.Margin = new Padding(3, 4, 3, 4);
+            DeleteBoorowBookBtn.Location = new Point(18, 296);
             DeleteBoorowBookBtn.Name = "DeleteBoorowBookBtn";
-            DeleteBoorowBookBtn.Size = new Size(228, 69);
+            DeleteBoorowBookBtn.Size = new Size(200, 52);
             DeleteBoorowBookBtn.TabIndex = 29;
             DeleteBoorowBookBtn.Text = "Retrieve Book";
             DeleteBoorowBookBtn.UseVisualStyleBackColor = false;
@@ -87,10 +85,11 @@
             BorrowBookSearch.IconFont = FontAwesome.Sharp.IconFont.Auto;
             BorrowBookSearch.IconSize = 20;
             BorrowBookSearch.ImageAlign = ContentAlignment.MiddleLeft;
-            BorrowBookSearch.Location = new Point(93, 304);
+            BorrowBookSearch.Location = new Point(81, 228);
+            BorrowBookSearch.Margin = new Padding(3, 2, 3, 2);
             BorrowBookSearch.Name = "BorrowBookSearch";
             BorrowBookSearch.Padding = new Padding(1);
-            BorrowBookSearch.Size = new Size(93, 35);
+            BorrowBookSearch.Size = new Size(81, 26);
             BorrowBookSearch.TabIndex = 28;
             BorrowBookSearch.Text = "Search";
             BorrowBookSearch.TextAlign = ContentAlignment.MiddleRight;
@@ -102,11 +101,10 @@
             BorrowedBook.BackColor = Color.White;
             BorrowedBook.Cursor = Cursors.IBeam;
             BorrowedBook.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            BorrowedBook.Location = new Point(20, 267);
-            BorrowedBook.Margin = new Padding(3, 4, 3, 4);
+            BorrowedBook.Location = new Point(18, 200);
             BorrowedBook.Name = "BorrowedBook";
             BorrowedBook.PlaceholderText = "Enter Book Name";
-            BorrowedBook.Size = new Size(238, 27);
+            BorrowedBook.Size = new Size(209, 23);
             BorrowedBook.TabIndex = 27;
             BorrowedBook.TextAlign = HorizontalAlignment.Center;
             // 
@@ -115,9 +113,9 @@
             Bookname.AutoSize = true;
             Bookname.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             Bookname.ForeColor = Color.White;
-            Bookname.Location = new Point(67, 224);
+            Bookname.Location = new Point(59, 168);
             Bookname.Name = "Bookname";
-            Bookname.Size = new Size(145, 23);
+            Bookname.Size = new Size(115, 17);
             Bookname.TabIndex = 20;
             Bookname.Text = "Enter Book Name";
             // 
@@ -125,10 +123,9 @@
             // 
             BorrowBookBackBtn.BackColor = Color.White;
             BorrowBookBackBtn.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            BorrowBookBackBtn.Location = new Point(16, 756);
-            BorrowBookBackBtn.Margin = new Padding(3, 4, 3, 4);
+            BorrowBookBackBtn.Location = new Point(14, 567);
             BorrowBookBackBtn.Name = "BorrowBookBackBtn";
-            BorrowBookBackBtn.Size = new Size(86, 31);
+            BorrowBookBackBtn.Size = new Size(75, 23);
             BorrowBookBackBtn.TabIndex = 25;
             BorrowBookBackBtn.Text = "Back";
             BorrowBookBackBtn.UseVisualStyleBackColor = false;
@@ -140,9 +137,8 @@
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1790, 34);
+            panel1.Size = new Size(1213, 26);
             panel1.TabIndex = 17;
             // 
             // label2
@@ -153,7 +149,7 @@
             label2.ForeColor = Color.White;
             label2.Location = new Point(0, 0);
             label2.Name = "label2";
-            label2.Size = new Size(535, 25);
+            label2.Size = new Size(428, 20);
             label2.TabIndex = 1;
             label2.Text = "Library Management System | Admin Panel | Borrowed Books";
             // 
@@ -162,24 +158,23 @@
             BorrowedBookAdminPanel.BackgroundColor = Color.White;
             BorrowedBookAdminPanel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             BorrowedBookAdminPanel.Dock = DockStyle.Right;
-            BorrowedBookAdminPanel.Location = new Point(296, 34);
-            BorrowedBookAdminPanel.Margin = new Padding(3, 4, 3, 4);
+            BorrowedBookAdminPanel.Location = new Point(-94, 26);
             BorrowedBookAdminPanel.Name = "BorrowedBookAdminPanel";
             BorrowedBookAdminPanel.RowHeadersWidth = 51;
             BorrowedBookAdminPanel.RowTemplate.Height = 25;
-            BorrowedBookAdminPanel.Size = new Size(1494, 758);
+            BorrowedBookAdminPanel.Size = new Size(1307, 565);
             BorrowedBookAdminPanel.TabIndex = 19;
+            BorrowedBookAdminPanel.CellContentClick += BorrowedBookAdminPanel_CellContentClick;
             // 
             // AdminBorrowedBook
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1790, 792);
+            ClientSize = new Size(1213, 591);
             Controls.Add(BorrowedBookAdminPanel);
             Controls.Add(panel1);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "AdminBorrowedBook";
             Text = "S";
             WindowState = FormWindowState.Maximized;

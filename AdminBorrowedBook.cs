@@ -226,5 +226,10 @@ namespace Library
         {
             FormManager.Show(new adminpanel());
         }
+
+        private void BorrowedBookAdminPanel_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
