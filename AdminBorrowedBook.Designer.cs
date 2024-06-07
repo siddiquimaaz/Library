@@ -66,10 +66,10 @@
             DeleteBoorowBookBtn.IconColor = Color.Black;
             DeleteBoorowBookBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             DeleteBoorowBookBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            DeleteBoorowBookBtn.Location = new Point(16, 415);
+            DeleteBoorowBookBtn.Location = new Point(20, 394);
             DeleteBoorowBookBtn.Margin = new Padding(3, 4, 3, 4);
             DeleteBoorowBookBtn.Name = "DeleteBoorowBookBtn";
-            DeleteBoorowBookBtn.Size = new Size(259, 72);
+            DeleteBoorowBookBtn.Size = new Size(228, 69);
             DeleteBoorowBookBtn.TabIndex = 29;
             DeleteBoorowBookBtn.Text = "Retrieve Book";
             DeleteBoorowBookBtn.UseVisualStyleBackColor = false;
