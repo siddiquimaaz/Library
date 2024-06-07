@@ -53,7 +53,7 @@
             // 
             text1.BackColor = Color.FromArgb(224, 224, 224);
             text1.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            text1.ForeColor = Color.FromArgb(224, 224, 224);
+            text1.ForeColor = Color.FromArgb(31, 58, 95);
             text1.Location = new Point(968, 222);
             text1.Margin = new Padding(3, 4, 3, 4);
             text1.Name = "text1";
@@ -66,7 +66,7 @@
             // 
             text2.BackColor = Color.FromArgb(224, 224, 224);
             text2.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            text2.ForeColor = Color.FromArgb(224, 224, 224);
+            text2.ForeColor = Color.FromArgb(31, 58, 95);
             text2.Location = new Point(968, 286);
             text2.Margin = new Padding(2, 10, 2, 3);
             text2.Name = "text2";
