@@ -181,7 +181,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "AdminBorrowedBook";
-            Text = "AdminBorrowedBook";
+            Text = "S";
             WindowState = FormWindowState.Maximized;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
