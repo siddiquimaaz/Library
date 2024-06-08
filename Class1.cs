@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Library
 {
@@ -12,7 +9,7 @@ namespace Library
 
         public static void Show(Form newForm)
         {
-            if (currentForm != null)
+            if (currentForm != null && currentForm != newForm)
             {
                 currentForm.Close();
             }
@@ -26,10 +23,10 @@ namespace Library
         {
             if (currentForm != null)
             {
-                currentForm.Close();
+                var tempForm = currentForm;
                 currentForm = null;
+                tempForm.Close();
             }
         }
     }
-
 }

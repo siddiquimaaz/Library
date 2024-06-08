@@ -22,26 +22,60 @@ namespace Library
         {
             InitializeComponent();
             currentStudentId = Form1.SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
-            Task.Run(async () => await InitializeFormAsync()).Wait();
-            FormManager.Show(this); // Use FormManager to show the form
-           
+
+            // Ensure the form handle is created before proceeding
+            this.HandleCreated += async (s, e) =>
+            {
+                try
+                {
+                    await InitializeFormAsync();
+                    FormManager.Show(this); // Use FormManager to show the form
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error during form initialization: {ex.Message}", "Initialization Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            };
+
+            // Additional event handler for the form load, if needed
+            this.Load += async (s, e) =>
+            {
+                try
+                {
+                    await FetchAndDisplayStudentInfo(currentStudentId); // Pass the student ID
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error loading student info: {ex.Message}", "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            };
         }
+
         private async Task InitializeFormAsync()
         {
             try
             {
-                //await FetchAndDisplayStudentInfo(currentStudentId);
-                await LoadBooksAsync();  // Always reload books to refresh the grid, ensuring consistency with the database
+                await LoadBooksAsync(); // Always reload books to refresh the grid, ensuring consistency with the database
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error initializing form: {ex.Message}", "Initialization Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Ensure any UI updates are invoked on the main thread
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new Action(() =>
+                        MessageBox.Show($"Error initializing form: {ex.Message}", "Initialization Error", MessageBoxButtons.OK, MessageBoxIcon.Error)));
+                }
+                else
+                {
+                    MessageBox.Show($"Error initializing form: {ex.Message}", "Initialization Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+
+
         private async void AddBook_Load(object? sender, EventArgs? e)
         {
-            await FetchAndDisplayStudentInfo(currentStudentId); // Pass the student ID
-            await LoadBooksAsync(); // Load books when the form is loaded
+            await FetchAndDisplayStudentInfo(currentStudentId);
         }
 
         private void backbtn_Click(object sender, EventArgs e)
@@ -157,7 +191,7 @@ namespace Library
                             booksView.Invoke(new Action(() =>
                             {
                                 booksView.DataSource = dt;
-                                UpdateCheckBoxes();
+                                SetupDataGridView();
                             }));
                         }
                     }
@@ -168,7 +202,6 @@ namespace Library
                 MessageBox.Show($"An error occurred while searching for books: {ex.Message}", "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private async Task LoadBooksAsync()
         {
             try
@@ -177,7 +210,7 @@ namespace Library
                 {
                     await connection.OpenAsync();
                     string sql = "SELECT BookID, Title, Author, ISBN, PublicationYear, Genre, " +
-                                 "CASE WHEN EXISTS (SELECT * FROM BorrowedBooks WHERE BookID = Books.BookID) THEN 'False' ELSE 'True' END AS IsAvailable " +
+                                 "CASE WHEN EXISTS (SELECT * FROM BorrowedBooks WHERE BookID = Books.BookID) THEN 0 ELSE 1 END AS IsAvailable " +
                                  "FROM Books";
                     using (var cmd = new MySqlCommand(sql, connection))
                     {
@@ -200,40 +233,33 @@ namespace Library
             }
         }
 
-        private async void SetupDataGridView()
+        private void SetupDataGridView()
         {
             try
             {
-                await Task.Delay(1); // Ensure async method
-
                 booksView.AutoGenerateColumns = false;
                 booksView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-                // Add columns in the desired order
                 AddColumnIfMissing("Title", "Title");
                 AddColumnIfMissing("Author", "Author");
                 AddColumnIfMissing("ISBN", "ISBN");
                 AddColumnIfMissing("PublicationYear", "Year");
                 AddColumnIfMissing("Genre", "Genre");
-                AddCheckboxColumnIfMissing("IsAvailable", "Available?", "IsAvailable"); // Provide the data property name
+                AddCheckboxColumnIfMissing("IsAvailable", "Available?", "IsAvailable");
 
-                // Adjust column widths
-                booksView.Columns["Title"].Width = 160; // Adjust width for the Title column
+                booksView.Columns["Title"].Width = 160;
                 booksView.Columns["Author"].Width = 100;
                 booksView.Columns["ISBN"].Width = 80;
-                booksView.Columns["Genre"].Width = 60; // Adjust width for the Genre column
+                booksView.Columns["Genre"].Width = 60;
 
-                // Update checkboxes after adding columns
-                UpdateCheckBoxes();
+                // Refresh the DataGridView
+                booksView.Refresh();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error setting up data grid view: {ex.Message}", "UI Setup Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
 
 
         private void AddColumnIfMissing(string columnName, string headerText, string dataPropertyName = null)
@@ -249,6 +275,7 @@ namespace Library
                 booksView.Columns.Add(textColumn);
             }
         }
+
         private void AddCheckboxColumnIfMissing(string columnName, string headerText, string dataPropertyName)
         {
             if (!booksView.Columns.Contains(columnName))
@@ -259,9 +286,7 @@ namespace Library
                     HeaderText = headerText,
                     DataPropertyName = dataPropertyName,
                     Width = 80,
-                    ReadOnly = true,  // Set true here; will adjust dynamically in UpdateCheckBoxes
-                    FalseValue = "False",
-                    TrueValue = "True"
+                    ReadOnly = true, // Assuming it should be read-only
                 };
                 booksView.Columns.Add(checkBoxColumn);
             }
@@ -272,14 +297,14 @@ namespace Library
             {
                 foreach (DataGridViewRow row in booksView.Rows)
                 {
-                    if (row.IsNewRow) continue;
-
-                    DataGridViewCheckBoxCell chkCell = row.Cells["IsAvailable"] as DataGridViewCheckBoxCell;
-                    if (chkCell != null)
+                    if (!row.IsNewRow)
                     {
-                        bool isAvailable = Convert.ToBoolean(row.Cells["IsAvailable"].Value);
-                        chkCell.Value = isAvailable;  // Reflect the correct availability
-                        chkCell.ReadOnly = !isAvailable; // Make read-only if not available
+                        DataGridViewCheckBoxCell chkCell = row.Cells["IsAvailable"] as DataGridViewCheckBoxCell;
+                        if (chkCell != null)
+                        {
+                            bool isAvailable = Convert.ToBoolean(row.Cells["IsAvailable"].Value);
+                            chkCell.Value = isAvailable;
+                        }
                     }
                 }
             }
@@ -288,8 +313,26 @@ namespace Library
                 MessageBox.Show($"Failed to update checkboxes: {ex.Message}", "Checkbox Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void booksView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == booksView.Columns["IsAvailable"].Index && e.RowIndex >= 0)
+                {
+                    DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)booksView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    bool isChecked = Convert.ToBoolean(cell.Value);
+                    cell.Value = !isChecked;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to handle cell click: {ex.Message}", "Cell Click Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private async void addToStdbtn_Click(object sender, EventArgs e)
         {
+            booksView.Refresh();
             bool anyBookSelected = false;
             bool allSuccessfullyBorrowed = true;
 
@@ -322,108 +365,54 @@ namespace Library
             }
             else if (allSuccessfullyBorrowed)
             {
-                MessageBox.Show("All selected books have been successfully borrowed.", "Borrow Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Books borrowed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                await LoadBooksAsync();
             }
             else
             {
-                MessageBox.Show("Some selected books could not be borrowed.", "Partial Borrow Success", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-            await LoadBooksAsync();  // Refresh the list of books after borrowing
-        }
-
-
-
-        private async void booksView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex != -1 && !booksView.Rows[e.RowIndex].IsNewRow && e.ColumnIndex == booksView.Columns["IsAvailable"].Index)
-            {
-                DataGridViewCheckBoxCell cell = booksView.Rows[e.RowIndex].Cells["IsAvailable"] as DataGridViewCheckBoxCell;
-                if (cell != null && !cell.ReadOnly)
-                {
-                    bool isChecked = Convert.ToBoolean(cell.Value);
-                    cell.Value = !isChecked;
-
-                    if (!isChecked)
-                    {
-                        int bookId = Convert.ToInt32(booksView.Rows[e.RowIndex].Cells["BookID"].Value);
-                        bool wasBorrowedSuccessfully = await BorrowBookAsync(bookId);
-                        if (wasBorrowedSuccessfully)
-                        {
-                            MessageBox.Show("Book borrowed successfully.");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Book could not be borrowed. It may already be borrowed.");
-                            cell.Value = isChecked;
-                        }
-                        await LoadBooksAsync();
-                    }
-                }
+                MessageBox.Show("Some books could not be borrowed.", "Partial Success", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private async Task<bool> BorrowBookAsync(int bookId)
         {
-            bool isAvailable;
-            int currentStudentId = Form1.SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
-
-            using (var connection = new MySqlConnection(connectionString))
+            try
             {
-                await connection.OpenAsync();
-
-                // Check if the book is still available
-                using (var cmdCheckAvailability = new MySqlCommand("SELECT IsAvailable FROM Books WHERE BookID = @BookID", connection))
+                using (var connection = new MySqlConnection(connectionString))
                 {
-                    cmdCheckAvailability.Parameters.AddWithValue("@BookID", bookId);
-                    var result = await cmdCheckAvailability.ExecuteScalarAsync();
-                    isAvailable = result != DBNull.Value && Convert.ToBoolean(result);
-                }
+                    await connection.OpenAsync();
 
-                if (!isAvailable)
-                {
-                    this.Invoke((MethodInvoker)(() =>
-                        MessageBox.Show($"Book with ID {bookId} is no longer available.", "Unavailable", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    ));
-                    return false; // Indicate that borrowing failed
-                }
-
-                // If available, proceed to borrow
-                using (var transaction = await connection.BeginTransactionAsync())
-                {
-                    try
+                    string checkAvailabilityQuery = "SELECT COUNT(*) FROM BorrowedBooks WHERE BookID = @BookID";
+                    using (var checkCmd = new MySqlCommand(checkAvailabilityQuery, connection))
                     {
-                        // Update the book status
-                        using (var cmdUpdateBook = new MySqlCommand("UPDATE Books SET IsAvailable = 0 WHERE BookID = @BookID", connection, transaction))
+                        checkCmd.Parameters.AddWithValue("@BookID", bookId);
+                        int count = Convert.ToInt32(await checkCmd.ExecuteScalarAsync());
+                        if (count > 0)
                         {
-                            cmdUpdateBook.Parameters.AddWithValue("@BookID", bookId);
-                            await cmdUpdateBook.ExecuteNonQueryAsync();
+                            MessageBox.Show($"Book ID {bookId} is already borrowed.", "Borrow Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return false;
                         }
-
-                        // Record the borrowing
-                        using (var cmdInsertBorrowing = new MySqlCommand("INSERT INTO BorrowedBooks (StudentID, BookID, DateBorrowed, DueDate) VALUES (@StudentID, @BookID, @DateBorrowed, @DueDate)", connection, transaction))
-                        {
-                            cmdInsertBorrowing.Parameters.AddWithValue("@StudentID", currentStudentId);
-                            cmdInsertBorrowing.Parameters.AddWithValue("@BookID", bookId);
-                            cmdInsertBorrowing.Parameters.AddWithValue("@DateBorrowed", DateTime.Now);
-                            cmdInsertBorrowing.Parameters.AddWithValue("@DueDate", DateTime.Now.AddDays(14)); // Assuming a 2-week borrowing period
-                            await cmdInsertBorrowing.ExecuteNonQueryAsync();
-                        }
-
-                        await transaction.CommitAsync();
-                        return true; // Indicate that borrowing was successful
                     }
-                    catch (Exception ex)
+
+                    string borrowQuery = "INSERT INTO BorrowedBooks (StudentID, BookID, DateBorrowed) VALUES (@StudentID, @BookID, @DateBorrowed)";
+                    using (var borrowCmd = new MySqlCommand(borrowQuery, connection))
                     {
-                        await transaction.RollbackAsync();
-                        this.Invoke((MethodInvoker)(() =>
-                            MessageBox.Show($"Failed to borrow book ID {bookId}: {ex.Message}", "Borrow Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        ));
-                        return false; // Indicate that borrowing failed
+                        borrowCmd.Parameters.AddWithValue("@StudentID", currentStudentId);
+                        borrowCmd.Parameters.AddWithValue("@BookID", bookId);
+                        borrowCmd.Parameters.AddWithValue("@DateBorrowed", DateTime.Now);
+
+                        await borrowCmd.ExecuteNonQueryAsync();
                     }
                 }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error borrowing book ID {bookId}: {ex.Message}", "Borrow Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
+
 
 
 

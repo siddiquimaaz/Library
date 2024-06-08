@@ -90,16 +90,10 @@ namespace Library
             return userId;
         }
 
-
-
-
-
-
         private void sign_Click(object sender, EventArgs e)
         {
-            this.Close();
-            Signup signup = new Signup();
-            signup.ShowDialog();
+            FormManager.CloseCurrentForm();
+            FormManager.Show(new Signup());
         }
 
         private void Form1_Load(object sender, EventArgs e)

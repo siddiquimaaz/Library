@@ -39,9 +39,8 @@ namespace Library
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Form1 Back = new Form1();
-            Back.ShowDialog();
+            FormManager.CloseCurrentForm();
+            FormManager.Show(new Form1());
         }
         private void button1_Click(object sender, EventArgs e)
         {
