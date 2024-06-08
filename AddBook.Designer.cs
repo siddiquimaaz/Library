@@ -246,7 +246,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
+            label1.ForeColor = Color.FromArgb(0, 102, 140);
             label1.ImeMode = ImeMode.NoControl;
             label1.Location = new Point(7, 8);
             label1.Name = "label1";
