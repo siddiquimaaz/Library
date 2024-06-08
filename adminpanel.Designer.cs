@@ -152,7 +152,7 @@
             // label4
             // 
             resources.ApplyResources(label4, "label4");
-            label4.ForeColor = Color.White;
+            label4.ForeColor = Color.FromArgb(0, 102, 140);
             label4.Name = "label4";
             // 
             // label1
