@@ -57,10 +57,10 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.ForeColor = Color.FromArgb(29, 28, 28);
-            label3.Location = new Point(17, 483);
+            label3.ForeColor = Color.FromArgb(0, 102, 140);
+            label3.Location = new Point(15, 362);
             label3.Name = "label3";
-            label3.Size = new Size(84, 17);
+            label3.Size = new Size(69, 13);
             label3.TabIndex = 2;
             label3.Text = "Book Title:";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -71,10 +71,11 @@
             booktitltxt.BorderStyle = BorderStyle.FixedSingle;
             booktitltxt.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             booktitltxt.ForeColor = Color.FromArgb(0, 102, 140);
-            booktitltxt.Location = new Point(21, 508);
+            booktitltxt.Location = new Point(18, 381);
+            booktitltxt.Margin = new Padding(3, 2, 3, 2);
             booktitltxt.Name = "booktitltxt";
             booktitltxt.PlaceholderText = "Enter Book name";
-            booktitltxt.Size = new Size(240, 24);
+            booktitltxt.Size = new Size(210, 21);
             booktitltxt.TabIndex = 3;
             booktitltxt.TextAlign = HorizontalAlignment.Center;
             booktitltxt.TextChanged += booktitltxt_TextChanged;
@@ -85,10 +86,11 @@
             authortxt.BorderStyle = BorderStyle.FixedSingle;
             authortxt.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             authortxt.ForeColor = Color.FromArgb(0, 102, 140);
-            authortxt.Location = new Point(19, 576);
+            authortxt.Location = new Point(17, 432);
+            authortxt.Margin = new Padding(3, 2, 3, 2);
             authortxt.Name = "authortxt";
             authortxt.PlaceholderText = "Enter Author name";
-            authortxt.Size = new Size(240, 24);
+            authortxt.Size = new Size(210, 21);
             authortxt.TabIndex = 5;
             authortxt.TextAlign = HorizontalAlignment.Center;
             // 
@@ -97,10 +99,10 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.ForeColor = Color.FromArgb(29, 28, 28);
-            label4.Location = new Point(17, 551);
+            label4.ForeColor = Color.FromArgb(0, 102, 140);
+            label4.Location = new Point(15, 413);
             label4.Name = "label4";
-            label4.Size = new Size(57, 17);
+            label4.Size = new Size(45, 13);
             label4.TabIndex = 4;
             label4.Text = "Author";
             label4.TextAlign = ContentAlignment.MiddleCenter;
@@ -116,9 +118,10 @@
             addToStdbtn.IconFont = FontAwesome.Sharp.IconFont.Regular;
             addToStdbtn.IconSize = 28;
             addToStdbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            addToStdbtn.Location = new Point(22, 688);
+            addToStdbtn.Location = new Point(19, 516);
+            addToStdbtn.Margin = new Padding(3, 2, 3, 2);
             addToStdbtn.Name = "addToStdbtn";
-            addToStdbtn.Size = new Size(241, 53);
+            addToStdbtn.Size = new Size(211, 40);
             addToStdbtn.TabIndex = 6;
             addToStdbtn.Text = "Issue Book";
             addToStdbtn.UseVisualStyleBackColor = false;
@@ -135,9 +138,10 @@
             cancel.IconFont = FontAwesome.Sharp.IconFont.Auto;
             cancel.IconSize = 20;
             cancel.ImageAlign = ContentAlignment.MiddleLeft;
-            cancel.Location = new Point(178, 820);
+            cancel.Location = new Point(156, 615);
+            cancel.Margin = new Padding(3, 2, 3, 2);
             cancel.Name = "cancel";
-            cancel.Size = new Size(87, 41);
+            cancel.Size = new Size(76, 31);
             cancel.TabIndex = 7;
             cancel.Text = "Cancel";
             cancel.TextAlign = ContentAlignment.MiddleRight;
@@ -155,9 +159,10 @@
             backbtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
             backbtn.IconSize = 20;
             backbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            backbtn.Location = new Point(19, 820);
+            backbtn.Location = new Point(17, 615);
+            backbtn.Margin = new Padding(3, 2, 3, 2);
             backbtn.Name = "backbtn";
-            backbtn.Size = new Size(73, 41);
+            backbtn.Size = new Size(64, 31);
             backbtn.TabIndex = 8;
             backbtn.Text = "Back";
             backbtn.TextAlign = ContentAlignment.MiddleRight;
@@ -172,11 +177,12 @@
             booksView.AllowUserToResizeRows = false;
             booksView.BackgroundColor = Color.FromArgb(245, 244, 241);
             booksView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            booksView.Location = new Point(317, 57);
+            booksView.Location = new Point(280, 43);
+            booksView.Margin = new Padding(3, 2, 3, 2);
             booksView.Name = "booksView";
             booksView.RowHeadersWidth = 51;
             booksView.RowTemplate.Height = 29;
-            booksView.Size = new Size(1238, 881);
+            booksView.Size = new Size(1083, 661);
             booksView.TabIndex = 9;
             booksView.CellContentClick += booksView_CellContentClick;
             // 
@@ -192,10 +198,11 @@
             SearchBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             SearchBtn.IconSize = 20;
             SearchBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            SearchBtn.Location = new Point(23, 623);
+            SearchBtn.Location = new Point(20, 467);
+            SearchBtn.Margin = new Padding(3, 2, 3, 2);
             SearchBtn.Name = "SearchBtn";
             SearchBtn.Padding = new Padding(1);
-            SearchBtn.Size = new Size(93, 35);
+            SearchBtn.Size = new Size(81, 26);
             SearchBtn.TabIndex = 11;
             SearchBtn.Text = "Search";
             SearchBtn.TextAlign = ContentAlignment.MiddleRight;
@@ -205,17 +212,18 @@
             // addbookstdname
             // 
             addbookstdname.AutoSize = true;
-            addbookstdname.Location = new Point(128, 396);
+            addbookstdname.Location = new Point(112, 297);
             addbookstdname.Name = "addbookstdname";
-            addbookstdname.Size = new Size(0, 20);
+            addbookstdname.Size = new Size(0, 15);
             addbookstdname.TabIndex = 12;
             addbookstdname.Visible = false;
             // 
             // addbookstdimage
             // 
-            addbookstdimage.Location = new Point(17, 339);
+            addbookstdimage.Location = new Point(15, 254);
+            addbookstdimage.Margin = new Padding(3, 2, 3, 2);
             addbookstdimage.Name = "addbookstdimage";
-            addbookstdimage.Size = new Size(99, 105);
+            addbookstdimage.Size = new Size(87, 79);
             addbookstdimage.SizeMode = PictureBoxSizeMode.Zoom;
             addbookstdimage.TabIndex = 13;
             addbookstdimage.TabStop = false;
@@ -228,10 +236,10 @@
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(3, 5, 3, 5);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(2, 1, 2, 1);
-            panel1.Size = new Size(1595, 45);
+            panel1.Size = new Size(1370, 34);
             panel1.TabIndex = 18;
             // 
             // label1
@@ -240,9 +248,9 @@
             label1.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.FromArgb(0, 102, 140);
             label1.ImeMode = ImeMode.NoControl;
-            label1.Location = new Point(8, 11);
+            label1.Location = new Point(7, 8);
             label1.Name = "label1";
-            label1.Size = new Size(552, 20);
+            label1.Size = new Size(423, 16);
             label1.TabIndex = 17;
             label1.Text = "Library Management System | Reader Panel | Issue Book";
             // 
@@ -252,9 +260,9 @@
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
             label2.ImeMode = ImeMode.NoControl;
-            label2.Location = new Point(1567, 11);
+            label2.Location = new Point(1371, 8);
             label2.Name = "label2";
-            label2.Size = new Size(19, 20);
+            label2.Size = new Size(15, 15);
             label2.TabIndex = 14;
             label2.Text = "X";
             // 
@@ -273,33 +281,32 @@
             panel2.Controls.Add(cancel);
             panel2.Controls.Add(backbtn);
             panel2.ForeColor = Color.FromArgb(29, 28, 28);
-            panel2.Location = new Point(8, 57);
-            panel2.Margin = new Padding(3, 4, 3, 4);
+            panel2.Location = new Point(7, 43);
             panel2.Name = "panel2";
-            panel2.Size = new Size(302, 883);
+            panel2.Size = new Size(264, 662);
             panel2.TabIndex = 19;
             // 
             // pictureBox1
             // 
             pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Location = new Point(50, 31);
-            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Location = new Point(44, 23);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(193, 220);
+            pictureBox1.Size = new Size(169, 165);
             pictureBox1.TabIndex = 20;
             pictureBox1.TabStop = false;
             // 
             // AddBook
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1595, 941);
+            ClientSize = new Size(1370, 710);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(booksView);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             MinimizeBox = false;
             Name = "AddBook";
             StartPosition = FormStartPosition.CenterScreen;

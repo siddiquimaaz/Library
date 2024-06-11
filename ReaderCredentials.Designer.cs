@@ -48,7 +48,7 @@
             readerPicture.BackColor = Color.Transparent;
             readerPicture.Location = new Point(33, 100);
             readerPicture.Name = "readerPicture";
-            readerPicture.Size = new Size(122, 86);
+            readerPicture.Size = new Size(120, 100);
             readerPicture.SizeMode = PictureBoxSizeMode.Zoom;
             readerPicture.TabIndex = 15;
             readerPicture.TabStop = false;
