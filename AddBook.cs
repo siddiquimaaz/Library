@@ -17,6 +17,7 @@ namespace Library
     {
         string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
         private int currentStudentId;  // Field to store the current student's ID
+        private List<Book> books = new List<Book>();
 
         public AddBook()
         {
@@ -84,14 +85,12 @@ namespace Library
             FormManager.Show(new home());
         }
 
-        private void cancel_Click(object sender, EventArgs e)
+        private async void cancel_Click(object sender, EventArgs e)
         {
             booktitltxt.Text = "";
             authortxt.Text = "";
-            FormManager.CloseCurrentForm(); // Close the current form
-            FormManager.Show(new home()); // Show the existing home form
-
-            // Reset any other UI elements that might have changed
+            await LoadBooksAsync();
+            booksView.Refresh();
 
         }
 
@@ -192,6 +191,7 @@ namespace Library
                             {
                                 booksView.DataSource = dt;
                                 SetupDataGridView();
+                                UpdateCheckBoxes();
                             }));
                         }
                     }
@@ -202,36 +202,55 @@ namespace Library
                 MessageBox.Show($"An error occurred while searching for books: {ex.Message}", "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private async Task LoadBooksAsync()
+
+       private async Task LoadBooksAsync()
+{
+    try
+    {
+        using (var connection = new MySqlConnection(connectionString))
         {
-            try
+            await connection.OpenAsync();
+            string sql = "SELECT BookID, Title, Author, ISBN, PublicationYear, Genre, IsAvailable FROM Books";
+            using (var cmd = new MySqlCommand(sql, connection))
             {
-                using (var connection = new MySqlConnection(connectionString))
+                DataTable dt = new DataTable();
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
                 {
-                    await connection.OpenAsync();
-                    string sql = "SELECT BookID, Title, Author, ISBN, PublicationYear, Genre, " +
-                                 "CASE WHEN EXISTS (SELECT * FROM BorrowedBooks WHERE BookID = Books.BookID) THEN 0 ELSE 1 END AS IsAvailable " +
-                                 "FROM Books";
-                    using (var cmd = new MySqlCommand(sql, connection))
-                    {
-                        DataTable dt = new DataTable();
-                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
-                        {
-                            await Task.Run(() => adapter.Fill(dt));
-                            booksView.Invoke(new Action(() =>
-                            {
-                                booksView.DataSource = dt;
-                                SetupDataGridView();
-                            }));
-                        }
-                    }
+                    await Task.Run(() => adapter.Fill(dt));
+                    books = ConvertDataTableToList(dt);
+                    booksView.DataSource = books;
+                    SetupDataGridView();
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to load books: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
+        // Call UpdateCheckBoxes after loading books
+        UpdateCheckBoxes();
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show($"Failed to load books: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+}
+
+        private List<Book> ConvertDataTableToList(DataTable dt)
+        {
+            List<Book> list = new List<Book>();
+            foreach (DataRow row in dt.Rows)
+            {
+                list.Add(new Book
+                {
+                    BookID = Convert.ToInt32(row["BookID"]),
+                    Title = row["Title"].ToString(),
+                    Author = row["Author"].ToString(),
+                    ISBN = row["ISBN"].ToString(),
+                    PublicationYear = Convert.ToInt32(row["PublicationYear"]),
+                    Genre = row["Genre"].ToString(),
+                    IsAvailable = Convert.ToBoolean(row["IsAvailable"])
+                });
+            }
+            return list;
+        }
+
 
         private void SetupDataGridView()
         {
@@ -239,6 +258,8 @@ namespace Library
             {
                 booksView.AutoGenerateColumns = false;
                 booksView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                booksView.ReadOnly = false; // Allow editing for checkboxes
+                booksView.Refresh();
 
                 AddColumnIfMissing("Title", "Title");
                 AddColumnIfMissing("Author", "Author");
@@ -247,12 +268,13 @@ namespace Library
                 AddColumnIfMissing("Genre", "Genre");
                 AddCheckboxColumnIfMissing("IsAvailable", "Available?", "IsAvailable");
 
-                booksView.Columns["Title"].Width = 160;
-                booksView.Columns["Author"].Width = 100;
-                booksView.Columns["ISBN"].Width = 80;
-                booksView.Columns["Genre"].Width = 60;
+                booksView.Columns["Title"].ReadOnly = true;
+                booksView.Columns["Author"].ReadOnly = true;
+                booksView.Columns["ISBN"].ReadOnly = true;
+                booksView.Columns["PublicationYear"].ReadOnly = true;
+                booksView.Columns["Genre"].ReadOnly = true;
+                booksView.Columns["IsAvailable"].ReadOnly = false; // Allow editing for this column only
 
-                // Refresh the DataGridView
                 booksView.Refresh();
             }
             catch (Exception ex)
@@ -260,7 +282,6 @@ namespace Library
                 MessageBox.Show($"Error setting up data grid view: {ex.Message}", "UI Setup Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void AddColumnIfMissing(string columnName, string headerText, string dataPropertyName = null)
         {
@@ -286,7 +307,6 @@ namespace Library
                     HeaderText = headerText,
                     DataPropertyName = dataPropertyName,
                     Width = 80,
-                    ReadOnly = true, // Assuming it should be read-only
                 };
                 booksView.Columns.Add(checkBoxColumn);
             }
@@ -297,13 +317,13 @@ namespace Library
             {
                 foreach (DataGridViewRow row in booksView.Rows)
                 {
-                    if (!row.IsNewRow)
+                    if (row.DataBoundItem is Book book)
                     {
                         DataGridViewCheckBoxCell chkCell = row.Cells["IsAvailable"] as DataGridViewCheckBoxCell;
                         if (chkCell != null)
                         {
-                            bool isAvailable = Convert.ToBoolean(row.Cells["IsAvailable"].Value);
-                            chkCell.Value = isAvailable;
+                            chkCell.Value = book.IsAvailable;
+                            chkCell.ReadOnly = !book.IsAvailable;
                         }
                     }
                 }
@@ -313,7 +333,6 @@ namespace Library
                 MessageBox.Show($"Failed to update checkboxes: {ex.Message}", "Checkbox Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void booksView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try

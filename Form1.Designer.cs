@@ -52,26 +52,26 @@
             // text1
             // 
             text1.BackColor = Color.FromArgb(224, 224, 224);
-            text1.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            text1.ForeColor = Color.FromArgb(31, 58, 95);
+            text1.Font = new Font("Verdana", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
+            text1.ForeColor = Color.FromArgb(0, 0, 0, 7);
             text1.Location = new Point(968, 222);
             text1.Margin = new Padding(3, 4, 3, 4);
             text1.Name = "text1";
             text1.PlaceholderText = "Enter username";
-            text1.Size = new Size(228, 24);
+            text1.Size = new Size(228, 23);
             text1.TabIndex = 0;
             text1.TextAlign = HorizontalAlignment.Center;
             // 
             // text2
             // 
             text2.BackColor = Color.FromArgb(224, 224, 224);
-            text2.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            text2.ForeColor = Color.FromArgb(31, 58, 95);
+            text2.Font = new Font("Verdana", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
+            text2.ForeColor = Color.FromArgb(0, 0, 0, 7);
             text2.Location = new Point(968, 286);
             text2.Margin = new Padding(2, 10, 2, 3);
             text2.Name = "text2";
             text2.PlaceholderText = "Enter your Password";
-            text2.Size = new Size(228, 24);
+            text2.Size = new Size(228, 23);
             text2.TabIndex = 1;
             text2.TextAlign = HorizontalAlignment.Center;
             text2.UseSystemPasswordChar = true;
