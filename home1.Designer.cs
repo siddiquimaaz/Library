@@ -55,6 +55,7 @@
             // addbk
             // 
             addbk.BackColor = Color.FromArgb(0, 102, 140);
+            addbk.BackgroundImage = (Image)resources.GetObject("addbk.BackgroundImage");
             addbk.BackgroundImageLayout = ImageLayout.Center;
             addbk.FlatAppearance.BorderSize = 0;
             addbk.FlatStyle = FlatStyle.Popup;
@@ -69,6 +70,7 @@
             // RenewMembershipBtn
             // 
             RenewMembershipBtn.BackColor = Color.FromArgb(0, 102, 140);
+            RenewMembershipBtn.BackgroundImage = (Image)resources.GetObject("RenewMembershipBtn.BackgroundImage");
             RenewMembershipBtn.BackgroundImageLayout = ImageLayout.Center;
             RenewMembershipBtn.FlatAppearance.BorderSize = 0;
             RenewMembershipBtn.FlatStyle = FlatStyle.Popup;
@@ -159,6 +161,7 @@
             // DetailsBtn
             // 
             DetailsBtn.BackColor = Color.FromArgb(0, 102, 140);
+            DetailsBtn.BackgroundImage = (Image)resources.GetObject("DetailsBtn.BackgroundImage");
             DetailsBtn.BackgroundImageLayout = ImageLayout.Center;
             DetailsBtn.FlatAppearance.BorderSize = 0;
             DetailsBtn.FlatStyle = FlatStyle.Popup;
@@ -253,6 +256,7 @@
             // ReaderReturnBookBtn
             // 
             ReaderReturnBookBtn.BackColor = Color.FromArgb(0, 102, 140);
+            ReaderReturnBookBtn.BackgroundImage = (Image)resources.GetObject("ReaderReturnBookBtn.BackgroundImage");
             ReaderReturnBookBtn.BackgroundImageLayout = ImageLayout.Center;
             ReaderReturnBookBtn.FlatAppearance.BorderSize = 0;
             ReaderReturnBookBtn.FlatStyle = FlatStyle.Popup;
