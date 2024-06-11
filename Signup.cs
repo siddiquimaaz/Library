@@ -17,7 +17,6 @@ using static Library.home;
 using System.Resources; // Often not needed, depending on project setup
 using Library.Properties; // Replace 'Library' with your actual namespace, if different
 
-
 namespace Library
 {
     public partial class Signup : Form
@@ -33,16 +32,21 @@ namespace Library
             }
         }
         private string connectionString = "server=127.0.0.1;port=3306;database=LMS;uid=root;pwd=maazsiddiqui12;";
+        private UserManager userManager;
+
         public Signup()
         {
             InitializeComponent();
+            userManager = new UserManager(connectionString);
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
             FormManager.CloseCurrentForm();
             FormManager.Show(new Form1());
         }
-        private void button1_Click(object sender, EventArgs e)
+
+        private async void button1_Click(object? sender, EventArgs? e)
         {
             string firstName = firstnametxt.Text;
             string lastName = lastnametxt.Text;
@@ -78,9 +82,13 @@ namespace Library
 
             try
             {
-                int studentId = InsertUserIntoDatabase("Students", firstName, lastName, email, hashedPassword, phoneNumber, imageBytes);
+                int studentId = await userManager.RegisterUserAsync(firstName, lastName, email, hashedPassword, phoneNumber, imageBytes);
                 MessageBox.Show("Registration Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Form1.SessionInfo.CurrentStudentId = studentId;
+
+                // Set session details
+                FormManager.SetSession(studentId, DateTime.Now.AddMinutes(5));
+
                 // Debug output to verify the ID
                 MessageBox.Show($"Current Student ID: {Form1.SessionInfo.CurrentStudentId}");
                 this.Close();
@@ -91,60 +99,8 @@ namespace Library
                 MessageBox.Show($"An error occurred during registration: {ex.Message}", "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private int InsertUserIntoDatabase(string tableName, string firstName, string lastName, string email, string hashedPassword, string phoneNumber, byte[] image)
-        {
-            int studentId = 0;
-            using (var connection = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    connection.Open();
-                    using (var cmd = new MySqlCommand())
-                    {
-                        cmd.Connection = connection;
-                        cmd.CommandText = $"INSERT INTO {tableName} (FirstName, LastName, Email, HashedPassword, PhoneNumber, Photo) VALUES (@FirstName, @LastName, @Email, @HashedPassword, @PhoneNumber, @Photo)";
-                        cmd.Parameters.Clear();
-
-                        cmd.Parameters.AddWithValue("@FirstName", firstName);
-                        cmd.Parameters.AddWithValue("@LastName", lastName);
-                        cmd.Parameters.AddWithValue("@Email", email);
-                        cmd.Parameters.AddWithValue("@HashedPassword", hashedPassword);
-                        cmd.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
-                        cmd.Parameters.AddWithValue("@Photo", image ?? (object)DBNull.Value);
-
-                        cmd.ExecuteNonQuery();
-                        studentId = Convert.ToInt32(cmd.LastInsertedId); // Retrieves the last-inserted auto-increment ID
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Failed to insert student data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    throw; // Re-throw the exception to be handled in the calling method
-                }
-            }
-            return studentId;
-        }
-
-
 
         // Helper method to validate email
-        //helper-functions
-        private void selectimg_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Title = "Select Image";
-                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    System.Drawing.Image originalImage = System.Drawing.Image.FromFile(openFileDialog.FileName);
-                    System.Drawing.Image ellipseImage = GetEllipseImage(originalImage);
-                    addpic.Image = ellipseImage;
-                    addpic.Visible = true;
-                }
-            }
-        }
         private bool IsValidEmail(string email)
         {
             try
@@ -172,16 +128,28 @@ namespace Library
             return bitmap;
         }
 
-
-        private void label2_Click(object sender, EventArgs e)
+        private void selectimg_Click(object sender, EventArgs e)
         {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Title = "Select Image";
+                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
 
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    System.Drawing.Image originalImage = System.Drawing.Image.FromFile(openFileDialog.FileName);
+                    System.Drawing.Image ellipseImage = GetEllipseImage(originalImage);
+                    addpic.Image = ellipseImage;
+                    addpic.Visible = true;
+                }
+            }
         }
+
+        private void label2_Click(object sender, EventArgs e) { }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             panel1.BackColor = Color.FromArgb(200, 255, 255, 255);
-
         }
     }
 }

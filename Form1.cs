@@ -1,8 +1,10 @@
+using System;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using BCrypt.Net;
-using static Library.home;
+using System.Threading.Tasks;
 using System.Data;
-using System.Security.Cryptography.X509Certificates;
+
 namespace Library
 {
     public partial class Form1 : Form
@@ -12,8 +14,9 @@ namespace Library
         public Form1()
         {
             InitializeComponent();
-            FormManager.Show(this); // Use FormManager to show the form
+            FormManager.Show(this);
         }
+
         public static class SessionInfo
         {
             public static int CurrentStudentId { get; set; }
@@ -25,7 +28,7 @@ namespace Library
         private async Task<int> ValidateCredentialsAsync(string email, string password, bool isAdmin)
         {
             string table = isAdmin ? "AdminUsers" : "Students";
-            string idColumn = isAdmin ? "UserID" : "StudentID"; // Remove the space before "UserID"
+            string idColumn = isAdmin ? "UserID" : "StudentID";
             int userId = -1;
 
             try
@@ -45,7 +48,6 @@ namespace Library
                             {
                                 string hashedPassword = reader.GetString("HashedPassword");
 
-                                // For admin users, check password directly (since it's not hashed)
                                 if (isAdmin)
                                 {
                                     if (password == hashedPassword)
@@ -59,7 +61,7 @@ namespace Library
                                         MessageBox.Show("Invalid password for admin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
                                 }
-                                else  // For student users, verify hashed password
+                                else
                                 {
                                     if (BCrypt.Net.BCrypt.Verify(password, hashedPassword))
                                     {
@@ -96,24 +98,9 @@ namespace Library
             FormManager.Show(new Signup());
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void Head_Click(object sender, EventArgs e) { }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e) { }
-
         private void Login_Click(object sender, EventArgs e)
         {
-            LoginUserAsync(); // Call async method
+            LoginUserAsync();
         }
 
         private async void LoginUserAsync()
@@ -136,8 +123,8 @@ namespace Library
                         home homeForm = new home();
                         await homeForm.LoadStudentInfo(userId); // Load student info
                         FormManager.Show(homeForm);
+                        FormManager.SetSession(userId, DateTime.Now.AddMinutes(5)); // Set session expiration for testing
                     }
-                    // Do not close the current form here
                 }
                 else
                 {
@@ -147,10 +134,8 @@ namespace Library
             catch (Exception ex)
             {
                 MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // Log the exception or take appropriate action
             }
         }
-
 
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -158,9 +143,8 @@ namespace Library
             text2.UseSystemPasswordChar = !checkBox1.Checked;
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {}private void label2_Click(object sender, EventArgs e){}
+        private void label3_Click(object sender, EventArgs e) { }
+
+        private void label2_Click(object sender, EventArgs e) { }
     }
-
 }
-

@@ -206,7 +206,7 @@
             label1.Size = new Size(15, 15);
             label1.TabIndex = 14;
             label1.Text = "X";
-            label1.Click += label1_Click;
+            //label1.Click += label1_Click;
             // 
             // pictureBox1
             // 
@@ -220,7 +220,7 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 14;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            //pictureBox1.Click += pictureBox1_Click;
             // 
             // label2
             // 
@@ -287,7 +287,7 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LMS";
-            Load += Form1_Load;
+            //Load += Form1_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
