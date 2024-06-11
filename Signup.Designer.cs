@@ -231,10 +231,10 @@
             // 
             addpic.BackColor = Color.Transparent;
             addpic.InitialImage = (Image)resources.GetObject("addpic.InitialImage");
-            addpic.Location = new Point(847, 202);
+            addpic.Location = new Point(847, 178);
             addpic.Margin = new Padding(3, 2, 3, 2);
             addpic.Name = "addpic";
-            addpic.Size = new Size(109, 75);
+            addpic.Size = new Size(120, 100);
             addpic.SizeMode = PictureBoxSizeMode.Zoom;
             addpic.TabIndex = 18;
             addpic.TabStop = false;
