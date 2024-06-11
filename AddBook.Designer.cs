@@ -58,7 +58,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = Color.FromArgb(0, 102, 140);
-            label3.Location = new Point(15, 362);
+            label3.Location = new Point(23, 362);
             label3.Name = "label3";
             label3.Size = new Size(69, 13);
             label3.TabIndex = 2;
@@ -71,7 +71,7 @@
             booktitltxt.BorderStyle = BorderStyle.FixedSingle;
             booktitltxt.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             booktitltxt.ForeColor = Color.FromArgb(0, 102, 140);
-            booktitltxt.Location = new Point(18, 381);
+            booktitltxt.Location = new Point(26, 381);
             booktitltxt.Margin = new Padding(3, 2, 3, 2);
             booktitltxt.Name = "booktitltxt";
             booktitltxt.PlaceholderText = "Enter Book name";
@@ -86,7 +86,7 @@
             authortxt.BorderStyle = BorderStyle.FixedSingle;
             authortxt.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             authortxt.ForeColor = Color.FromArgb(0, 102, 140);
-            authortxt.Location = new Point(17, 432);
+            authortxt.Location = new Point(25, 432);
             authortxt.Margin = new Padding(3, 2, 3, 2);
             authortxt.Name = "authortxt";
             authortxt.PlaceholderText = "Enter Author name";
@@ -100,7 +100,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = Color.FromArgb(0, 102, 140);
-            label4.Location = new Point(15, 413);
+            label4.Location = new Point(23, 413);
             label4.Name = "label4";
             label4.Size = new Size(45, 13);
             label4.TabIndex = 4;
@@ -118,7 +118,7 @@
             addToStdbtn.IconFont = FontAwesome.Sharp.IconFont.Regular;
             addToStdbtn.IconSize = 28;
             addToStdbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            addToStdbtn.Location = new Point(19, 516);
+            addToStdbtn.Location = new Point(27, 516);
             addToStdbtn.Margin = new Padding(3, 2, 3, 2);
             addToStdbtn.Name = "addToStdbtn";
             addToStdbtn.Size = new Size(211, 40);
@@ -159,7 +159,7 @@
             backbtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
             backbtn.IconSize = 20;
             backbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            backbtn.Location = new Point(17, 615);
+            backbtn.Location = new Point(23, 615);
             backbtn.Margin = new Padding(3, 2, 3, 2);
             backbtn.Name = "backbtn";
             backbtn.Size = new Size(64, 31);
@@ -198,7 +198,7 @@
             SearchBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             SearchBtn.IconSize = 20;
             SearchBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            SearchBtn.Location = new Point(20, 467);
+            SearchBtn.Location = new Point(28, 467);
             SearchBtn.Margin = new Padding(3, 2, 3, 2);
             SearchBtn.Name = "SearchBtn";
             SearchBtn.Padding = new Padding(1);
@@ -212,7 +212,7 @@
             // addbookstdname
             // 
             addbookstdname.AutoSize = true;
-            addbookstdname.Location = new Point(112, 297);
+            addbookstdname.Location = new Point(120, 297);
             addbookstdname.Name = "addbookstdname";
             addbookstdname.Size = new Size(0, 15);
             addbookstdname.TabIndex = 12;
@@ -220,7 +220,7 @@
             // 
             // addbookstdimage
             // 
-            addbookstdimage.Location = new Point(15, 254);
+            addbookstdimage.Location = new Point(23, 254);
             addbookstdimage.Margin = new Padding(3, 2, 3, 2);
             addbookstdimage.Name = "addbookstdimage";
             addbookstdimage.Size = new Size(87, 79);
@@ -290,9 +290,9 @@
             // 
             pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Location = new Point(44, 23);
+            pictureBox1.Location = new Point(25, 24);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(169, 165);
+            pictureBox1.Size = new Size(201, 184);
             pictureBox1.TabIndex = 20;
             pictureBox1.TabStop = false;
             // 
