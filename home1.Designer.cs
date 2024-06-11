@@ -271,6 +271,7 @@
             ReaderReturnBookBtn.Size = new Size(134, 127);
             ReaderReturnBookBtn.TabIndex = 22;
             ReaderReturnBookBtn.UseVisualStyleBackColor = false;
+            ReaderReturnBookBtn.Click += ReaderReturnBookBtn_Click;
             // 
             // ReturnBook
             // 

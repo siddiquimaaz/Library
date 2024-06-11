@@ -80,7 +80,7 @@
             lastnametxt.Location = new Point(1002, 321);
             lastnametxt.Name = "lastnametxt";
             lastnametxt.PlaceholderText = "Enter Last Name";
-            lastnametxt.Size = new Size(172, 21);
+            lastnametxt.Size = new Size(172, 24);
             lastnametxt.TabIndex = 10;
             lastnametxt.TextAlign = HorizontalAlignment.Center;
             // 
@@ -92,7 +92,7 @@
             phonenumbertxt.Location = new Point(1002, 345);
             phonenumbertxt.Name = "phonenumbertxt";
             phonenumbertxt.PlaceholderText = "Enter Phone Number";
-            phonenumbertxt.Size = new Size(172, 21);
+            phonenumbertxt.Size = new Size(172, 24);
             phonenumbertxt.TabIndex = 11;
             phonenumbertxt.TextAlign = HorizontalAlignment.Center;
             // 
@@ -118,7 +118,7 @@
             emailtxt.Location = new Point(1002, 370);
             emailtxt.Name = "emailtxt";
             emailtxt.PlaceholderText = "Enter Email";
-            emailtxt.Size = new Size(172, 21);
+            emailtxt.Size = new Size(172, 24);
             emailtxt.TabIndex = 12;
             emailtxt.TextAlign = HorizontalAlignment.Center;
             // 
@@ -131,7 +131,7 @@
             label8.ForeColor = Color.White;
             label8.Location = new Point(847, 426);
             label8.Name = "label8";
-            label8.Size = new Size(115, 13);
+            label8.Size = new Size(142, 17);
             label8.TabIndex = 7;
             label8.Text = "Re-type Password:";
             // 
@@ -143,7 +143,7 @@
             passwordtxt.Location = new Point(1002, 395);
             passwordtxt.Name = "passwordtxt";
             passwordtxt.PlaceholderText = "Enter Password";
-            passwordtxt.Size = new Size(172, 21);
+            passwordtxt.Size = new Size(172, 24);
             passwordtxt.TabIndex = 13;
             passwordtxt.TextAlign = HorizontalAlignment.Center;
             passwordtxt.UseSystemPasswordChar = true;
@@ -157,7 +157,7 @@
             label7.ForeColor = Color.White;
             label7.Location = new Point(847, 400);
             label7.Name = "label7";
-            label7.Size = new Size(66, 13);
+            label7.Size = new Size(81, 17);
             label7.TabIndex = 6;
             label7.Text = "Password:";
             // 
@@ -169,7 +169,7 @@
             repasswordtxt.Location = new Point(1002, 423);
             repasswordtxt.Name = "repasswordtxt";
             repasswordtxt.PlaceholderText = "Re-Enter Password";
-            repasswordtxt.Size = new Size(172, 21);
+            repasswordtxt.Size = new Size(172, 24);
             repasswordtxt.TabIndex = 14;
             repasswordtxt.TextAlign = HorizontalAlignment.Center;
             repasswordtxt.UseSystemPasswordChar = true;
@@ -183,7 +183,7 @@
             label6.ForeColor = Color.White;
             label6.Location = new Point(847, 372);
             label6.Name = "label6";
-            label6.Size = new Size(43, 13);
+            label6.Size = new Size(50, 17);
             label6.TabIndex = 5;
             label6.Text = "Email:";
             // 
@@ -210,7 +210,7 @@
             label5.ForeColor = Color.White;
             label5.Location = new Point(847, 348);
             label5.Name = "label5";
-            label5.Size = new Size(97, 13);
+            label5.Size = new Size(119, 17);
             label5.TabIndex = 4;
             label5.Text = "Phone-Number:";
             // 
@@ -223,7 +223,7 @@
             label4.ForeColor = Color.White;
             label4.Location = new Point(847, 323);
             label4.Name = "label4";
-            label4.Size = new Size(73, 13);
+            label4.Size = new Size(90, 17);
             label4.TabIndex = 3;
             label4.Text = "Last-Name:";
             // 
@@ -249,7 +249,7 @@
             label3.ForeColor = Color.White;
             label3.Location = new Point(847, 299);
             label3.Name = "label3";
-            label3.Size = new Size(74, 13);
+            label3.Size = new Size(91, 17);
             label3.TabIndex = 2;
             label3.Text = "First-Name:";
             // 
@@ -276,7 +276,7 @@
             label2.ForeColor = Color.White;
             label2.Location = new Point(106, 150);
             label2.Name = "label2";
-            label2.Size = new Size(371, 42);
+            label2.Size = new Size(468, 53);
             label2.TabIndex = 1;
             label2.Text = "Registration Form";
             label2.Click += label2_Click;
@@ -289,7 +289,7 @@
             label9.ForeColor = Color.White;
             label9.Location = new Point(933, 517);
             label9.Name = "label9";
-            label9.Size = new Size(128, 13);
+            label9.Size = new Size(152, 17);
             label9.TabIndex = 20;
             label9.Text = "Please Select Image!";
             // 
@@ -302,7 +302,7 @@
             firstnametxt.Margin = new Padding(3, 2, 3, 2);
             firstnametxt.Name = "firstnametxt";
             firstnametxt.PlaceholderText = "Enter First Name";
-            firstnametxt.Size = new Size(172, 21);
+            firstnametxt.Size = new Size(172, 24);
             firstnametxt.TabIndex = 16;
             firstnametxt.TextAlign = HorizontalAlignment.Center;
             // 
@@ -334,7 +334,7 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(9, 9);
             label1.Name = "label1";
-            label1.Size = new Size(431, 16);
+            label1.Size = new Size(563, 20);
             label1.TabIndex = 17;
             label1.Text = "Library Management System | Reader Panel | Registration";
             // 
@@ -345,7 +345,7 @@
             label10.ForeColor = Color.White;
             label10.Location = new Point(1373, 9);
             label10.Name = "label10";
-            label10.Size = new Size(15, 15);
+            label10.Size = new Size(19, 20);
             label10.TabIndex = 14;
             label10.Text = "X";
             // 
@@ -362,7 +362,7 @@
             // 
             // Signup
             // 
-            AutoScaleDimensions = new SizeF(7F, 13F);
+            AutoScaleDimensions = new SizeF(9F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(15, 28, 46);
             BackgroundImageLayout = ImageLayout.Stretch;
