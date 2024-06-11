@@ -182,7 +182,7 @@
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(2, 1, 2, 1);
-            panel1.Size = new Size(1370, 34);
+            panel1.Size = new Size(1494, 34);
             panel1.TabIndex = 13;
             // 
             // label4
@@ -201,7 +201,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(1369, 7);
+            label1.Location = new Point(1470, 7);
             label1.Name = "label1";
             label1.Size = new Size(19, 20);
             label1.TabIndex = 14;
@@ -213,10 +213,10 @@
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(185, 315);
+            pictureBox1.Location = new Point(194, 268);
             pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(209, 201);
+            pictureBox1.Size = new Size(280, 273);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 14;
             pictureBox1.TabStop = false;
@@ -239,7 +239,7 @@
             // 
             panel2.BackColor = Color.FromArgb(224, 224, 224);
             panel2.ForeColor = Color.FromArgb(224, 224, 224);
-            panel2.Location = new Point(652, 52);
+            panel2.Location = new Point(683, 72);
             panel2.Name = "panel2";
             panel2.Size = new Size(5, 625);
             panel2.TabIndex = 16;
@@ -249,7 +249,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(36, 92);
+            label3.Location = new Point(63, 92);
             label3.Name = "label3";
             label3.Size = new Size(569, 106);
             label3.TabIndex = 0;
@@ -263,7 +263,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(15, 28, 46);
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1370, 710);
+            ClientSize = new Size(1494, 753);
             Controls.Add(panel2);
             Controls.Add(label3);
             Controls.Add(label2);

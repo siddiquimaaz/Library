@@ -231,7 +231,7 @@
             panel1.Margin = new Padding(3, 5, 3, 5);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(2, 1, 2, 1);
-            panel1.Size = new Size(1566, 45);
+            panel1.Size = new Size(1595, 45);
             panel1.TabIndex = 18;
             // 
             // label1
@@ -295,7 +295,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1566, 947);
+            ClientSize = new Size(1595, 941);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(booksView);

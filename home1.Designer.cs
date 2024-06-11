@@ -202,7 +202,7 @@
             panel2.Margin = new Padding(3, 5, 3, 5);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(2, 1, 2, 1);
-            panel2.Size = new Size(1508, 45);
+            panel2.Size = new Size(1572, 45);
             panel2.TabIndex = 19;
             // 
             // label2
@@ -260,7 +260,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 254, 251);
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1508, 733);
+            ClientSize = new Size(1572, 783);
             Controls.Add(label5);
             Controls.Add(pictureBox1);
             Controls.Add(panel2);
