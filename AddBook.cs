@@ -43,6 +43,7 @@ namespace Library
             {
                 try
                 {
+                    await LoadBooksAsync();
                     await FetchAndDisplayStudentInfo(currentStudentId); // Pass the student ID
                 }
                 catch (Exception ex)
@@ -56,7 +57,7 @@ namespace Library
         {
             try
             {
-                await LoadBooksAsync(); // Always reload books to refresh the grid, ensuring consistency with the database
+                //await LoadBooksAsync(); // Always reload books to refresh the grid, ensuring consistency with the database
             }
             catch (Exception ex)
             {
@@ -203,34 +204,35 @@ namespace Library
             }
         }
 
-       private async Task LoadBooksAsync()
-{
-    try
-    {
-        using (var connection = new MySqlConnection(connectionString))
+        private async Task LoadBooksAsync()
         {
-            await connection.OpenAsync();
-            string sql = "SELECT BookID, Title, Author, ISBN, PublicationYear, Genre, IsAvailable FROM Books";
-            using (var cmd = new MySqlCommand(sql, connection))
+            try
             {
-                DataTable dt = new DataTable();
-                using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                using (var connection = new MySqlConnection(connectionString))
                 {
-                    await Task.Run(() => adapter.Fill(dt));
-                    books = ConvertDataTableToList(dt);
-                    booksView.DataSource = books;
-                    SetupDataGridView();
+                    await connection.OpenAsync();
+                    string sql = "SELECT BookID, Title, Author, ISBN, PublicationYear, Genre FROM Books"; // Removed IsAvailable
+                    using (var cmd = new MySqlCommand(sql, connection))
+                    {
+                        DataTable dt = new DataTable();
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                        {
+                            await Task.Run(() => adapter.Fill(dt));
+                            books = ConvertDataTableToList(dt);
+                            booksView.DataSource = books;
+                            SetupDataGridView();
+
+                            // Update availability status concurrently
+                            await UpdateAvailabilityStatusConcurrently();
+                        }
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to load books: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        // Call UpdateCheckBoxes after loading books
-        UpdateCheckBoxes();
-    }
-    catch (Exception ex)
-    {
-        MessageBox.Show($"Failed to load books: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }
-}
 
         private List<Book> ConvertDataTableToList(DataTable dt)
         {
@@ -245,21 +247,38 @@ namespace Library
                     ISBN = row["ISBN"].ToString(),
                     PublicationYear = Convert.ToInt32(row["PublicationYear"]),
                     Genre = row["Genre"].ToString(),
-                    IsAvailable = Convert.ToBoolean(row["IsAvailable"])
+                    IsAvailable = false // Default to false, will update later
                 });
             }
             return list;
         }
 
+        private async Task UpdateAvailabilityStatusConcurrently()
+        {
+            try
+            {
+                var tasks = books.Select(book => Task.Run(() =>
+                {
+                    book.IsAvailable = GetBookAvailabilityFromDatabase(book.BookID);
+                })).ToArray();
+
+                await Task.WhenAll(tasks);
+                booksView.Invoke(new Action(() => booksView.Refresh()));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to update availability status: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void SetupDataGridView()
         {
             try
             {
+
                 booksView.AutoGenerateColumns = false;
                 booksView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 booksView.ReadOnly = false; // Allow editing for checkboxes
-                booksView.Refresh();
 
                 AddColumnIfMissing("Title", "Title");
                 AddColumnIfMissing("Author", "Author");
@@ -274,7 +293,7 @@ namespace Library
                 booksView.Columns["PublicationYear"].ReadOnly = true;
                 booksView.Columns["Genre"].ReadOnly = true;
                 booksView.Columns["IsAvailable"].ReadOnly = false; // Allow editing for this column only
-
+                UpdateAvailabilityStatusConcurrently();
                 booksView.Refresh();
             }
             catch (Exception ex)
@@ -282,6 +301,8 @@ namespace Library
                 MessageBox.Show($"Error setting up data grid view: {ex.Message}", "UI Setup Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         private void AddColumnIfMissing(string columnName, string headerText, string dataPropertyName = null)
         {
@@ -341,7 +362,16 @@ namespace Library
                 {
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)booksView.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     bool isChecked = Convert.ToBoolean(cell.Value);
-                    cell.Value = !isChecked;
+
+                    if (cell.ReadOnly)
+                    {
+                        
+                        MessageBox.Show("This book is currently not available and cannot be changed.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        cell.Value = !isChecked;
+                    }
                 }
             }
             catch (Exception ex)
@@ -349,6 +379,65 @@ namespace Library
                 MessageBox.Show($"Failed to handle cell click: {ex.Message}", "Cell Click Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private bool GetBookAvailabilityFromDatabase(int bookID)
+        {
+            try
+            {
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Check if the book is borrowed and not returned
+                    string sql = "SELECT COUNT(*) FROM BorrowedBooks WHERE BookID = @BookID AND ReturnedDate IS NULL";
+                    using (var cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@BookID", bookID);
+                        int borrowedCount = Convert.ToInt32(cmd.ExecuteScalar());
+                        return borrowedCount == 0; // Book is available if not borrowed
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to check book availability: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false; // Default to false if there is an error
+            }
+        }
+
+        private void UpdateAvailabilityStatus()
+        {
+            try
+            {
+                foreach (DataGridViewRow row in booksView.Rows)
+                {
+                    if (row.DataBoundItem is Book book)
+                    {
+                        // Retrieve availability status from the database
+                        bool isAvailable = GetBookAvailabilityFromDatabase(book.BookID);
+
+                        // Update the IsAvailable property of the book
+                        book.IsAvailable = isAvailable;
+
+                        DataGridViewCheckBoxCell chkCell = row.Cells["IsAvailable"] as DataGridViewCheckBoxCell;
+                        if (chkCell != null)
+                        {
+                            chkCell.Value = isAvailable;
+                            chkCell.ReadOnly = !isAvailable; // Only make the cell read-only if the book is not available
+                            chkCell.Value = !isAvailable; // Check the checkbox if the book is not available
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to update availability status: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+
         private async void addToStdbtn_Click(object sender, EventArgs e)
         {
             booksView.Refresh();
@@ -479,5 +568,8 @@ namespace Library
 
         private void booksView_CellContentClick(object sender, DataGridViewCellEventArgs e){}
         private void booktitltxt_TextChanged(object sender, EventArgs e){}
+
+        
+
     }
 }
