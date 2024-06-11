@@ -366,7 +366,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(15, 28, 46);
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1370, 659);
+            ClientSize = new Size(1370, 710);
             Controls.Add(pictureBox1);
             Controls.Add(panel2);
             Controls.Add(panel1);
