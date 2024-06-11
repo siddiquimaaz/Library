@@ -57,7 +57,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.ForeColor = Color.FromArgb(29, 28, 28);
+            label3.ForeColor = Color.FromArgb(0, 102, 140);
             label3.Location = new Point(15, 362);
             label3.Name = "label3";
             label3.Size = new Size(69, 13);
@@ -99,7 +99,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.ForeColor = Color.FromArgb(29, 28, 28);
+            label4.ForeColor = Color.FromArgb(0, 102, 140);
             label4.Location = new Point(15, 413);
             label4.Name = "label4";
             label4.Size = new Size(45, 13);

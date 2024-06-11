@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(home));
             addbk = new Button();
-            button3 = new Button();
+            RenewMembershipBtn = new Button();
             ad = new Label();
             label1 = new Label();
             HomeStdPic = new PictureBox();
@@ -45,6 +45,8 @@
             label4 = new Label();
             pictureBox1 = new PictureBox();
             label5 = new Label();
+            ReaderReturnBookBtn = new Button();
+            ReturnBook = new Label();
             ((System.ComponentModel.ISupportInitialize)HomeStdPic).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -52,40 +54,38 @@
             // 
             // addbk
             // 
-            addbk.BackColor = Color.FromArgb(245, 244, 241);
-            addbk.BackgroundImage = (Image)resources.GetObject("addbk.BackgroundImage");
+            addbk.BackColor = Color.FromArgb(0, 102, 140);
             addbk.BackgroundImageLayout = ImageLayout.Center;
             addbk.FlatAppearance.BorderSize = 0;
             addbk.FlatStyle = FlatStyle.Popup;
             addbk.ForeColor = Color.Transparent;
-            addbk.Location = new Point(778, 313);
+            addbk.Location = new Point(868, 319);
             addbk.Name = "addbk";
             addbk.Size = new Size(117, 95);
             addbk.TabIndex = 0;
             addbk.UseVisualStyleBackColor = false;
             addbk.Click += addbk_Click;
             // 
-            // button3
+            // RenewMembershipBtn
             // 
-            button3.BackColor = Color.FromArgb(245, 244, 241);
-            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
-            button3.BackgroundImageLayout = ImageLayout.Center;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Popup;
-            button3.ForeColor = Color.White;
-            button3.Location = new Point(957, 313);
-            button3.Name = "button3";
-            button3.Size = new Size(117, 95);
-            button3.TabIndex = 2;
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
+            RenewMembershipBtn.BackColor = Color.FromArgb(0, 102, 140);
+            RenewMembershipBtn.BackgroundImageLayout = ImageLayout.Center;
+            RenewMembershipBtn.FlatAppearance.BorderSize = 0;
+            RenewMembershipBtn.FlatStyle = FlatStyle.Popup;
+            RenewMembershipBtn.ForeColor = Color.White;
+            RenewMembershipBtn.Location = new Point(1047, 319);
+            RenewMembershipBtn.Name = "RenewMembershipBtn";
+            RenewMembershipBtn.Size = new Size(117, 95);
+            RenewMembershipBtn.TabIndex = 2;
+            RenewMembershipBtn.UseVisualStyleBackColor = false;
+            RenewMembershipBtn.Click += button3_Click;
             // 
             // ad
             // 
             ad.AutoSize = true;
             ad.BackColor = Color.Transparent;
             ad.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            ad.Location = new Point(796, 420);
+            ad.Location = new Point(886, 426);
             ad.Name = "ad";
             ad.Size = new Size(76, 20);
             ad.TabIndex = 4;
@@ -96,7 +96,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI Semibold", 10.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(946, 420);
+            label1.Location = new Point(1036, 426);
             label1.Name = "label1";
             label1.Size = new Size(133, 19);
             label1.TabIndex = 6;
@@ -158,13 +158,12 @@
             // 
             // DetailsBtn
             // 
-            DetailsBtn.BackColor = Color.FromArgb(245, 244, 241);
-            DetailsBtn.BackgroundImage = (Image)resources.GetObject("DetailsBtn.BackgroundImage");
+            DetailsBtn.BackColor = Color.FromArgb(0, 102, 140);
             DetailsBtn.BackgroundImageLayout = ImageLayout.Center;
             DetailsBtn.FlatAppearance.BorderSize = 0;
             DetailsBtn.FlatStyle = FlatStyle.Popup;
             DetailsBtn.ForeColor = Color.White;
-            DetailsBtn.Location = new Point(1133, 313);
+            DetailsBtn.Location = new Point(1223, 319);
             DetailsBtn.Name = "DetailsBtn";
             DetailsBtn.Size = new Size(117, 95);
             DetailsBtn.TabIndex = 12;
@@ -176,7 +175,7 @@
             ReaderDetails.AutoSize = true;
             ReaderDetails.BackColor = Color.Transparent;
             ReaderDetails.Font = new Font("Segoe UI Semibold", 10.25F, FontStyle.Bold, GraphicsUnit.Point);
-            ReaderDetails.Location = new Point(1161, 420);
+            ReaderDetails.Location = new Point(1251, 426);
             ReaderDetails.Name = "ReaderDetails";
             ReaderDetails.Size = new Size(52, 19);
             ReaderDetails.TabIndex = 13;
@@ -251,6 +250,30 @@
             label5.TabIndex = 21;
             label5.Text = "Welcome!";
             // 
+            // ReaderReturnBookBtn
+            // 
+            ReaderReturnBookBtn.BackColor = Color.FromArgb(0, 102, 140);
+            ReaderReturnBookBtn.BackgroundImageLayout = ImageLayout.Center;
+            ReaderReturnBookBtn.FlatAppearance.BorderSize = 0;
+            ReaderReturnBookBtn.FlatStyle = FlatStyle.Popup;
+            ReaderReturnBookBtn.ForeColor = Color.White;
+            ReaderReturnBookBtn.Location = new Point(693, 319);
+            ReaderReturnBookBtn.Name = "ReaderReturnBookBtn";
+            ReaderReturnBookBtn.Size = new Size(117, 95);
+            ReaderReturnBookBtn.TabIndex = 22;
+            ReaderReturnBookBtn.UseVisualStyleBackColor = false;
+            // 
+            // ReturnBook
+            // 
+            ReturnBook.AutoSize = true;
+            ReturnBook.BackColor = Color.Transparent;
+            ReturnBook.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            ReturnBook.Location = new Point(705, 426);
+            ReturnBook.Name = "ReturnBook";
+            ReturnBook.Size = new Size(94, 20);
+            ReturnBook.TabIndex = 23;
+            ReturnBook.Text = "Return Book";
+            // 
             // home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -258,6 +281,8 @@
             BackColor = Color.FromArgb(255, 254, 251);
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1370, 710);
+            Controls.Add(ReturnBook);
+            Controls.Add(ReaderReturnBookBtn);
             Controls.Add(label5);
             Controls.Add(pictureBox1);
             Controls.Add(panel2);
@@ -268,7 +293,7 @@
             Controls.Add(logout);
             Controls.Add(HomeStdNameLabel);
             Controls.Add(HomeStdPic);
-            Controls.Add(button3);
+            Controls.Add(RenewMembershipBtn);
             Controls.Add(addbk);
             Controls.Add(label1);
             Controls.Add(ad);
@@ -290,7 +315,7 @@
         #endregion
 
         private Button addbk;
-        private Button button3;
+        private Button RenewMembershipBtn;
         private Label ad;
         private Label label1;
         private PictureBox HomeStdPic;
@@ -305,5 +330,7 @@
         private Label label4;
         private PictureBox pictureBox1;
         private Label label5;
+        private Button ReaderReturnBookBtn;
+        private Label ReturnBook;
     }
 }
