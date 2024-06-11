@@ -109,7 +109,7 @@
             HomeStdPic.Location = new Point(661, 100);
             HomeStdPic.Margin = new Padding(3, 2, 3, 2);
             HomeStdPic.Name = "HomeStdPic";
-            HomeStdPic.Size = new Size(136, 83);
+            HomeStdPic.Size = new Size(120, 100);
             HomeStdPic.SizeMode = PictureBoxSizeMode.Zoom;
             HomeStdPic.TabIndex = 8;
             HomeStdPic.TabStop = false;
