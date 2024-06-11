@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(adminpanel));
             adminNamelbl = new Label();
-            adminDataGridView = new DataGridView();
             AddBookBtnAdmin = new FontAwesome.Sharp.IconButton();
             ShowBorrrwedBookAdmin = new FontAwesome.Sharp.IconButton();
             label3 = new Label();
@@ -41,28 +40,17 @@
             panel1 = new Panel();
             label4 = new Label();
             label1 = new Label();
-            ((System.ComponentModel.ISupportInitialize)adminDataGridView).BeginInit();
+            adminDataGridView = new DataGridView();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)adminDataGridView).BeginInit();
             SuspendLayout();
             // 
             // adminNamelbl
             // 
             resources.ApplyResources(adminNamelbl, "adminNamelbl");
             adminNamelbl.Name = "adminNamelbl";
-            // 
-            // adminDataGridView
-            // 
-            adminDataGridView.AllowUserToAddRows = false;
-            adminDataGridView.AllowUserToDeleteRows = false;
-            adminDataGridView.BackgroundColor = Color.FromArgb(245, 244, 241);
-            adminDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            resources.ApplyResources(adminDataGridView, "adminDataGridView");
-            adminDataGridView.Name = "adminDataGridView";
-            adminDataGridView.ReadOnly = true;
-            adminDataGridView.RowTemplate.Height = 29;
-            adminDataGridView.CellContentClick += dataGridView1_CellContentClick;
             // 
             // AddBookBtnAdmin
             // 
@@ -161,13 +149,27 @@
             label1.ForeColor = Color.White;
             label1.Name = "label1";
             // 
+            // adminDataGridView
+            // 
+            adminDataGridView.AllowUserToAddRows = false;
+            adminDataGridView.AllowUserToDeleteRows = false;
+            adminDataGridView.AllowUserToOrderColumns = true;
+            adminDataGridView.AllowUserToResizeColumns = false;
+            adminDataGridView.AllowUserToResizeRows = false;
+            adminDataGridView.BackgroundColor = Color.White;
+            adminDataGridView.BorderStyle = BorderStyle.Fixed3D;
+            adminDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(adminDataGridView, "adminDataGridView");
+            adminDataGridView.Name = "adminDataGridView";
+            adminDataGridView.RowTemplate.Height = 25;
+            // 
             // adminpanel
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 254, 251);
-            Controls.Add(panel1);
             Controls.Add(adminDataGridView);
+            Controls.Add(panel1);
             Controls.Add(adminNamelbl);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
@@ -175,19 +177,18 @@
             MinimizeBox = false;
             Name = "adminpanel";
             Load += adminpanel_Load;
-            ((System.ComponentModel.ISupportInitialize)adminDataGridView).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)adminDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
         private Label adminNamelbl;
-        private DataGridView adminDataGridView;
         private FontAwesome.Sharp.IconButton AddBookBtnAdmin;
         private FontAwesome.Sharp.IconButton ShowBorrrwedBookAdmin;
         private Label label3;
@@ -198,5 +199,6 @@
         private Label label4;
         private Label label1;
         private PictureBox pictureBox1;
+        private DataGridView adminDataGridView;
     }
 }

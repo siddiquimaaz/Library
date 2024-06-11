@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using MySql.Data.MySqlClient;
-using FontAwesome.Sharp;
 
 namespace Library
 {
@@ -22,34 +21,11 @@ namespace Library
         public adminpanel()
         {
             InitializeComponent();
+            SetupDataGridView(); // Call SetupDataGridView in the constructor
             this.Load += adminpanel_Load;
-            ShowBorrrwedBookAdmin.Click += async (s, e) => await iconButton4_Click(s, e);
         }
 
-        public class BorrowedBookDetails
-        {
-            public int BorrowID { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public string Email { get; set; }
-            public string PhoneNumber { get; set; }
-            public string Title { get; set; }
-            public string Author { get; set; }
-            public DateTime DateBorrowed { get; set; }
-            public DateTime DueDate { get; set; }
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e){}
-
-        private void adminpic_Click(object sender, EventArgs e){}
-
-        private void panel2_Paint(object sender, PaintEventArgs e){}
-
-        private async Task iconButton4_Click(object sender, EventArgs e)
-        {
-            await LoadBorrowedBooksWithStudentDetailsAsync();
-        }
-
+        
         private void iconButton3_Click(object? sender, EventArgs? e)
         {
             FormManager.CloseCurrentForm();
@@ -59,7 +35,7 @@ namespace Library
 
         private async void adminpanel_Load(object sender, EventArgs e)
         {
-            await LoadBorrowedBooksWithStudentDetailsAsync();
+            await LoadAllStudentsAsync();
         }
 
 
@@ -89,126 +65,33 @@ namespace Library
                     {
                         var dataTable = new DataTable();
                         adapter.Fill(dataTable);
-                        adminDataGridView.DataSource = dataTable;
+                        if (dataTable.Rows.Count > 0)
+                        {
+                            adminDataGridView.DataSource = dataTable;
+                            adminDataGridView.Refresh(); // Refresh the DataGridView
+                            MessageBox.Show("Data loaded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Console.WriteLine("Data loaded successfully."); // Log success message
+                        }
+                        else
+                        {
+                            MessageBox.Show("No students found.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Console.WriteLine("No data found."); // Log no data message
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading students: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private async Task LoadBorrowedBooksWithStudentDetailsAsync()
-        {
-            try
-            {
-                using (var connection = new MySqlConnection(connectionString))
-                {
-                    await connection.OpenAsync();
-                    var query = @"
-                SELECT bb.BorrowID, s.FirstName, s.LastName, s.Email, s.PhoneNumber, b.Title, b.Author, bb.DateBorrowed, bb.DueDate 
-                FROM BorrowedBooks bb
-                INNER JOIN Students s ON bb.StudentID = s.StudentID
-                INNER JOIN Books b ON bb.BookID = b.BookID";
-
-                    using (var command = new MySqlCommand(query, connection))
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        var borrowedBooks = new List<BorrowedBookDetails>();  // Assuming you have a BorrowedBookDetails class
-                        while (await reader.ReadAsync())
-                        {
-                            borrowedBooks.Add(new BorrowedBookDetails
-                            {
-                                BorrowID = reader.GetInt32("BorrowID"),
-                                FirstName = reader.GetString("FirstName"),
-                                LastName = reader.GetString("LastName"),
-                                Email = reader.GetString("Email"),
-                                PhoneNumber = reader.GetString("PhoneNumber"),
-                                Title = reader.GetString("Title"),
-                                Author = reader.GetString("Author"),
-                                DateBorrowed = reader.GetDateTime("DateBorrowed"),
-                                DueDate = reader.GetDateTime("DueDate")
-                            });
-                        }
-                        adminDataGridView.DataSource = borrowedBooks;  // Bind to your DataGridView
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading borrowed books: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error loading students: {ex.Message}"); // Log error message
             }
         }
 
-        private async Task AddNewStudentAsync(string firstName, string lastName, string email, string password, string phoneNumber, byte[] photo)
-        {
-            try
-            {
-                using (var connection = new MySqlConnection(connectionString))
-                {
-                    await connection.OpenAsync();
-                    var hashedPassword = HashPassword(password); // Implement password hashing as per your preference
 
-                    var query = @"INSERT INTO Students (FirstName, LastName, Email, HashedPassword, PhoneNumber, Photo)
-                          VALUES (@FirstName, @LastName, @Email, @HashedPassword, @PhoneNumber, @Photo)";
-                    using (var command = new MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@FirstName", firstName);
-                        command.Parameters.AddWithValue("@LastName", lastName);
-                        command.Parameters.AddWithValue("@Email", email);
-                        command.Parameters.AddWithValue("@HashedPassword", hashedPassword);
-                        command.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
-                        command.Parameters.AddWithValue("@Photo", photo);
 
-                        await command.ExecuteNonQueryAsync();
-                        MessageBox.Show("Student added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error adding student: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
-        private string HashPassword(string password)
-        {
-            // Implement your hashing logic here
-            return password; // Placeholder
-        }
-        private async Task AddNewBookAsync(string title, string author, string isbn, int publicationYear, string genre, bool isAvailable)
-        {
-            try
-            {
-                using (var connection = new MySqlConnection(connectionString))
-                {
-                    await connection.OpenAsync();
-                    var query = @"INSERT INTO Books (Title, Author, ISBN, PublicationYear, Genre, IsAvailable)
-                          VALUES (@Title, @Author, @ISBN, @PublicationYear, @Genre, @IsAvailable)";
-                    using (var command = new MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@Title", title);
-                        command.Parameters.AddWithValue("@Author", author);
-                        command.Parameters.AddWithValue("@ISBN", isbn);
-                        command.Parameters.AddWithValue("@PublicationYear", publicationYear);
-                        command.Parameters.AddWithValue("@Genre", genre);
-                        command.Parameters.AddWithValue("@IsAvailable", isAvailable);
 
-                        await command.ExecuteNonQueryAsync();
-                        MessageBox.Show("Book added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error adding book: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void showAllStdBtn_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void showAllStdBtn_Click(object sender, EventArgs e){}
 
         private void ShowBorrrwedBookAdmin_Click(object sender, EventArgs e)
         {
@@ -220,9 +103,47 @@ namespace Library
             FormManager.Show(new AdminRemoveStudent());
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e){}
 
+        private void adminpic_Click(object sender, EventArgs e) { }
+
+        private void panel2_Paint(object sender, PaintEventArgs e) { }
+
+        private void iconButton4_(object sender, EventArgs e) { }
+
+        private void SetupDataGridView()
+        {
+            try
+            {
+                adminDataGridView.AutoGenerateColumns = false;
+                adminDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                adminDataGridView.ReadOnly = true; // Set all cells to read-only
+
+                // Add columns if missing
+                AddColumnIfMissing("StudentID", "Student ID");
+                AddColumnIfMissing("FirstName", "First Name");
+                AddColumnIfMissing("LastName", "Last Name");
+                AddColumnIfMissing("Email", "Email");
+                AddColumnIfMissing("PhoneNumber", "Phone Number");
+
+                // Additional columns can be added here if needed
+
+                adminDataGridView.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error setting up DataGridView: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+        private void AddColumnIfMissing(string columnName, string headerText)
+        {
+            if (!adminDataGridView.Columns.Contains(columnName))
+            {
+                adminDataGridView.Columns.Add(columnName, headerText);
+            }
+        }
+
+
     }
 }

@@ -30,8 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminRemoveStudent));
             panel2 = new Panel();
+            pictureBox1 = new PictureBox();
             TerminateMemberBackBtn = new Button();
-            TerminateMemberSearch = new FontAwesome.Sharp.IconButton();
+            TerminateMemberSearchbtn = new FontAwesome.Sharp.IconButton();
             TerminateBtn = new FontAwesome.Sharp.IconButton();
             ReaderID = new TextBox();
             label1 = new Label();
@@ -39,11 +40,10 @@
             panel1 = new Panel();
             label4 = new Label();
             label2 = new Label();
-            pictureBox1 = new PictureBox();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TerminateMembershipAdminPanel).BeginInit();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel2
@@ -51,48 +51,61 @@
             panel2.BackColor = Color.FromArgb(31, 58, 95);
             panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(TerminateMemberBackBtn);
-            panel2.Controls.Add(TerminateMemberSearch);
+            panel2.Controls.Add(TerminateMemberSearchbtn);
             panel2.Controls.Add(TerminateBtn);
             panel2.Controls.Add(ReaderID);
             panel2.Controls.Add(label1);
-            panel2.Location = new Point(7, 43);
+            panel2.Location = new Point(8, 57);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(293, 657);
+            panel2.Size = new Size(335, 876);
             panel2.TabIndex = 18;
             panel2.Paint += panel2_Paint;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.Location = new Point(50, 63);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(229, 267);
+            pictureBox1.TabIndex = 25;
+            pictureBox1.TabStop = false;
             // 
             // TerminateMemberBackBtn
             // 
             TerminateMemberBackBtn.BackColor = Color.White;
             TerminateMemberBackBtn.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TerminateMemberBackBtn.Location = new Point(14, 617);
+            TerminateMemberBackBtn.Location = new Point(16, 823);
+            TerminateMemberBackBtn.Margin = new Padding(3, 4, 3, 4);
             TerminateMemberBackBtn.Name = "TerminateMemberBackBtn";
-            TerminateMemberBackBtn.Size = new Size(75, 23);
+            TerminateMemberBackBtn.Size = new Size(86, 31);
             TerminateMemberBackBtn.TabIndex = 24;
             TerminateMemberBackBtn.Text = "Back";
             TerminateMemberBackBtn.UseVisualStyleBackColor = false;
             // 
-            // TerminateMemberSearch
+            // TerminateMemberSearchbtn
             // 
-            TerminateMemberSearch.BackColor = Color.FromArgb(31, 43, 62);
-            TerminateMemberSearch.Cursor = Cursors.Hand;
-            TerminateMemberSearch.FlatStyle = FlatStyle.Flat;
-            TerminateMemberSearch.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TerminateMemberSearch.ForeColor = Color.White;
-            TerminateMemberSearch.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
-            TerminateMemberSearch.IconColor = Color.White;
-            TerminateMemberSearch.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            TerminateMemberSearch.IconSize = 20;
-            TerminateMemberSearch.ImageAlign = ContentAlignment.MiddleLeft;
-            TerminateMemberSearch.Location = new Point(19, 341);
-            TerminateMemberSearch.Margin = new Padding(3, 2, 3, 2);
-            TerminateMemberSearch.Name = "TerminateMemberSearch";
-            TerminateMemberSearch.Padding = new Padding(1);
-            TerminateMemberSearch.Size = new Size(77, 25);
-            TerminateMemberSearch.TabIndex = 23;
-            TerminateMemberSearch.Text = "Search";
-            TerminateMemberSearch.TextAlign = ContentAlignment.MiddleRight;
-            TerminateMemberSearch.UseVisualStyleBackColor = false;
+            TerminateMemberSearchbtn.BackColor = Color.FromArgb(31, 43, 62);
+            TerminateMemberSearchbtn.Cursor = Cursors.Hand;
+            TerminateMemberSearchbtn.FlatStyle = FlatStyle.Flat;
+            TerminateMemberSearchbtn.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            TerminateMemberSearchbtn.ForeColor = Color.White;
+            TerminateMemberSearchbtn.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            TerminateMemberSearchbtn.IconColor = Color.White;
+            TerminateMemberSearchbtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            TerminateMemberSearchbtn.IconSize = 20;
+            TerminateMemberSearchbtn.ImageAlign = ContentAlignment.MiddleLeft;
+            TerminateMemberSearchbtn.Location = new Point(22, 455);
+            TerminateMemberSearchbtn.Name = "TerminateMemberSearchbtn";
+            TerminateMemberSearchbtn.Padding = new Padding(1);
+            TerminateMemberSearchbtn.Size = new Size(88, 33);
+            TerminateMemberSearchbtn.TabIndex = 23;
+            TerminateMemberSearchbtn.Text = "Search";
+            TerminateMemberSearchbtn.TextAlign = ContentAlignment.MiddleRight;
+            TerminateMemberSearchbtn.UseVisualStyleBackColor = false;
+            TerminateMemberSearchbtn.Click += TerminateMemberSearchbtn_Click;
             // 
             // TerminateBtn
             // 
@@ -103,45 +116,58 @@
             TerminateBtn.IconChar = FontAwesome.Sharp.IconChar.IdBadge;
             TerminateBtn.IconColor = Color.White;
             TerminateBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            TerminateBtn.IconSize = 40;
+            TerminateBtn.IconSize = 44;
             TerminateBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            TerminateBtn.Location = new Point(19, 422);
+            TerminateBtn.Location = new Point(22, 563);
+            TerminateBtn.Margin = new Padding(3, 4, 3, 4);
             TerminateBtn.Name = "TerminateBtn";
-            TerminateBtn.Size = new Size(200, 52);
+            TerminateBtn.Size = new Size(229, 69);
             TerminateBtn.TabIndex = 22;
             TerminateBtn.Text = "Terminate";
             TerminateBtn.UseVisualStyleBackColor = false;
+            TerminateBtn.Click += TerminateBtn_Click;
             // 
             // ReaderID
             // 
             ReaderID.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            ReaderID.Location = new Point(19, 309);
+            ReaderID.Location = new Point(22, 412);
+            ReaderID.Margin = new Padding(3, 4, 3, 4);
             ReaderID.Name = "ReaderID";
-            ReaderID.Size = new Size(202, 21);
+            ReaderID.PlaceholderText = "Enter Reader ID";
+            ReaderID.Size = new Size(230, 24);
             ReaderID.TabIndex = 20;
+            ReaderID.TextAlign = HorizontalAlignment.Center;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(17, 290);
+            label1.Location = new Point(19, 387);
             label1.Name = "label1";
-            label1.Size = new Size(66, 13);
+            label1.Size = new Size(78, 17);
             label1.TabIndex = 19;
             label1.Text = "Reader ID";
             // 
             // TerminateMembershipAdminPanel
             // 
+            TerminateMembershipAdminPanel.AllowUserToAddRows = false;
+            TerminateMembershipAdminPanel.AllowUserToDeleteRows = false;
+            TerminateMembershipAdminPanel.AllowUserToOrderColumns = true;
+            TerminateMembershipAdminPanel.AllowUserToResizeColumns = false;
+            TerminateMembershipAdminPanel.AllowUserToResizeRows = false;
             TerminateMembershipAdminPanel.BackgroundColor = Color.White;
             TerminateMembershipAdminPanel.BorderStyle = BorderStyle.Fixed3D;
             TerminateMembershipAdminPanel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            TerminateMembershipAdminPanel.Location = new Point(307, 43);
+            TerminateMembershipAdminPanel.Location = new Point(351, 57);
+            TerminateMembershipAdminPanel.Margin = new Padding(3, 4, 3, 4);
             TerminateMembershipAdminPanel.Name = "TerminateMembershipAdminPanel";
             TerminateMembershipAdminPanel.RowHeadersWidth = 51;
             TerminateMembershipAdminPanel.RowTemplate.Height = 25;
-            TerminateMembershipAdminPanel.Size = new Size(1083, 661);
+            TerminateMembershipAdminPanel.ScrollBars = ScrollBars.Vertical;
+            TerminateMembershipAdminPanel.Size = new Size(1215, 881);
             TerminateMembershipAdminPanel.TabIndex = 0;
+            TerminateMembershipAdminPanel.CellContentClick += TerminateMembershipAdminPanel_CellContentClick;
             // 
             // panel1
             // 
@@ -150,10 +176,10 @@
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Margin = new Padding(3, 5, 3, 5);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(2, 1, 2, 1);
-            panel1.Size = new Size(1370, 36);
+            panel1.Size = new Size(1566, 48);
             panel1.TabIndex = 21;
             // 
             // label4
@@ -161,9 +187,9 @@
             label4.AutoSize = true;
             label4.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(9, 9);
+            label4.Location = new Point(10, 12);
             label4.Name = "label4";
-            label4.Size = new Size(427, 16);
+            label4.Size = new Size(557, 20);
             label4.TabIndex = 17;
             label4.Text = "Library Management System | Admin Panel | Membership";
             // 
@@ -172,40 +198,31 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(1373, 9);
+            label2.Location = new Point(1569, 12);
             label2.Name = "label2";
-            label2.Size = new Size(15, 15);
+            label2.Size = new Size(19, 20);
             label2.TabIndex = 14;
             label2.Text = "X";
             // 
-            // pictureBox1
-            // 
-            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
-            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Location = new Point(44, 47);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(200, 200);
-            pictureBox1.TabIndex = 25;
-            pictureBox1.TabStop = false;
-            // 
             // AdminRemoveStudent
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(15, 28, 46);
-            ClientSize = new Size(1370, 710);
+            ClientSize = new Size(1566, 947);
             Controls.Add(panel1);
             Controls.Add(TerminateMembershipAdminPanel);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "AdminRemoveStudent";
             Text = "AdminRemoveStudent";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)TerminateMembershipAdminPanel).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -216,7 +233,7 @@
         private Label label1;
         private TextBox ReaderID;
         private FontAwesome.Sharp.IconButton TerminateBtn;
-        private FontAwesome.Sharp.IconButton TerminateMemberSearch;
+        private FontAwesome.Sharp.IconButton TerminateMemberSearchbtn;
         private Button TerminateMemberBackBtn;
         private Panel panel1;
         private Label label4;
