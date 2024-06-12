@@ -16,14 +16,9 @@ namespace Library
         public AdminRemoveStudent()
         {
             InitializeComponent();
-            this.Load += new EventHandler(AdminRemoveStudentForm_Load);
+            this.Load += new EventHandler(AdminRemoveStudent_Load);
             TerminateMemberSearchbtn.Click += new EventHandler(TerminateMemberSearchbtn_Click);
             TerminateBtn.Click += new EventHandler(TerminateBtn_Click);
-        }
-
-        private async void AdminRemoveStudentForm_Load(object sender, EventArgs e)
-        {
-            await LoadStudentsAsync();
         }
 
         private async Task LoadStudentsAsync()
@@ -200,6 +195,11 @@ namespace Library
             FormManager.CloseCurrentForm();
             FormManager.ClearSession();
             FormManager.Show(new adminpanel());
+        }
+
+        private async void AdminRemoveStudent_Load(object sender, EventArgs e){
+
+            await LoadStudentsAsync();
         }
     }
 }

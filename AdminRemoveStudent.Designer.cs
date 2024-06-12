@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminRemoveStudent));
             panel2 = new Panel();
             pictureBox1 = new PictureBox();
-            TerminateMemberBackBtn = new Button();
             TerminateMemberSearchbtn = new FontAwesome.Sharp.IconButton();
             TerminateBtn = new FontAwesome.Sharp.IconButton();
             ReaderID = new TextBox();
@@ -50,7 +49,6 @@
             // 
             panel2.BackColor = Color.FromArgb(31, 58, 95);
             panel2.Controls.Add(pictureBox1);
-            panel2.Controls.Add(TerminateMemberBackBtn);
             panel2.Controls.Add(TerminateMemberSearchbtn);
             panel2.Controls.Add(TerminateBtn);
             panel2.Controls.Add(ReaderID);
@@ -58,7 +56,7 @@
             panel2.Location = new Point(8, 57);
             panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(335, 876);
+            panel2.Size = new Size(335, 835);
             panel2.TabIndex = 18;
             panel2.Paint += panel2_Paint;
             // 
@@ -72,19 +70,6 @@
             pictureBox1.Size = new Size(229, 267);
             pictureBox1.TabIndex = 25;
             pictureBox1.TabStop = false;
-            // 
-            // TerminateMemberBackBtn
-            // 
-            TerminateMemberBackBtn.BackColor = Color.White;
-            TerminateMemberBackBtn.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TerminateMemberBackBtn.Location = new Point(19, 711);
-            TerminateMemberBackBtn.Margin = new Padding(3, 4, 3, 4);
-            TerminateMemberBackBtn.Name = "TerminateMemberBackBtn";
-            TerminateMemberBackBtn.Size = new Size(86, 31);
-            TerminateMemberBackBtn.TabIndex = 24;
-            TerminateMemberBackBtn.Text = "Back";
-            TerminateMemberBackBtn.UseVisualStyleBackColor = false;
-            TerminateMemberBackBtn.Click += TerminateMemberBackBtn_Click;
             // 
             // TerminateMemberSearchbtn
             // 
@@ -166,7 +151,7 @@
             TerminateMembershipAdminPanel.RowHeadersWidth = 51;
             TerminateMembershipAdminPanel.RowTemplate.Height = 25;
             TerminateMembershipAdminPanel.ScrollBars = ScrollBars.Vertical;
-            TerminateMembershipAdminPanel.Size = new Size(1215, 881);
+            TerminateMembershipAdminPanel.Size = new Size(1215, 835);
             TerminateMembershipAdminPanel.TabIndex = 0;
             TerminateMembershipAdminPanel.CellContentClick += TerminateMembershipAdminPanel_CellContentClick;
             // 
@@ -210,7 +195,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(15, 28, 46);
-            ClientSize = new Size(1566, 947);
+            ClientSize = new Size(1566, 892);
             Controls.Add(panel1);
             Controls.Add(TerminateMembershipAdminPanel);
             Controls.Add(panel2);
@@ -219,6 +204,7 @@
             Name = "AdminRemoveStudent";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminRemoveStudent";
+            Load += AdminRemoveStudent_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -236,7 +222,6 @@
         private TextBox ReaderID;
         private FontAwesome.Sharp.IconButton TerminateBtn;
         private FontAwesome.Sharp.IconButton TerminateMemberSearchbtn;
-        private Button TerminateMemberBackBtn;
         private Panel panel1;
         private Label label4;
         private Label label2;

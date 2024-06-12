@@ -25,7 +25,7 @@ namespace Library
             this.Load += adminpanel_Load;
         }
 
-        
+
         private void iconButton3_Click(object? sender, EventArgs? e)
         {
             FormManager.CloseCurrentForm();
@@ -91,7 +91,7 @@ namespace Library
 
 
 
-        private void showAllStdBtn_Click(object sender, EventArgs e){}
+        private void showAllStdBtn_Click(object sender, EventArgs e) { }
 
         private void ShowBorrrwedBookAdmin_Click(object sender, EventArgs e)
         {
@@ -103,7 +103,7 @@ namespace Library
             FormManager.Show(new AdminRemoveStudent());
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e){}
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e) { }
 
         private void adminpic_Click(object sender, EventArgs e) { }
 
@@ -144,6 +144,10 @@ namespace Library
             }
         }
 
-
+        private void CloseAdminPanel_Click(object sender, EventArgs e)
+        {
+            FormManager.ClearSession();
+            Application.Exit();
+        }
     }
 }

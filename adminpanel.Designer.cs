@@ -38,6 +38,7 @@
             panel2 = new Panel();
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
+            CloseAdminPanel = new FontAwesome.Sharp.IconButton();
             label4 = new Label();
             label1 = new Label();
             adminDataGridView = new DataGridView();
@@ -132,10 +133,24 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(204, 203, 200);
+            panel1.Controls.Add(CloseAdminPanel);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label1);
             resources.ApplyResources(panel1, "panel1");
             panel1.Name = "panel1";
+            // 
+            // CloseAdminPanel
+            // 
+            CloseAdminPanel.BackColor = Color.Transparent;
+            resources.ApplyResources(CloseAdminPanel, "CloseAdminPanel");
+            CloseAdminPanel.ForeColor = Color.FromArgb(204, 203, 200);
+            CloseAdminPanel.IconChar = FontAwesome.Sharp.IconChar.TimesCircle;
+            CloseAdminPanel.IconColor = Color.FromArgb(0, 102, 140);
+            CloseAdminPanel.IconFont = FontAwesome.Sharp.IconFont.Regular;
+            CloseAdminPanel.IconSize = 30;
+            CloseAdminPanel.Name = "CloseAdminPanel";
+            CloseAdminPanel.UseVisualStyleBackColor = false;
+            CloseAdminPanel.Click += CloseAdminPanel_Click;
             // 
             // label4
             // 
@@ -200,5 +215,6 @@
         private Label label1;
         private PictureBox pictureBox1;
         private DataGridView adminDataGridView;
+        private FontAwesome.Sharp.IconButton CloseAdminPanel;
     }
 }
