@@ -153,7 +153,6 @@
             // 
             adminDataGridView.AllowUserToAddRows = false;
             adminDataGridView.AllowUserToDeleteRows = false;
-            adminDataGridView.AllowUserToOrderColumns = true;
             adminDataGridView.AllowUserToResizeColumns = false;
             adminDataGridView.AllowUserToResizeRows = false;
             adminDataGridView.BackgroundColor = Color.White;
@@ -161,6 +160,7 @@
             adminDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(adminDataGridView, "adminDataGridView");
             adminDataGridView.Name = "adminDataGridView";
+            adminDataGridView.ReadOnly = true;
             adminDataGridView.RowTemplate.Height = 25;
             // 
             // adminpanel

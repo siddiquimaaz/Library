@@ -77,13 +77,14 @@
             // 
             TerminateMemberBackBtn.BackColor = Color.White;
             TerminateMemberBackBtn.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TerminateMemberBackBtn.Location = new Point(16, 823);
+            TerminateMemberBackBtn.Location = new Point(19, 711);
             TerminateMemberBackBtn.Margin = new Padding(3, 4, 3, 4);
             TerminateMemberBackBtn.Name = "TerminateMemberBackBtn";
             TerminateMemberBackBtn.Size = new Size(86, 31);
             TerminateMemberBackBtn.TabIndex = 24;
             TerminateMemberBackBtn.Text = "Back";
             TerminateMemberBackBtn.UseVisualStyleBackColor = false;
+            TerminateMemberBackBtn.Click += TerminateMemberBackBtn_Click;
             // 
             // TerminateMemberSearchbtn
             // 
@@ -216,6 +217,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "AdminRemoveStudent";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminRemoveStudent";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();

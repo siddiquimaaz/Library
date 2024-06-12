@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -9,6 +11,7 @@ namespace Library
     public partial class AdminRemoveStudent : Form
     {
         string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
+        private readonly string logFilePath = "student_termination_log.txt";
 
         public AdminRemoveStudent()
         {
@@ -134,15 +137,41 @@ namespace Library
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
+                    MessageBox.Show("Database connection opened successfully.", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     foreach (var studentID in studentIDs)
                     {
-                        string sql = "DELETE FROM Students WHERE StudentID = @StudentID";
-                        using (var cmd = new MySqlCommand(sql, connection))
+                        // Check for related records in borrowedbooks table
+                        string checkSql = "SELECT COUNT(*) FROM borrowedbooks WHERE StudentID = @StudentID AND ReturnDate IS NULL";
+                        using (var checkCmd = new MySqlCommand(checkSql, connection))
                         {
-                            cmd.Parameters.AddWithValue("@StudentID", studentID);
-                            await cmd.ExecuteNonQueryAsync();
+                            checkCmd.Parameters.AddWithValue("@StudentID", studentID);
+                            int count = Convert.ToInt32(await checkCmd.ExecuteScalarAsync());
+                            MessageBox.Show($"Checked borrowedbooks for student ID: {studentID}. Count: {count}", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            if (count > 0)
+                            {
+                                // Update ReturnDate for borrowed books
+                                string updateSql = "UPDATE borrowedbooks SET ReturnDate = NOW() WHERE StudentID = @StudentID AND ReturnDate IS NULL";
+                                using (var updateCmd = new MySqlCommand(updateSql, connection))
+                                {
+                                    updateCmd.Parameters.AddWithValue("@StudentID", studentID);
+                                    await updateCmd.ExecuteNonQueryAsync();
+                                    MessageBox.Show($"Updated return date for borrowed books of student ID: {studentID}.", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
+                        }
+
+                        // Delete the student record
+                        string deleteSql = "DELETE FROM Students WHERE StudentID = @StudentID";
+                        using (var deleteCmd = new MySqlCommand(deleteSql, connection))
+                        {
+                            deleteCmd.Parameters.AddWithValue("@StudentID", studentID);
+                            await deleteCmd.ExecuteNonQueryAsync();
+                            MessageBox.Show($"Deleted student ID: {studentID}.", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
+
                     MessageBox.Show("Selected student memberships terminated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await LoadStudentsAsync();
                 }
@@ -153,10 +182,24 @@ namespace Library
             }
         }
 
+
+        private void LogStudentTermination(int studentID)
+        {
+            string logMessage = $"StudentID: {studentID}, Termination Time: {DateTime.Now}";
+            File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
+        }
+
         private void panel3_Paint(object sender, PaintEventArgs e) { }
 
         private void panel2_Paint(object sender, PaintEventArgs e) { }
 
         private void TerminateMembershipAdminPanel_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+
+        private void TerminateMemberBackBtn_Click(object sender, EventArgs e)
+        {
+            FormManager.CloseCurrentForm();
+            FormManager.ClearSession();
+            FormManager.Show(new adminpanel());
+        }
     }
 }
