@@ -38,6 +38,7 @@ namespace Library
             string isbnNo = ISBNNo.Text.Trim();
             int publicationYear = dateTimePicker.Value.Year;
             string genre = Genre.Text.Trim();
+            bool availablity = true;
 
             // Validating the input data
             if (string.IsNullOrEmpty(bookName) || string.IsNullOrEmpty(bookAuthor) || string.IsNullOrEmpty(isbnNo))
@@ -47,7 +48,7 @@ namespace Library
             }
 
             // SQL Insert query
-            string query = "INSERT INTO Books (Title, Author, ISBN, PublicationYear, Genre) VALUES (@Title, @Author, @ISBN, @PublicationYear, @Genre)";
+            string query = "INSERT INTO Books (Title, Author, ISBN, PublicationYear, Genre, IsAvailable) VALUES (@Title, @Author, @ISBN, @PublicationYear, @Genre, @IsAvailable)";
 
             try
             {
@@ -55,26 +56,40 @@ namespace Library
                 {
                     await connection.OpenAsync();
 
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (MySqlTransaction transaction = await connection.BeginTransactionAsync())
                     {
-                        // Adding parameters to prevent SQL injection
-                        command.Parameters.AddWithValue("@Title", bookName);
-                        command.Parameters.AddWithValue("@Author", bookAuthor);
-                        command.Parameters.AddWithValue("@ISBN", isbnNo);
-                        command.Parameters.AddWithValue("@PublicationYear", publicationYear);
-                        command.Parameters.AddWithValue("@Genre", genre);
-
-                        // Executing the query asynchronously
-                        int result = await command.ExecuteNonQueryAsync();
-
-                        // Checking if the insert was successful
-                        if (result > 0)
+                        try
                         {
-                            MessageBox.Show("Book added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            using (MySqlCommand command = new MySqlCommand(query, connection, transaction))
+                            {
+                                // Adding parameters to prevent SQL injection
+                                command.Parameters.AddWithValue("@Title", bookName);
+                                command.Parameters.AddWithValue("@Author", bookAuthor);
+                                command.Parameters.AddWithValue("@ISBN", isbnNo);
+                                command.Parameters.AddWithValue("@PublicationYear", publicationYear);
+                                command.Parameters.AddWithValue("@Genre", genre);
+                                command.Parameters.AddWithValue("@IsAvailable", availablity);
+
+                                // Executing the query asynchronously
+                                int result = await command.ExecuteNonQueryAsync();
+
+                                // Checking if the insert was successful
+                                if (result > 0)
+                                {
+                                    await transaction.CommitAsync();
+                                    MessageBox.Show("Book added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else
+                                {
+                                    await transaction.RollbackAsync();
+                                    MessageBox.Show("Failed to add the book.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Failed to add the book.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            await transaction.RollbackAsync();
+                            throw; // Re-throw the exception to be handled in the outer catch blocks
                         }
                     }
                 }
@@ -96,9 +111,15 @@ namespace Library
             }
         }
 
+
         private void BackBtn_Click(object sender, EventArgs e)
         {
             FormManager.Show(new adminpanel());
+        }
+
+        private void submitBtn_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

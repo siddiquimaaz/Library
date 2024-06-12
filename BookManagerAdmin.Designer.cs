@@ -134,6 +134,7 @@
             submitBtn.TabIndex = 10;
             submitBtn.Text = "Submit";
             submitBtn.UseVisualStyleBackColor = false;
+            submitBtn.Click += submitBtn_Click_1;
             // 
             // dateTimePicker
             // 
