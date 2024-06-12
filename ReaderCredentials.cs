@@ -9,9 +9,6 @@ using System.Windows.Forms;
 using System.Drawing.Text;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
-
 namespace Library
 {
     public partial class ReaderCredentials : Form
@@ -98,10 +95,10 @@ namespace Library
             string readerPhoneNo = reader["PhoneNumber"].ToString();
             byte[] photoBytes = reader["Photo"] as byte[];
 
-            readername.Text = $"{firstName} {lastName}";
-            readerid.Text = readerId;
-            readerphoneno.Text = readerPhoneNo;
-            readeremail.Text = email;
+            readerName.Text = $"{firstName} {lastName}";
+            this.readerId.Text = readerId;
+            this.readerPhoneNo.Text = readerPhoneNo;
+            readerEmail.Text = email;
 
             if (photoBytes != null && photoBytes.Length > 0)
             {
@@ -144,78 +141,11 @@ namespace Library
         }
 
         private async void printIdCard_Click(object? sender, EventArgs? e)
-        {
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-            {
-                saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
-                saveFileDialog.Title = "Save Reader ID Card as PDF";
-                saveFileDialog.FileName = $"ReaderIDCard_{readerid.Text}.pdf";
+        { 
 
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string fileName = saveFileDialog.FileName;
-                    try
-                    {
-                        //await CreatePdfWithStudentInfo(fileName);
-                        MessageBox.Show("PDF created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"An error occurred while creating the PDF: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
         }
        
-        /* private async Task CreatePdfWithStudentInfo(string fileName)
-        {
-            try
-            {
-                await Task.Run(() =>
-                {
-                    using (PdfDocument document = new PdfDocument())
-                    {
-                        PdfPage page = document.AddPage();
-                        XGraphics gfx = XGraphics.FromPdfPage(page);
-                        XFont fontRegular = new XFont("Arial", 12);
-                        XFont fontBold = new XFont("Arial", 20);
-
-                        // Draw the title
-                        gfx.DrawString("Library Card", fontBold, XBrushes.Black,
-                            new XRect(0, 0, page.Width, 50), XStringFormats.TopCenter);
-
-                        // Draw the image
-                        if (readerPicture.Image != null)
-                        {
-                            using (MemoryStream ms = new MemoryStream())
-                            {
-                                readerPicture.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                                XImage xImage = XImage.FromStream(ms);
-                                gfx.DrawImage(xImage, (page.Width - 100) / 2, 60, 100, 100);
-                            }
-                        }
-
-                        // Draw the student information
-                        gfx.DrawString("Name: " + readername.Text, fontRegular, XBrushes.Black,
-                            new XRect(40, 200, page.Width - 80, 20), XStringFormats.TopLeft);
-                        gfx.DrawString("ID: " + readerid.Text, fontRegular, XBrushes.Black,
-                            new XRect(40, 230, page.Width - 80, 20), XStringFormats.TopLeft);
-                        gfx.DrawString("Email: " + readeremail.Text, fontRegular, XBrushes.Black,
-                            new XRect(40, 260, page.Width - 80, 20), XStringFormats.TopLeft);
-                        gfx.DrawString("Phone Number: " + readerphoneno.Text, fontRegular, XBrushes.Black,
-                            new XRect(40, 290, page.Width - 80, 20), XStringFormats.TopLeft);
-
-                        // Save the document
-                        document.Save(fileName);
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred while creating the PDF: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }*/
-
+        
 
 
     }
