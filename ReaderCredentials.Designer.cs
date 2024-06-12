@@ -39,6 +39,8 @@
             printIdCard = new FontAwesome.Sharp.IconButton();
             panel1 = new Panel();
             panel2 = new Panel();
+            printDialog1 = new PrintDialog();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)readerPicture).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -173,6 +175,10 @@
             panel2.Size = new Size(442, 41);
             panel2.TabIndex = 32;
             // 
+            // printDialog1
+            // 
+            printDialog1.UseEXDialog = true;
+            // 
             // ReaderCredentials
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -214,5 +220,7 @@
         private FontAwesome.Sharp.IconButton printIdCard;
         private Panel panel1;
         private Panel panel2;
+        private PrintDialog printDialog1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }

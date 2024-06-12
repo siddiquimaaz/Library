@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Drawing.Text;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Drawing.Printing;
 namespace Library
 {
     public partial class ReaderCredentials : Form
@@ -20,7 +21,11 @@ namespace Library
         public ReaderCredentials()
         {
             InitializeComponent();
-    
+            this.Load += new EventHandler(ReaderCredentials_Load);
+            printIdCard.Click += new EventHandler(printIdCard_Click);
+            printDocument1 = new PrintDocument();
+            printDocument1.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
+
         }
 
         private void label2_Click(object sender, EventArgs e) { }
@@ -141,11 +146,72 @@ namespace Library
         }
 
         private async void printIdCard_Click(object? sender, EventArgs? e)
-        { 
+        {
+            using (PrintDialog printDialog = new PrintDialog())
+            {
+                printDialog.Document = printDocument1;
 
+                if (printDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        printDocument1.Print();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"An error occurred while printing: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
-       
-        
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            try
+            {
+                Graphics g = e.Graphics;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+
+                // Define fonts and colors
+                Font titleFont = new Font("Arial", 18, FontStyle.Bold);
+                Font labelFont = new Font("Arial", 12, FontStyle.Regular);
+                Font infoFont = new Font("Arial", 12, FontStyle.Italic);
+                Brush titleBrush = new SolidBrush(Color.Black);
+                Brush labelBrush = new SolidBrush(Color.DarkBlue);
+                Brush infoBrush = new SolidBrush(Color.DarkGreen);
+
+                // Draw elements
+                g.DrawString("Library ID Card", titleFont, titleBrush, 100, 50);
+
+                g.DrawString("Reader ID:", labelFont, labelBrush, 50, 120);
+                g.DrawString(readerId.Text, infoFont, infoBrush, 200, 120);
+
+                g.DrawString("Name:", labelFont, labelBrush, 50, 160);
+                g.DrawString(readerName.Text, infoFont, infoBrush, 200, 160);
+
+                g.DrawString("Phone No:", labelFont, labelBrush, 50, 200);
+                g.DrawString(readerPhoneNo.Text, infoFont, infoBrush, 200, 200);
+
+                g.DrawString("Email:", labelFont, labelBrush, 50, 240);
+                g.DrawString(readerEmail.Text, infoFont, infoBrush, 200, 240);
+
+                // Draw signature lines
+                g.DrawString(signdash.Text, labelFont, labelBrush, 50, 280);
+                g.DrawString(signlabel.Text, infoFont, infoBrush, 200, 280);
+
+                // Draw reader picture
+                if (readerPicture.Image != null)
+                {
+                    g.DrawImage(readerPicture.Image, 400, 120, 100, 100);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while drawing the ID card: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
 
 
     }
