@@ -171,8 +171,16 @@ namespace Library
 
         private void ReaderReturnBookBtn_Click(object sender, EventArgs e)
         {
-
+            FormManager.Show(new ReaderReturnBook());
         }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            FormManager.ClearSession();
+            Application.Exit();
+        }
+
+        private void HomeStdPic_Click(object sender, EventArgs e){}
     }
 
 

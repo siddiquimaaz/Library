@@ -46,6 +46,7 @@
             label1 = new Label();
             panel2 = new Panel();
             label7 = new Label();
+            label8 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -54,15 +55,15 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(77, 100, 141);
+            panel1.Controls.Add(ISBNNo);
+            panel1.Controls.Add(BookAuthor);
+            panel1.Controls.Add(BooKNameAdmin);
             panel1.Controls.Add(BackBtn);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(submitBtn);
             panel1.Controls.Add(dateTimePicker);
             panel1.Controls.Add(Genre);
-            panel1.Controls.Add(ISBNNo);
-            panel1.Controls.Add(BookAuthor);
-            panel1.Controls.Add(BooKNameAdmin);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
@@ -155,20 +156,22 @@
             // 
             // ISBNNo
             // 
+            ISBNNo.BorderStyle = BorderStyle.FixedSingle;
             ISBNNo.ForeColor = Color.FromArgb(31, 43, 62);
             ISBNNo.Location = new Point(227, 244);
             ISBNNo.Margin = new Padding(3, 4, 3, 4);
             ISBNNo.Name = "ISBNNo";
-            ISBNNo.Size = new Size(171, 27);
+            ISBNNo.Size = new Size(237, 27);
             ISBNNo.TabIndex = 7;
             // 
             // BookAuthor
             // 
+            BookAuthor.BorderStyle = BorderStyle.FixedSingle;
             BookAuthor.ForeColor = Color.FromArgb(31, 43, 62);
             BookAuthor.Location = new Point(227, 205);
             BookAuthor.Margin = new Padding(3, 4, 3, 4);
             BookAuthor.Name = "BookAuthor";
-            BookAuthor.Size = new Size(171, 27);
+            BookAuthor.Size = new Size(237, 27);
             BookAuthor.TabIndex = 6;
             // 
             // BooKNameAdmin
@@ -178,7 +181,7 @@
             BooKNameAdmin.Location = new Point(227, 168);
             BooKNameAdmin.Margin = new Padding(3, 4, 3, 4);
             BooKNameAdmin.Name = "BooKNameAdmin";
-            BooKNameAdmin.Size = new Size(171, 27);
+            BooKNameAdmin.Size = new Size(237, 27);
             BooKNameAdmin.TabIndex = 1;
             // 
             // label5
@@ -239,6 +242,7 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(55, 67, 87);
+            panel2.Controls.Add(label8);
             panel2.Controls.Add(label7);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
@@ -257,6 +261,20 @@
             label7.Size = new Size(617, 20);
             label7.TabIndex = 1;
             label7.Text = "Library Management System | Admin Panel | Book Management";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.BackColor = Color.Transparent;
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.ForeColor = Color.White;
+            label8.ImeMode = ImeMode.NoControl;
+            label8.Location = new Point(1339, 13);
+            label8.Name = "label8";
+            label8.Size = new Size(19, 20);
+            label8.TabIndex = 17;
+            label8.Text = "X";
+            label8.Click += label8_Click;
             // 
             // BookManagerAdmin
             // 
@@ -298,5 +316,6 @@
         private PictureBox pictureBox1;
         private Panel panel2;
         private Label label7;
+        private Label label8;
     }
 }

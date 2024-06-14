@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Library
 {
@@ -10,6 +11,16 @@ namespace Library
         private static Form currentForm;
         private static int currentStudentId;
         private static DateTime membershipExpiration;
+        private static System.Timers.Timer inactivityTimer;
+        private static DateTime lastActivityTime;
+        private const int InactivityLimitMinutes = 2; // Inactivity limit in minutes for testing purposes
+        private const int MembershipExpirationDays = 1; // Membership expiration duration in days for testing purposes
+
+        static FormManager()
+        {
+            inactivityTimer = new System.Timers.Timer(60000); // Check every minute
+            inactivityTimer.Elapsed += OnInactivityCheck;
+        }
 
         public static void Show(Form newForm)
         {
@@ -21,6 +32,7 @@ namespace Library
             currentForm = newForm;
             currentForm.FormClosed += (sender, e) => currentForm = null;
             newForm.Show();
+            ResetInactivityTimer();
         }
 
         public static void CloseCurrentForm()
@@ -36,8 +48,10 @@ namespace Library
         public static void SetSession(int studentId, DateTime expirationDate)
         {
             currentStudentId = studentId;
-            membershipExpiration = expirationDate;
+            membershipExpiration = expirationDate.AddMinutes(InactivityLimitMinutes); // Set membership expiration with inactivity limit
             StartExpirationCheck();
+            StartInactivityTimer();
+            ResetInactivityTimer();
         }
 
         public static bool IsSessionActive()
@@ -48,7 +62,7 @@ namespace Library
         public static bool IsMembershipExpiring(int daysBeforeExpiration)
         {
             TimeSpan remainingTime = membershipExpiration - DateTime.Now;
-            return remainingTime.TotalMinutes <= daysBeforeExpiration && remainingTime.TotalMinutes >= 0;
+            return remainingTime.TotalDays <= daysBeforeExpiration && remainingTime.TotalDays >= 0;
         }
 
         public static void NotifyExpiration(int minutesBeforeExpiration)
@@ -63,6 +77,7 @@ namespace Library
         {
             currentStudentId = 0;
             membershipExpiration = DateTime.MinValue;
+            StopInactivityTimer();
         }
 
         private static async void StartExpirationCheck()
@@ -84,6 +99,37 @@ namespace Library
                     NotifyExpiration(1); // Notify 1 minute before expiration for testing purposes
                 }
             }
+        }
+
+        private static void StartInactivityTimer()
+        {
+            inactivityTimer.Start();
+        }
+
+        private static void StopInactivityTimer()
+        {
+            inactivityTimer.Stop();
+        }
+
+        private static void ResetInactivityTimer()
+        {
+            lastActivityTime = DateTime.Now;
+        }
+
+        private static void OnInactivityCheck(object sender, ElapsedEventArgs e)
+        {
+            if ((DateTime.Now - lastActivityTime).TotalMinutes >= InactivityLimitMinutes)
+            {
+                MessageBox.Show("You have been inactive for too long. Session will be terminated.", "Session Expired", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CloseAllForms();
+                ClearSession();
+                inactivityTimer.Stop();
+            }
+        }
+
+        public static void RecordUserActivity()
+        {
+            ResetInactivityTimer();
         }
 
         private static async Task RemoveUserFromDatabaseAsync()

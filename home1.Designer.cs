@@ -111,7 +111,7 @@
             HomeStdPic.BackColor = Color.Transparent;
             HomeStdPic.ErrorImage = (Image)resources.GetObject("HomeStdPic.ErrorImage");
             HomeStdPic.InitialImage = null;
-            HomeStdPic.Location = new Point(755, 133);
+            HomeStdPic.Location = new Point(786, 133);
             HomeStdPic.Name = "HomeStdPic";
             HomeStdPic.Size = new Size(137, 133);
             HomeStdPic.SizeMode = PictureBoxSizeMode.Zoom;
@@ -119,11 +119,12 @@
             HomeStdPic.TabStop = false;
             HomeStdPic.Visible = false;
             HomeStdPic.WaitOnLoad = true;
+            HomeStdPic.Click += HomeStdPic_Click;
             // 
             // HomeStdNameLabel
             // 
             HomeStdNameLabel.AutoSize = true;
-            HomeStdNameLabel.Location = new Point(758, 253);
+            HomeStdNameLabel.Location = new Point(792, 285);
             HomeStdNameLabel.Name = "HomeStdNameLabel";
             HomeStdNameLabel.Size = new Size(0, 20);
             HomeStdNameLabel.TabIndex = 9;
@@ -224,13 +225,14 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = Color.White;
+            label4.ForeColor = Color.FromArgb(0, 102, 140);
             label4.ImeMode = ImeMode.NoControl;
-            label4.Location = new Point(1569, 12);
+            label4.Location = new Point(1613, 12);
             label4.Name = "label4";
             label4.Size = new Size(19, 20);
             label4.TabIndex = 14;
             label4.Text = "X";
+            label4.Click += label4_Click;
             // 
             // pictureBox1
             // 

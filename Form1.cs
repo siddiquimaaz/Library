@@ -146,5 +146,11 @@ namespace Library
         private void label3_Click(object sender, EventArgs e) { }
 
         private void label2_Click(object sender, EventArgs e) { }
+
+        private void LoginCloseBtn_Click(object sender, EventArgs e)
+        {
+            FormManager.ClearSession();
+            Application.Exit();
+        }
     }
 }

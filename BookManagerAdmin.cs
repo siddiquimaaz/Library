@@ -20,15 +20,9 @@ namespace Library
             submitBtn.Click += new EventHandler(submitBtn_Click); // Correct event handler assignment
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
 
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void pictureBox1_Click(object sender, EventArgs e) { }
 
         private async void submitBtn_Click(object sender, EventArgs e)
         {
@@ -120,6 +114,11 @@ namespace Library
         private void submitBtn_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
