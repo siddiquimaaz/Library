@@ -188,10 +188,10 @@ namespace Library
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
                         {
                             await Task.Run(() => adapter.Fill(dt));
-                            booksView.Invoke(new Action(() =>
+                            booksView.Invoke(new Action(async () =>
                             {
                                 booksView.DataSource = dt;
-                                SetupDataGridView();
+                                await SetupDataGridViewAsync();
                                 UpdateCheckBoxes();
                             }));
                         }
@@ -220,7 +220,7 @@ namespace Library
                             await Task.Run(() => adapter.Fill(dt));
                             books = ConvertDataTableToList(dt);
                             booksView.DataSource = books;
-                            SetupDataGridView();
+                            await SetupDataGridViewAsync();
 
                             // Update availability status concurrently
                             await UpdateAvailabilityStatusConcurrently();
@@ -253,29 +253,11 @@ namespace Library
             return list;
         }
 
-        private async Task UpdateAvailabilityStatusConcurrently()
+
+        private async Task SetupDataGridViewAsync()
         {
             try
             {
-                var tasks = books.Select(book => Task.Run(() =>
-                {
-                    book.IsAvailable = GetBookAvailabilityFromDatabase(book.BookID);
-                })).ToArray();
-
-                await Task.WhenAll(tasks);
-                booksView.Invoke(new Action(() => booksView.Refresh()));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to update availability status: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void SetupDataGridView()
-        {
-            try
-            {
-
                 booksView.AutoGenerateColumns = false;
                 booksView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 booksView.ReadOnly = false; // Allow editing for checkboxes
@@ -293,7 +275,8 @@ namespace Library
                 booksView.Columns["PublicationYear"].ReadOnly = true;
                 booksView.Columns["Genre"].ReadOnly = true;
                 booksView.Columns["IsAvailable"].ReadOnly = false; // Allow editing for this column only
-                UpdateAvailabilityStatusConcurrently();
+
+                await UpdateAvailabilityStatusConcurrently(); // Ensure availability is updated before displaying
                 booksView.Refresh();
             }
             catch (Exception ex)
@@ -302,7 +285,24 @@ namespace Library
             }
         }
 
+        private async Task UpdateAvailabilityStatusConcurrently()
+        {
+            try
+            {
+                var tasks = books.Select(book => Task.Run(() =>
+                {
+                    book.IsAvailable = GetBookAvailabilityFromDatabase(book.BookID);
+                })).ToArray();
 
+                await Task.WhenAll(tasks);
+                UpdateCheckBoxes(); // Ensure checkboxes are updated after fetching availability
+                booksView.Invoke(new Action(() => booksView.Refresh()));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to update availability status: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void AddColumnIfMissing(string columnName, string headerText, string dataPropertyName = null)
         {
@@ -332,6 +332,7 @@ namespace Library
                 booksView.Columns.Add(checkBoxColumn);
             }
         }
+
         private void UpdateCheckBoxes()
         {
             try
@@ -344,7 +345,7 @@ namespace Library
                         if (chkCell != null)
                         {
                             chkCell.Value = book.IsAvailable;
-                            chkCell.ReadOnly = !book.IsAvailable;
+                            chkCell.ReadOnly = !book.IsAvailable; // Set to read-only if not available
                         }
                     }
                 }
@@ -354,6 +355,7 @@ namespace Library
                 MessageBox.Show($"Failed to update checkboxes: {ex.Message}", "Checkbox Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void booksView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -365,7 +367,6 @@ namespace Library
 
                     if (cell.ReadOnly)
                     {
-                        
                         MessageBox.Show("This book is currently not available and cannot be changed.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -405,35 +406,6 @@ namespace Library
             }
         }
 
-        private void UpdateAvailabilityStatus()
-        {
-            try
-            {
-                foreach (DataGridViewRow row in booksView.Rows)
-                {
-                    if (row.DataBoundItem is Book book)
-                    {
-                        // Retrieve availability status from the database
-                        bool isAvailable = GetBookAvailabilityFromDatabase(book.BookID);
-
-                        // Update the IsAvailable property of the book
-                        book.IsAvailable = isAvailable;
-
-                        DataGridViewCheckBoxCell chkCell = row.Cells["IsAvailable"] as DataGridViewCheckBoxCell;
-                        if (chkCell != null)
-                        {
-                            chkCell.Value = isAvailable;
-                            chkCell.ReadOnly = !isAvailable; // Only make the cell read-only if the book is not available
-                            chkCell.Value = !isAvailable; // Check the checkbox if the book is not available
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to update availability status: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
 
 
@@ -489,41 +461,60 @@ namespace Library
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
-
-                    string checkAvailabilityQuery = "SELECT COUNT(*) FROM BorrowedBooks WHERE BookID = @BookID";
-                    using (var checkCmd = new MySqlCommand(checkAvailabilityQuery, connection))
+                    using (var transaction = await connection.BeginTransactionAsync())
                     {
-                        checkCmd.Parameters.AddWithValue("@BookID", bookId);
-                        int count = Convert.ToInt32(await checkCmd.ExecuteScalarAsync());
-                        if (count > 0)
+                        try
                         {
-                            MessageBox.Show($"Book ID {bookId} is already borrowed.", "Borrow Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            // Check if the book is already borrowed
+                            string checkAvailabilityQuery = "SELECT COUNT(*) FROM BorrowedBooks WHERE BookID = @BookID AND ReturnedDate IS NULL";
+                            using (var checkCmd = new MySqlCommand(checkAvailabilityQuery, connection, transaction))
+                            {
+                                checkCmd.Parameters.AddWithValue("@BookID", bookId);
+                                int count = Convert.ToInt32(await checkCmd.ExecuteScalarAsync());
+                                if (count > 0)
+                                {
+                                    MessageBox.Show($"Book ID {bookId} is already borrowed.", "Borrow Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return false;
+                                }
+                            }
+
+                            // Insert a new record into BorrowedBooks
+                            string borrowQuery = "INSERT INTO BorrowedBooks (StudentID, BookID, DateBorrowed) VALUES (@StudentID, @BookID, @DateBorrowed)";
+                            using (var borrowCmd = new MySqlCommand(borrowQuery, connection, transaction))
+                            {
+                                borrowCmd.Parameters.AddWithValue("@StudentID", currentStudentId);
+                                borrowCmd.Parameters.AddWithValue("@BookID", bookId);
+                                borrowCmd.Parameters.AddWithValue("@DateBorrowed", DateTime.Now);
+
+                                await borrowCmd.ExecuteNonQueryAsync();
+                            }
+
+                            // Update the Books table to mark the book as unavailable
+                            string updateBooksQuery = "UPDATE Books SET IsAvailable = FALSE WHERE BookID = @BookID";
+                            using (var updateCmd = new MySqlCommand(updateBooksQuery, connection, transaction))
+                            {
+                                updateCmd.Parameters.AddWithValue("@BookID", bookId);
+                                await updateCmd.ExecuteNonQueryAsync();
+                            }
+
+                            await transaction.CommitAsync();
+                            return true;
+                        }
+                        catch (Exception ex)
+                        {
+                            await transaction.RollbackAsync();
+                            MessageBox.Show($"Error borrowing book ID {bookId}: {ex.Message}", "Borrow Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return false;
                         }
                     }
-
-                    string borrowQuery = "INSERT INTO BorrowedBooks (StudentID, BookID, DateBorrowed) VALUES (@StudentID, @BookID, @DateBorrowed)";
-                    using (var borrowCmd = new MySqlCommand(borrowQuery, connection))
-                    {
-                        borrowCmd.Parameters.AddWithValue("@StudentID", currentStudentId);
-                        borrowCmd.Parameters.AddWithValue("@BookID", bookId);
-                        borrowCmd.Parameters.AddWithValue("@DateBorrowed", DateTime.Now);
-
-                        await borrowCmd.ExecuteNonQueryAsync();
-                    }
                 }
-                return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error borrowing book ID {bookId}: {ex.Message}", "Borrow Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error connecting to the database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
-
-
-
-
 
         private void DisplayStudentInfo(MySqlDataReader reader)
         {
