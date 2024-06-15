@@ -307,7 +307,7 @@
             ReaderBackBtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
             ReaderBackBtn.IconSize = 20;
             ReaderBackBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            ReaderBackBtn.Location = new Point(71, 163);
+            ReaderBackBtn.Location = new Point(71, 628);
             ReaderBackBtn.Name = "ReaderBackBtn";
             ReaderBackBtn.Size = new Size(84, 35);
             ReaderBackBtn.TabIndex = 40;

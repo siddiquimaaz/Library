@@ -62,13 +62,13 @@ namespace Library
             }
         }
 
-        private void ReaderBackBtn_Click(object sender, EventArgs e)
+        private void ReaderBackBtn_Click(object? sender, EventArgs? e)
         {
             FormManager.CloseCurrentForm();
             FormManager.Show(new home());
         }
 
-        private void ReadersDetailsCancelBtn_Click(object sender, EventArgs e)
+        private void ReadersDetailsCancelBtn_Click(object? sender, EventArgs? e)
         {
             FirstNameTxt.Text = string.Empty;
             LastNameTxt.Text = string.Empty;
@@ -77,7 +77,7 @@ namespace Library
             ReWritePasswordTxt.Text = string.Empty;
         }
 
-        private void BrowseBtn_Click(object sender, EventArgs e)
+        private void BrowseBtn_Click(object? sender, EventArgs? e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -117,7 +117,7 @@ namespace Library
             }
         }
 
-        private async void ReadersDetailsUpdateBtn_Click(object sender, EventArgs e)
+        private async void ReadersDetailsUpdateBtn_Click(object? sender, EventArgs? e)
         {
             // Prompt user to enter the current password
             string enteredPassword = PromptForPassword();
@@ -149,8 +149,8 @@ namespace Library
                 passwordForm.Height = 150;
 
                 Label label = new Label() { Left = 50, Top = 20, Text = "Current Password", Width = 300 };
-                TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 300, PasswordChar = '*' };
-                Button confirmation = new Button() { Text = "Ok", Left = 250, Width = 100, Top = 70 };
+                TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 280, PasswordChar = '*' };
+                Button confirmation = new Button() { Text = "Ok", Left = 250, Width = 100, Top = 100 };
 
                 confirmation.Click += (sender, e) =>
                 {

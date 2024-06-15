@@ -147,7 +147,7 @@
             printIdCard.IconColor = Color.WhiteSmoke;
             printIdCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
             printIdCard.IconSize = 20;
-            printIdCard.Location = new Point(392, 133);
+            printIdCard.Location = new Point(374, 116);
             printIdCard.Margin = new Padding(3, 4, 3, 4);
             printIdCard.Name = "printIdCard";
             printIdCard.Size = new Size(34, 40);
