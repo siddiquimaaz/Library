@@ -222,11 +222,6 @@ namespace Library
             }
         }
 
-        private void BorrowBookBackBtn_Click(object sender, EventArgs e)
-        {
-            FormManager.Show(new adminpanel());
-        }
-
         private void BorrowedBookAdminPanel_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -235,6 +230,16 @@ namespace Library
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void AdminBorrowedBackBtn_Click(object sender, EventArgs e)
+        {
+            FormManager.Show(new adminpanel());
+        }
+
+        private void AdminBorrowedBookCloseLabel_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 }

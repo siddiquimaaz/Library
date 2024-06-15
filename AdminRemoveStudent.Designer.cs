@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminRemoveStudent));
             panel2 = new Panel();
+            AdminRemoveReaderBackBtn = new FontAwesome.Sharp.IconButton();
             pictureBox1 = new PictureBox();
             TerminateMemberSearchbtn = new FontAwesome.Sharp.IconButton();
             TerminateBtn = new FontAwesome.Sharp.IconButton();
@@ -39,6 +40,7 @@
             panel1 = new Panel();
             label4 = new Label();
             label2 = new Label();
+            AdminRemoveStudentCloseLabel = new Label();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TerminateMembershipAdminPanel).BeginInit();
@@ -48,6 +50,7 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(31, 58, 95);
+            panel2.Controls.Add(AdminRemoveReaderBackBtn);
             panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(TerminateMemberSearchbtn);
             panel2.Controls.Add(TerminateBtn);
@@ -59,6 +62,26 @@
             panel2.Size = new Size(335, 835);
             panel2.TabIndex = 18;
             panel2.Paint += panel2_Paint;
+            // 
+            // AdminRemoveReaderBackBtn
+            // 
+            AdminRemoveReaderBackBtn.BackColor = Color.FromArgb(31, 43, 62);
+            AdminRemoveReaderBackBtn.FlatStyle = FlatStyle.Popup;
+            AdminRemoveReaderBackBtn.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            AdminRemoveReaderBackBtn.ForeColor = Color.White;
+            AdminRemoveReaderBackBtn.IconChar = FontAwesome.Sharp.IconChar.Backspace;
+            AdminRemoveReaderBackBtn.IconColor = Color.White;
+            AdminRemoveReaderBackBtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            AdminRemoveReaderBackBtn.IconSize = 20;
+            AdminRemoveReaderBackBtn.ImageAlign = ContentAlignment.MiddleLeft;
+            AdminRemoveReaderBackBtn.Location = new Point(19, 671);
+            AdminRemoveReaderBackBtn.Name = "AdminRemoveReaderBackBtn";
+            AdminRemoveReaderBackBtn.Size = new Size(84, 35);
+            AdminRemoveReaderBackBtn.TabIndex = 42;
+            AdminRemoveReaderBackBtn.Text = "Back";
+            AdminRemoveReaderBackBtn.TextAlign = ContentAlignment.MiddleRight;
+            AdminRemoveReaderBackBtn.UseVisualStyleBackColor = false;
+            AdminRemoveReaderBackBtn.Click += AdminRemoveReaderBackBtn_Click;
             // 
             // pictureBox1
             // 
@@ -158,6 +181,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(55, 67, 87);
+            panel1.Controls.Add(AdminRemoveStudentCloseLabel);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
@@ -189,6 +213,20 @@
             label2.Size = new Size(19, 20);
             label2.TabIndex = 14;
             label2.Text = "X";
+            // 
+            // AdminRemoveStudentCloseLabel
+            // 
+            AdminRemoveStudentCloseLabel.AutoSize = true;
+            AdminRemoveStudentCloseLabel.BackColor = Color.Transparent;
+            AdminRemoveStudentCloseLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            AdminRemoveStudentCloseLabel.ForeColor = Color.FromArgb(255, 254, 251);
+            AdminRemoveStudentCloseLabel.ImeMode = ImeMode.NoControl;
+            AdminRemoveStudentCloseLabel.Location = new Point(1535, 12);
+            AdminRemoveStudentCloseLabel.Name = "AdminRemoveStudentCloseLabel";
+            AdminRemoveStudentCloseLabel.Size = new Size(19, 20);
+            AdminRemoveStudentCloseLabel.TabIndex = 43;
+            AdminRemoveStudentCloseLabel.Text = "X";
+            AdminRemoveStudentCloseLabel.Click += AdminRemoveStudentCloseLabel_Click;
             // 
             // AdminRemoveStudent
             // 
@@ -226,5 +264,7 @@
         private Label label4;
         private Label label2;
         private PictureBox pictureBox1;
+        private FontAwesome.Sharp.IconButton AdminRemoveReaderBackBtn;
+        private Label AdminRemoveStudentCloseLabel;
     }
 }

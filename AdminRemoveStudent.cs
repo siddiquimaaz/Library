@@ -193,13 +193,24 @@ namespace Library
         private void TerminateMemberBackBtn_Click(object sender, EventArgs e)
         {
             FormManager.CloseCurrentForm();
-            FormManager.ClearSession();
             FormManager.Show(new adminpanel());
         }
 
-        private async void AdminRemoveStudent_Load(object sender, EventArgs e){
+        private async void AdminRemoveStudent_Load(object sender, EventArgs e)
+        {
 
             await LoadStudentsAsync();
+        }
+
+        private void AdminRemoveReaderBackBtn_Click(object sender, EventArgs e)
+        {
+            FormManager.CloseCurrentForm();
+            FormManager.Show(new adminpanel());
+        }
+
+        private void AdminRemoveStudentCloseLabel_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 }

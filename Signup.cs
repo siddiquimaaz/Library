@@ -40,13 +40,7 @@ namespace Library
             userManager = new UserManager(connectionString);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            FormManager.CloseCurrentForm();
-            FormManager.Show(new Form1());
-        }
-
-        private async void button1_Click(object? sender, EventArgs? e)
+        private async void SignUpBtn_Click(object sender, EventArgs e)
         {
             string firstName = firstnametxt.Text;
             string lastName = lastnametxt.Text;
@@ -160,6 +154,17 @@ namespace Library
         private void Signup_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void ReaderBackBtn_Click(object sender, EventArgs e)
+        {
+            FormManager.CloseCurrentForm();
+            FormManager.Show(new Form1());
+        }
+
+        private void SignUpCloseLabel_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 }

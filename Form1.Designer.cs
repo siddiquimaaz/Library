@@ -55,7 +55,7 @@
             text1.BackColor = Color.FromArgb(224, 224, 224);
             text1.Font = new Font("Verdana", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
             text1.ForeColor = Color.FromArgb(0, 0, 0, 7);
-            text1.Location = new Point(946, 226);
+            text1.Location = new Point(953, 237);
             text1.Margin = new Padding(3, 4, 3, 4);
             text1.Name = "text1";
             text1.PlaceholderText = "Enter username";
@@ -68,7 +68,7 @@
             text2.BackColor = Color.FromArgb(224, 224, 224);
             text2.Font = new Font("Verdana", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
             text2.ForeColor = Color.FromArgb(0, 0, 0, 7);
-            text2.Location = new Point(946, 290);
+            text2.Location = new Point(953, 284);
             text2.Margin = new Padding(2, 10, 2, 3);
             text2.Name = "text2";
             text2.PlaceholderText = "Enter your Password";
@@ -83,7 +83,7 @@
             userName.BackColor = Color.Transparent;
             userName.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             userName.ForeColor = Color.White;
-            userName.Location = new Point(946, 205);
+            userName.Location = new Point(854, 243);
             userName.Name = "userName";
             userName.Size = new Size(92, 17);
             userName.TabIndex = 2;
@@ -95,7 +95,7 @@
             Pass.BackColor = Color.Transparent;
             Pass.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             Pass.ForeColor = Color.White;
-            Pass.Location = new Point(946, 272);
+            Pass.Location = new Point(854, 290);
             Pass.Name = "Pass";
             Pass.Size = new Size(81, 17);
             Pass.TabIndex = 3;
@@ -106,10 +106,10 @@
             Login.BackColor = Color.FromArgb(55, 67, 87);
             Login.Font = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point);
             Login.ForeColor = Color.White;
-            Login.Location = new Point(946, 351);
+            Login.Location = new Point(982, 372);
             Login.Margin = new Padding(3, 4, 3, 4);
             Login.Name = "Login";
-            Login.Size = new Size(231, 48);
+            Login.Size = new Size(170, 46);
             Login.TabIndex = 6;
             Login.Text = "Login";
             Login.UseVisualStyleBackColor = false;
@@ -121,7 +121,7 @@
             hehe.BackColor = Color.Transparent;
             hehe.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             hehe.ForeColor = Color.White;
-            hehe.Location = new Point(946, 446);
+            hehe.Location = new Point(953, 479);
             hehe.Name = "hehe";
             hehe.Size = new Size(258, 17);
             hehe.TabIndex = 7;
@@ -133,7 +133,7 @@
             sign.FlatStyle = FlatStyle.Popup;
             sign.Font = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point);
             sign.ForeColor = Color.FromArgb(31, 58, 95);
-            sign.Location = new Point(946, 467);
+            sign.Location = new Point(961, 518);
             sign.Margin = new Padding(3, 4, 3, 4);
             sign.Name = "sign";
             sign.Size = new Size(233, 53);
@@ -148,7 +148,7 @@
             checkBox1.BackColor = Color.Transparent;
             checkBox1.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             checkBox1.ForeColor = Color.White;
-            checkBox1.Location = new Point(946, 320);
+            checkBox1.Location = new Point(1136, 314);
             checkBox1.Margin = new Padding(3, 1, 3, 1);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(141, 21);
@@ -164,7 +164,7 @@
             checkadmin.BackColor = Color.Transparent;
             checkadmin.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             checkadmin.ForeColor = Color.White;
-            checkadmin.Location = new Point(946, 409);
+            checkadmin.Location = new Point(1030, 346);
             checkadmin.Margin = new Padding(3, 1, 3, 1);
             checkadmin.Name = "checkadmin";
             checkadmin.Size = new Size(74, 21);

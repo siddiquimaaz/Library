@@ -45,6 +45,7 @@
             label2 = new Label();
             panel2 = new Panel();
             pictureBox1 = new PictureBox();
+            AddBookByReaderCloseLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)booksView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)addbookstdimage).BeginInit();
             panel1.SuspendLayout();
@@ -224,6 +225,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(204, 203, 200);
+            panel1.Controls.Add(AddBookByReaderCloseLabel);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
@@ -290,6 +292,20 @@
             pictureBox1.TabIndex = 20;
             pictureBox1.TabStop = false;
             // 
+            // AddBookByReaderCloseLabel
+            // 
+            AddBookByReaderCloseLabel.AutoSize = true;
+            AddBookByReaderCloseLabel.BackColor = Color.Transparent;
+            AddBookByReaderCloseLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            AddBookByReaderCloseLabel.ForeColor = Color.FromArgb(0, 102, 140);
+            AddBookByReaderCloseLabel.ImeMode = ImeMode.NoControl;
+            AddBookByReaderCloseLabel.Location = new Point(1535, 11);
+            AddBookByReaderCloseLabel.Name = "AddBookByReaderCloseLabel";
+            AddBookByReaderCloseLabel.Size = new Size(19, 20);
+            AddBookByReaderCloseLabel.TabIndex = 20;
+            AddBookByReaderCloseLabel.Text = "X";
+            AddBookByReaderCloseLabel.Click += AddBookByReaderCloseLabel_Click;
+            // 
             // AddBook
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -333,5 +349,6 @@
         private Label label2;
         private Panel panel2;
         private PictureBox pictureBox1;
+        private Label AddBookByReaderCloseLabel;
     }
 }

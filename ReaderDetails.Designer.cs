@@ -56,6 +56,7 @@
             ReaderPic = new PictureBox();
             MemberShipDateTimePicker = new DateTimePicker();
             label11 = new Label();
+            ReaderDetailsLabel = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ReaderPic).BeginInit();
@@ -64,6 +65,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(204, 203, 200);
+            panel1.Controls.Add(ReaderDetailsLabel);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
@@ -405,6 +407,19 @@
             label11.TabIndex = 47;
             label11.Text = "Publication Date:";
             // 
+            // ReaderDetailsLabel
+            // 
+            ReaderDetailsLabel.AutoSize = true;
+            ReaderDetailsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            ReaderDetailsLabel.ForeColor = Color.FromArgb(0, 102, 140);
+            ReaderDetailsLabel.ImeMode = ImeMode.NoControl;
+            ReaderDetailsLabel.Location = new Point(1382, 12);
+            ReaderDetailsLabel.Name = "ReaderDetailsLabel";
+            ReaderDetailsLabel.Size = new Size(19, 20);
+            ReaderDetailsLabel.TabIndex = 49;
+            ReaderDetailsLabel.Text = "X";
+            ReaderDetailsLabel.Click += ReaderDetailsLabel_Click;
+            // 
             // ReaderDetails
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -475,5 +490,6 @@
         private PictureBox ReaderPic;
         private DateTimePicker MemberShipDateTimePicker;
         private Label label11;
+        private Label ReaderDetailsLabel;
     }
 }

@@ -557,10 +557,12 @@ namespace Library
             return bitmap;
         }
 
-        private void booksView_CellContentClick(object sender, DataGridViewCellEventArgs e){}
-        private void booktitltxt_TextChanged(object sender, EventArgs e){}
+        private void booksView_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+        private void booktitltxt_TextChanged(object sender, EventArgs e) { }
 
-        
-
+        private void AddBookByReaderCloseLabel_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+        }
     }
 }
