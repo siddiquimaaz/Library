@@ -151,5 +151,15 @@ namespace Library
         {
             panel1.BackColor = Color.FromArgb(200, 255, 255, 255);
         }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Signup_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

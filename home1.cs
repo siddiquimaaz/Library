@@ -166,7 +166,8 @@ namespace Library
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            FormManager.CloseCurrentForm();
+            FormManager.Show(new ReaderDetails());
         }
 
         private void ReaderReturnBookBtn_Click(object sender, EventArgs e)

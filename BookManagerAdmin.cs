@@ -111,10 +111,7 @@ namespace Library
             FormManager.Show(new adminpanel());
         }
 
-        private void submitBtn_Click_1(object sender, EventArgs e)
-        {
-
-        }
+        private void submitBtn_Click_1(object sender, EventArgs e){}
 
         private void label8_Click(object sender, EventArgs e)
         {

@@ -292,6 +292,7 @@
             label9.Size = new Size(152, 17);
             label9.TabIndex = 20;
             label9.Text = "Please Select Image!";
+            label9.Click += label9_Click;
             // 
             // firstnametxt
             // 
@@ -397,6 +398,7 @@
             Name = "Signup";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Back";
+            Load += Signup_Load;
             ((System.ComponentModel.ISupportInitialize)addpic).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
