@@ -14,8 +14,9 @@ namespace Library
 {
     public partial class ReaderCredentials : Form
     {
-        private string connectionString = "server=127.0.0.1;port=3306;database=LMS;uid=root;pwd=maazsiddiqui12;";
-        
+        //private string connectionString = "server=127.0.0.1;port=3306;database=LMS;uid=root;pwd=maazsiddiqui12;";
+        string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
+
 
 
         public ReaderCredentials()
@@ -211,8 +212,9 @@ namespace Library
             }
         }
 
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
 
-
-
+        }
     }
 }

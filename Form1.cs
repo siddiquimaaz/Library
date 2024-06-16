@@ -4,13 +4,16 @@ using MySql.Data.MySqlClient;
 using BCrypt.Net;
 using System.Threading.Tasks;
 using System.Data;
+using Org.BouncyCastle.Bcpg.Sig;
 
 namespace Library
 {
     public partial class Form1 : Form
     {
-        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
-
+        //string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
+       /*Testing remote connection*/
+        string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
+       
         public Form1()
         {
             InitializeComponent();

@@ -15,7 +15,9 @@ namespace Library
 {
     public partial class AddBook : Form
     {
-        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
+        string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
+
+        //string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
         private int currentStudentId;  // Field to store the current student's ID
         private List<Book> books = new List<Book>();
 

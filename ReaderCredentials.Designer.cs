@@ -174,6 +174,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(442, 41);
             panel2.TabIndex = 32;
+            panel2.Paint += panel2_Paint;
             // 
             // printDialog1
             // 

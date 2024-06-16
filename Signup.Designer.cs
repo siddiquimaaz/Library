@@ -50,12 +50,12 @@
             firstnametxt = new TextBox();
             panel1 = new Panel();
             panel2 = new Panel();
+            SignUpCloseLabel = new Label();
             label1 = new Label();
             label10 = new Label();
             pictureBox1 = new PictureBox();
             SignUpBtn = new FontAwesome.Sharp.IconButton();
             ReaderBackBtn = new FontAwesome.Sharp.IconButton();
-            SignUpCloseLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)addpic).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -302,6 +302,20 @@
             panel2.Size = new Size(1370, 36);
             panel2.TabIndex = 22;
             // 
+            // SignUpCloseLabel
+            // 
+            SignUpCloseLabel.AutoSize = true;
+            SignUpCloseLabel.BackColor = Color.Transparent;
+            SignUpCloseLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            SignUpCloseLabel.ForeColor = Color.FromArgb(224, 224, 224);
+            SignUpCloseLabel.ImeMode = ImeMode.NoControl;
+            SignUpCloseLabel.Location = new Point(1339, 9);
+            SignUpCloseLabel.Name = "SignUpCloseLabel";
+            SignUpCloseLabel.Size = new Size(19, 20);
+            SignUpCloseLabel.TabIndex = 42;
+            SignUpCloseLabel.Text = "X";
+            SignUpCloseLabel.Click += SignUpCloseLabel_Click;
+            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -367,7 +381,7 @@
             ReaderBackBtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
             ReaderBackBtn.IconSize = 24;
             ReaderBackBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            ReaderBackBtn.Location = new Point(190, 603);
+            ReaderBackBtn.Location = new Point(190, 56);
             ReaderBackBtn.Name = "ReaderBackBtn";
             ReaderBackBtn.Size = new Size(84, 35);
             ReaderBackBtn.TabIndex = 41;
@@ -375,20 +389,6 @@
             ReaderBackBtn.TextAlign = ContentAlignment.MiddleRight;
             ReaderBackBtn.UseVisualStyleBackColor = false;
             ReaderBackBtn.Click += ReaderBackBtn_Click;
-            // 
-            // SignUpCloseLabel
-            // 
-            SignUpCloseLabel.AutoSize = true;
-            SignUpCloseLabel.BackColor = Color.Transparent;
-            SignUpCloseLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            SignUpCloseLabel.ForeColor = Color.FromArgb(224, 224, 224);
-            SignUpCloseLabel.ImeMode = ImeMode.NoControl;
-            SignUpCloseLabel.Location = new Point(1339, 9);
-            SignUpCloseLabel.Name = "SignUpCloseLabel";
-            SignUpCloseLabel.Size = new Size(19, 20);
-            SignUpCloseLabel.TabIndex = 42;
-            SignUpCloseLabel.Text = "X";
-            SignUpCloseLabel.Click += SignUpCloseLabel_Click;
             // 
             // Signup
             // 

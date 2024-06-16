@@ -90,7 +90,7 @@ namespace Library
                 {
                     MessageBox.Show("Your membership has expired.", "Session Expired", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await RemoveUserFromDatabaseAsync();
-                    CloseAllForms();
+                    await CloseAllFormsAsync();
                     ClearSession();
                     break;
                 }
@@ -121,7 +121,7 @@ namespace Library
             if ((DateTime.Now - lastActivityTime).TotalMinutes >= InactivityLimitMinutes)
             {
                 MessageBox.Show("You have been inactive for too long. Session will be terminated.", "Session Expired", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                CloseAllForms();
+                CloseAllFormsAsync();
                 ClearSession();
                 inactivityTimer.Stop();
             }
@@ -134,7 +134,8 @@ namespace Library
 
         private static async Task RemoveUserFromDatabaseAsync()
         {
-            string connectionString = "server=127.0.0.1;port=3306;database=LMS;uid=root;pwd=maazsiddiqui12;";
+            //string connectionString = "server=127.0.0.1;port=3306;database=LMS;uid=root;pwd=maazsiddiqui12;";
+            string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
 
             try
             {
@@ -156,13 +157,57 @@ namespace Library
             }
         }
 
-        private static void CloseAllForms()
+        private static async Task CloseAllFormsAsync()
         {
-            foreach (Form form in Application.OpenForms)
+            try
             {
-                form.Invoke((Action)(() => form.Close()));
+                List<Form> openForms = new List<Form>();
+
+                // Copy the list of open forms to avoid collection modified exceptions
+                foreach (Form form in Application.OpenForms)
+                {
+                    openForms.Add(form);
+                }
+
+                // Close each form safely asynchronously
+                foreach (Form form in openForms)
+                {
+                    if (form.InvokeRequired)
+                    {
+                        await form.Invoke(async () =>
+                        {
+                            await CloseFormSafelyAsync(form);
+                        });
+                    }
+                    else
+                    {
+                        await CloseFormSafelyAsync(form);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception appropriately
+                Console.WriteLine($"Error closing forms: {ex.Message}");
             }
         }
+
+        private static async Task CloseFormSafelyAsync(Form form)
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    form.Close();
+                });
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception appropriately
+                Console.WriteLine($"Error closing form {form.Name}: {ex.Message}");
+            }
+        }
+
     }
-   
+
 }

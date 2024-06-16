@@ -10,7 +10,9 @@ namespace Library
 {
     public partial class AdminRemoveStudent : Form
     {
-        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
+        string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
+
+        //string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
         private readonly string logFilePath = "student_termination_log.txt";
 
         public AdminRemoveStudent()
@@ -137,7 +139,7 @@ namespace Library
                     foreach (var studentID in studentIDs)
                     {
                         // Check for related records in borrowedbooks table
-                        string checkSql = "SELECT COUNT(*) FROM borrowedbooks WHERE StudentID = @StudentID AND ReturnDate IS NULL";
+                        string checkSql = "SELECT COUNT(*) FROM borrowedbooks WHERE StudentID = @StudentID AND ReturnedDate IS NULL";
                         using (var checkCmd = new MySqlCommand(checkSql, connection))
                         {
                             checkCmd.Parameters.AddWithValue("@StudentID", studentID);
