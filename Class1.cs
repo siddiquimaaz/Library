@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows.Forms;
 
 namespace Library
 {
@@ -13,13 +14,18 @@ namespace Library
         private static DateTime membershipExpiration;
         private static System.Timers.Timer inactivityTimer;
         private static DateTime lastActivityTime;
-        private const int InactivityLimitMinutes = 2; // Inactivity limit in minutes for testing purposes
-        private const int MembershipExpirationDays = 1; // Membership expiration duration in days for testing purposes
+        private static System.Timers.Timer membershipCheckTimer;
+        private const int InactivityLimitMinutes = 5; // Inactivity limit in minutes
+        private const int MembershipExpirationDays = 1; // Membership expiration duration in days
 
         static FormManager()
         {
-            inactivityTimer = new System.Timers.Timer(60000); // Check every minute
+            inactivityTimer = new System.Timers.Timer(60000); // Check inactivity every minute
             inactivityTimer.Elapsed += OnInactivityCheck;
+
+            membershipCheckTimer = new System.Timers.Timer(60000); // Check membership expiration every minute
+            membershipCheckTimer.Elapsed += OnMembershipCheck;
+            membershipCheckTimer.Start(); // Start membership check timer
         }
 
         public static void Show(Form newForm)
@@ -45,10 +51,10 @@ namespace Library
             }
         }
 
-        public static void SetSession(int studentId, DateTime expirationDate)
+        public static void SetSession(int studentId)
         {
             currentStudentId = studentId;
-            membershipExpiration = expirationDate.AddMinutes(InactivityLimitMinutes); // Set membership expiration with inactivity limit
+            membershipExpiration = DateTime.Now.AddDays(MembershipExpirationDays); // Set membership expiration to 1 day from now
             StartExpirationCheck();
             StartInactivityTimer();
             ResetInactivityTimer();
@@ -59,10 +65,10 @@ namespace Library
             return currentStudentId != 0 && DateTime.Now < membershipExpiration;
         }
 
-        public static bool IsMembershipExpiring(int daysBeforeExpiration)
+        public static bool IsMembershipExpiring(int minutesBeforeExpiration)
         {
             TimeSpan remainingTime = membershipExpiration - DateTime.Now;
-            return remainingTime.TotalDays <= daysBeforeExpiration && remainingTime.TotalDays >= 0;
+            return remainingTime.TotalMinutes <= minutesBeforeExpiration && remainingTime.TotalMinutes >= 0;
         }
 
         public static void NotifyExpiration(int minutesBeforeExpiration)
@@ -82,14 +88,13 @@ namespace Library
 
         private static async void StartExpirationCheck()
         {
-            while (true)
+            while (IsSessionActive())
             {
                 await Task.Delay(60000); // Check every minute
 
                 if (!IsSessionActive())
                 {
                     MessageBox.Show("Your membership has expired.", "Session Expired", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    await RemoveUserFromDatabaseAsync();
                     await CloseAllFormsAsync();
                     ClearSession();
                     break;
@@ -121,9 +126,19 @@ namespace Library
             if ((DateTime.Now - lastActivityTime).TotalMinutes >= InactivityLimitMinutes)
             {
                 MessageBox.Show("You have been inactive for too long. Session will be terminated.", "Session Expired", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                CloseAllFormsAsync();
+                CloseAllFormsAsync().GetAwaiter().GetResult();
                 ClearSession();
                 inactivityTimer.Stop();
+            }
+        }
+
+        private static void OnMembershipCheck(object sender, ElapsedEventArgs e)
+        {
+            if (!IsSessionActive())
+            {
+                MessageBox.Show("Your membership has expired.", "Session Expired", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearSession();
+                CloseAllFormsAsync().GetAwaiter().GetResult();
             }
         }
 
@@ -132,82 +147,65 @@ namespace Library
             ResetInactivityTimer();
         }
 
-        private static async Task RemoveUserFromDatabaseAsync()
-        {
-            //string connectionString = "server=127.0.0.1;port=3306;database=LMS;uid=root;pwd=maazsiddiqui12;";
-            string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
-
-            try
-            {
-                using (var connection = new MySqlConnection(connectionString))
-                {
-                    await connection.OpenAsync();
-                    string query = "DELETE FROM Students WHERE StudentID = @StudentID";
-
-                    using (var cmd = new MySqlCommand(query, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@StudentID", currentStudentId);
-                        await cmd.ExecuteNonQueryAsync();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error removing user from the database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private static async Task CloseAllFormsAsync()
         {
             try
             {
                 List<Form> openForms = new List<Form>();
 
-                // Copy the list of open forms to avoid collection modified exceptions
                 foreach (Form form in Application.OpenForms)
                 {
                     openForms.Add(form);
                 }
 
-                // Close each form safely asynchronously
                 foreach (Form form in openForms)
                 {
                     if (form.InvokeRequired)
                     {
-                        await form.Invoke(async () =>
-                        {
-                            await CloseFormSafelyAsync(form);
-                        });
+                        await Task.Run(() => form.Invoke(new Action(() => form.Close())));
                     }
                     else
                     {
-                        await CloseFormSafelyAsync(form);
+                        form.Close();
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Log or handle the exception appropriately
                 Console.WriteLine($"Error closing forms: {ex.Message}");
             }
         }
 
-        private static async Task CloseFormSafelyAsync(Form form)
+        public static void AttachUserActivityHandlers(Form form)
         {
-            try
+            form.Click += UserActivityDetected;
+            form.KeyPress += UserActivityDetected;
+            form.MouseMove += UserActivityDetected;
+            form.KeyDown += UserActivityDetected;
+
+            AttachHandlersToControls(form.Controls);
+        }
+
+        private static void AttachHandlersToControls(Control.ControlCollection controls)
+        {
+            foreach (Control control in controls)
             {
-                await Task.Run(() =>
+                control.Click += UserActivityDetected;
+                control.KeyPress += UserActivityDetected;
+                control.MouseMove += UserActivityDetected;
+                control.KeyDown += UserActivityDetected;
+
+                // Recursively attach to child controls if needed
+                if (control.Controls.Count > 0)
                 {
-                    form.Close();
-                });
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception appropriately
-                Console.WriteLine($"Error closing form {form.Name}: {ex.Message}");
+                    AttachHandlersToControls(control.Controls);
+                }
             }
         }
 
+        private static void UserActivityDetected(object sender, EventArgs e)
+        {
+            RecordUserActivity();
+        }
     }
-
 }

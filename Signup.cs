@@ -21,19 +21,10 @@ namespace Library
 {
     public partial class Signup : Form
     {
-        private byte[] ConvertImageToBytes(System.Drawing.Image img)
-        {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                byte[] byteArray = ms.ToArray();
-                MessageBox.Show($"Image byte array size: {byteArray.Length}"); // Debug message
-                return byteArray;
-            }
-        }
-        private string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
+         private string connectionString = "server=127.0.0.1;port=3306;database=LMS;uid=root;pwd=maazsiddiqui12;";
+       
+        //private string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
 
-        // private string connectionString = "server=127.0.0.1;port=3306;database=LMS;uid=root;pwd=maazsiddiqui12;";
         private UserManager userManager;
 
         public Signup()
@@ -83,12 +74,12 @@ namespace Library
                 Form1.SessionInfo.CurrentStudentId = studentId;
 
                 // Set session details
-                FormManager.SetSession(studentId, DateTime.Now.AddMinutes(5));
+                FormManager.SetSession(studentId);
 
                 // Debug output to verify the ID
                 MessageBox.Show($"Current Student ID: {Form1.SessionInfo.CurrentStudentId}");
-                this.Close();
-                new home().ShowDialog();
+                FormManager.CloseCurrentForm();
+                FormManager.Show(new home());
             }
             catch (Exception ex)
             {
@@ -167,6 +158,16 @@ namespace Library
         private void SignUpCloseLabel_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
+        }
+        private byte[] ConvertImageToBytes(System.Drawing.Image img)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] byteArray = ms.ToArray();
+                MessageBox.Show($"Image byte array size: {byteArray.Length}"); // Debug message
+                return byteArray;
+            }
         }
     }
 }

@@ -4,16 +4,14 @@ using MySql.Data.MySqlClient;
 using BCrypt.Net;
 using System.Threading.Tasks;
 using System.Data;
-using Org.BouncyCastle.Bcpg.Sig;
 
 namespace Library
 {
     public partial class Form1 : Form
     {
-        //string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
-       /*Testing remote connection*/
-        string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
-       
+        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
+        //string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
+
         public Form1()
         {
             InitializeComponent();
@@ -99,11 +97,13 @@ namespace Library
         {
             FormManager.CloseCurrentForm();
             FormManager.Show(new Signup());
+            FormManager.RecordUserActivity();
         }
 
         private void Login_Click(object sender, EventArgs e)
         {
             LoginUserAsync();
+            FormManager.RecordUserActivity();
         }
 
         private async void LoginUserAsync()
@@ -119,14 +119,14 @@ namespace Library
                 {
                     if (isAdmin)
                     {
+                        FormManager.CloseCurrentForm();
                         FormManager.Show(new adminpanel());
                     }
                     else
                     {
-                        home homeForm = new home();
-                        await homeForm.LoadStudentInfo(userId); // Load student info
-                        FormManager.Show(homeForm);
-                        FormManager.SetSession(userId, DateTime.Now.AddMinutes(5)); // Set session expiration for testing
+                        FormManager.CloseCurrentForm();
+                        FormManager.Show(new home());
+                        FormManager.SetSession(userId); // Set session expiration for the student
                     }
                 }
                 else
@@ -139,7 +139,6 @@ namespace Library
                 MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {

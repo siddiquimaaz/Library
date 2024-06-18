@@ -36,7 +36,7 @@ namespace Library
                         cmd.Parameters.AddWithValue("@HashedPassword", hashedPassword);
                         cmd.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
                         cmd.Parameters.AddWithValue("@Photo", image ?? (object)DBNull.Value);
-                        cmd.Parameters.AddWithValue("@MembershipExpiration", DateTime.Now.AddMinutes(5)); // 5-minute session
+                        cmd.Parameters.AddWithValue("@MembershipExpiration", DateTime.Now.AddDays(1)); // Membership expiration set to 1 day
 
                         await cmd.ExecuteNonQueryAsync();
                         studentId = Convert.ToInt32(cmd.LastInsertedId);

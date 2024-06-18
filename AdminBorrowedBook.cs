@@ -13,9 +13,9 @@ namespace Library
 {
     public partial class AdminBorrowedBook : Form
     {
-        string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
+        //string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
 
-        //string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
+        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
 
         public AdminBorrowedBook()
         {
@@ -26,6 +26,7 @@ namespace Library
             BorrowedBookAdminPanel.MultiSelect = false;
             CustomizeDataGridView();
             this.Load += AdminBorrowedBook_Load;
+            FormManager.RecordUserActivity();
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e) { }
@@ -190,6 +191,7 @@ namespace Library
         {
 
             await ShowAllBorrowedBooksAsync();
+            FormManager.RecordUserActivity();
         }
 
         private async Task ShowAllBorrowedBooksAsync()
@@ -236,12 +238,32 @@ namespace Library
 
         private void AdminBorrowedBackBtn_Click(object sender, EventArgs e)
         {
+            FormManager.CloseCurrentForm();
             FormManager.Show(new adminpanel());
+            FormManager.RecordUserActivity();
         }
 
         private void AdminBorrowedBookCloseLabel_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
+        }
+        private void AttachUserActivityHandlers(Control control)
+        {
+            control.Click += UserActivityDetected;
+            control.KeyPress += UserActivityDetected;
+            control.MouseMove += UserActivityDetected;
+            control.KeyDown += UserActivityDetected;
+
+            foreach (Control child in control.Controls)
+            {
+                AttachUserActivityHandlers(child);
+            }
+        }
+
+        private void UserActivityDetected(object sender, EventArgs e)
+        {
+
+            FormManager.RecordUserActivity();
         }
     }
 }

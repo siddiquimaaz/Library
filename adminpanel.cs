@@ -1,38 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using System.Reflection;
 using MySql.Data.MySqlClient;
 
 namespace Library
 {
     public partial class adminpanel : Form
     {
-        string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
-
-        //string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
+        //string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
+        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
 
         public adminpanel()
         {
             InitializeComponent();
-            SetupDataGridView(); // Call SetupDataGridView in the constructor
+            SetupDataGridView();
             this.Load += adminpanel_Load;
+            AttachUserActivityHandlers(this); // Attach activity handlers to the form and its controls
+            FormManager.RecordUserActivity();
         }
 
+        private void AttachUserActivityHandlers(Control control)
+        {
+            control.Click += UserActivityDetected;
+            control.KeyPress += UserActivityDetected;
+            control.MouseMove += UserActivityDetected;
+            control.KeyDown += UserActivityDetected;
+
+            foreach (Control child in control.Controls)
+            {
+                AttachUserActivityHandlers(child);
+            }
+        }
+
+        private void UserActivityDetected(object sender, EventArgs e)
+        {
+
+            FormManager.RecordUserActivity();
+        }
 
         private void iconButton3_Click(object? sender, EventArgs? e)
         {
+            FormManager.AttachUserActivityHandlers(this);
             FormManager.CloseCurrentForm();
             FormManager.Show(new BookManagerAdmin());
-
+            FormManager.RecordUserActivity();
         }
 
         private async void adminpanel_Load(object sender, EventArgs e)
@@ -40,17 +53,15 @@ namespace Library
             await LoadAllStudentsAsync();
         }
 
-
-
         private void iconButton1_Click(object sender, EventArgs e)
         {
             DialogResult check = MessageBox.Show("Are you sure you want to logout?", "Confirmation Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (check == DialogResult.Yes)
             {
-                Form1 form1 = new Form1();
-                form1.Show();
-                this.Hide();
-
+                FormManager.AttachUserActivityHandlers(this);
+                FormManager.CloseCurrentForm();
+                FormManager.Show(new Form1());
+                FormManager.RecordUserActivity();
             }
         }
 
@@ -70,14 +81,14 @@ namespace Library
                         if (dataTable.Rows.Count > 0)
                         {
                             adminDataGridView.DataSource = dataTable;
-                            adminDataGridView.Refresh(); // Refresh the DataGridView
+                            adminDataGridView.Refresh();
                             MessageBox.Show("Data loaded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Console.WriteLine("Data loaded successfully."); // Log success message
+                            Console.WriteLine("Data loaded successfully.");
                         }
                         else
                         {
                             MessageBox.Show("No students found.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Console.WriteLine("No data found."); // Log no data message
+                            Console.WriteLine("No data found.");
                         }
                     }
                 }
@@ -85,24 +96,24 @@ namespace Library
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading students: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Console.WriteLine($"Error loading students: {ex.Message}"); // Log error message
+                Console.WriteLine($"Error loading students: {ex.Message}");
             }
         }
-
-
-
-
 
         private void showAllStdBtn_Click(object sender, EventArgs e) { }
 
         private void ShowBorrrwedBookAdmin_Click(object sender, EventArgs e)
         {
+            FormManager.AttachUserActivityHandlers(this);
             FormManager.Show(new AdminBorrowedBook());
+            FormManager.RecordUserActivity();
         }
 
         private void RemoveStdBtn_Click(object sender, EventArgs e)
         {
+            FormManager.AttachUserActivityHandlers(this);
             FormManager.Show(new AdminRemoveStudent());
+            FormManager.RecordUserActivity();
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e) { }
@@ -119,16 +130,13 @@ namespace Library
             {
                 adminDataGridView.AutoGenerateColumns = false;
                 adminDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                adminDataGridView.ReadOnly = true; // Set all cells to read-only
+                adminDataGridView.ReadOnly = true;
 
-                // Add columns if missing
                 AddColumnIfMissing("StudentID", "Student ID");
                 AddColumnIfMissing("FirstName", "First Name");
                 AddColumnIfMissing("LastName", "Last Name");
                 AddColumnIfMissing("Email", "Email");
                 AddColumnIfMissing("PhoneNumber", "Phone Number");
-
-                // Additional columns can be added here if needed
 
                 adminDataGridView.Refresh();
             }
