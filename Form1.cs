@@ -17,15 +17,6 @@ namespace Library
             InitializeComponent();
             FormManager.Show(this);
         }
-
-        public static class SessionInfo
-        {
-            public static int CurrentStudentId { get; set; }
-            public static string CurrentStudentEmail { get; set; }
-            public static int CurrentAdminId { get; set; }
-            public static string CurrentAdminEmail { get; set; }
-        }
-
         private async Task<int> ValidateCredentialsAsync(string email, string password, bool isAdmin)
         {
             string table = isAdmin ? "AdminUsers" : "Students";

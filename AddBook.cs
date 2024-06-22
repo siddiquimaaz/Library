@@ -24,7 +24,7 @@ namespace Library
         public AddBook()
         {
             InitializeComponent();
-            currentStudentId = Form1.SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
+            currentStudentId = SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
 
             // Ensure the form handle is created before proceeding
             this.HandleCreated += async (s, e) =>
@@ -46,7 +46,7 @@ namespace Library
                 try
                 {
                     await LoadBooksAsync();
-                    await FetchAndDisplayStudentInfo(currentStudentId); // Pass the student ID
+                    LoadUserData(); // Pass the student ID
                 }
                 catch (Exception ex)
                 {
@@ -59,6 +59,7 @@ namespace Library
         {
             try
             {
+                //Not-Neccessary
                 //await LoadBooksAsync(); // Always reload books to refresh the grid, ensuring consistency with the database
             }
             catch (Exception ex)
@@ -79,7 +80,7 @@ namespace Library
 
         private async void AddBook_Load(object? sender, EventArgs? e)
         {
-            await FetchAndDisplayStudentInfo(currentStudentId);
+            LoadUserData();
         }
 
         private void backbtn_Click(object sender, EventArgs e)
@@ -101,58 +102,24 @@ namespace Library
         {
             SearchBooksAsync();
         }
-
-        private async Task<int> GetStudentId(string username)
+        private async void LoadUserData()
         {
             try
             {
-                using (var connection = new MySqlConnection(connectionString))
+                int userId = SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
+                if (userId != -1)
                 {
-                    await connection.OpenAsync();
-                    string sql = "SELECT StudentID FROM Students WHERE Username = @Username";
-                    using (var cmd = new MySqlCommand(sql, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@Username", username);
-                        object result = await cmd.ExecuteScalarAsync();
-                        if (result != null)
-                        {
-                            return Convert.ToInt32(result);
-                        }
-                        else
-                        {
-                            throw new Exception("User not found.");
-                        }
-                    }
+                    await StudentInfo.Instance.LoadStudentInfoAsync(userId, connectionString);
+                    DisplayStudentInfo(); // Display the loaded student info
+                }
+                else
+                {
+                    MessageBox.Show("User ID is invalid or not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error retrieving student ID: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
-            }
-        }
-        private async Task FetchAndDisplayStudentInfo(int studentId)
-        {
-            using (var connection = new MySqlConnection(connectionString))
-            {
-                await connection.OpenAsync();
-                string query = "SELECT FirstName, LastName, Photo FROM Students WHERE StudentId = @StudentId";
-                using (var command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@StudentId", studentId);
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        if (await reader.ReadAsync()) // Ensure there's data to read
-                        {
-                            // Casting DbDataReader to MySqlDataReader
-                            DisplayStudentInfo((MySqlDataReader)reader);
-                        }
-                        else
-                        {
-                            MessageBox.Show("No student data found.");
-                        }
-                    }
-                }
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private async Task SearchBooksAsync()
@@ -408,10 +375,6 @@ namespace Library
             }
         }
 
-
-
-
-
         private async void addToStdbtn_Click(object sender, EventArgs e)
         {
             booksView.Refresh();
@@ -518,17 +481,15 @@ namespace Library
             }
         }
 
-        private void DisplayStudentInfo(MySqlDataReader reader)
+        private void DisplayStudentInfo()
         {
-            string firstName = reader["FirstName"].ToString();
-            string lastName = reader["LastName"].ToString();
-            byte[] photoBytes = reader["Photo"] as byte[];
+            var studentInfo = StudentInfo.Instance;
 
-            addbookstdname.Text = $"{firstName} {lastName}";
+            addbookstdname.Text = $"{studentInfo.FirstName} {studentInfo.LastName}";
 
-            if (photoBytes != null && photoBytes.Length > 0)
+            if (studentInfo.Photo != null && studentInfo.Photo.Length > 0)
             {
-                using (var ms = new MemoryStream(photoBytes))
+                using (var ms = new MemoryStream(studentInfo.Photo))
                 {
                     Image originalImage = Image.FromStream(ms);
                     addbookstdname.Visible = true;
@@ -541,8 +502,6 @@ namespace Library
                 MessageBox.Show("Student image not found.");
             }
         }
-
-
         private Image GetEllipseImage(Image originalImage)
         {
             Bitmap bitmap = new Bitmap(originalImage.Width, originalImage.Height);

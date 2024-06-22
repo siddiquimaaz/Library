@@ -19,7 +19,7 @@ namespace Library
         public ReaderDetails()
         {
             InitializeComponent();
-            currentStudentId = Form1.SessionInfo.CurrentStudentId; // Capture the current student ID
+            currentStudentId = SessionInfo.CurrentStudentId; // Capture the current student ID
             LoadUserDetailsAsync(); // Call the async method to load user details
         }
 
@@ -50,6 +50,7 @@ namespace Library
                                     byte[] photoBytes = (byte[])reader["Photo"];
                                     using (MemoryStream ms = new MemoryStream(photoBytes))
                                     {
+                                        ReaderPic.Visible = true;
                                         ReaderPic.Image = Image.FromStream(ms);
                                     }
                                 }

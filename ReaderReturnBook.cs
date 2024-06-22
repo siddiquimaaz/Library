@@ -17,7 +17,7 @@ namespace Library
         public ReaderReturnBook()
         {
             InitializeComponent();
-            currentStudentId = Form1.SessionInfo.CurrentStudentId; // Assuming this is correctly set in your application
+            currentStudentId = SessionInfo.CurrentStudentId; // Assuming this is correctly set in your application
             InitializeDataGridView();
             Task task = LoadBorrowedBooksAsync(currentStudentId);
         }

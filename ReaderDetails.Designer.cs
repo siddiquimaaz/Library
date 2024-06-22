@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReaderDetails));
             panel1 = new Panel();
+            ReaderDetailsLabel = new Label();
             label1 = new Label();
             label2 = new Label();
             panel2 = new Panel();
@@ -56,7 +57,6 @@
             ReaderPic = new PictureBox();
             MemberShipDateTimePicker = new DateTimePicker();
             label11 = new Label();
-            ReaderDetailsLabel = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ReaderPic).BeginInit();
@@ -75,6 +75,19 @@
             panel1.Padding = new Padding(2, 1, 2, 1);
             panel1.Size = new Size(1413, 45);
             panel1.TabIndex = 19;
+            // 
+            // ReaderDetailsLabel
+            // 
+            ReaderDetailsLabel.AutoSize = true;
+            ReaderDetailsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            ReaderDetailsLabel.ForeColor = Color.FromArgb(0, 102, 140);
+            ReaderDetailsLabel.ImeMode = ImeMode.NoControl;
+            ReaderDetailsLabel.Location = new Point(1382, 12);
+            ReaderDetailsLabel.Name = "ReaderDetailsLabel";
+            ReaderDetailsLabel.Size = new Size(19, 20);
+            ReaderDetailsLabel.TabIndex = 49;
+            ReaderDetailsLabel.Text = "X";
+            ReaderDetailsLabel.Click += ReaderDetailsLabel_Click;
             // 
             // label1
             // 
@@ -377,11 +390,11 @@
             // 
             ReaderPic.BackColor = Color.Transparent;
             ReaderPic.InitialImage = (Image)resources.GetObject("ReaderPic.InitialImage");
-            ReaderPic.Location = new Point(863, 163);
+            ReaderPic.Location = new Point(985, 153);
             ReaderPic.Margin = new Padding(3, 2, 3, 2);
             ReaderPic.Name = "ReaderPic";
             ReaderPic.Size = new Size(120, 100);
-            ReaderPic.SizeMode = PictureBoxSizeMode.Zoom;
+            ReaderPic.SizeMode = PictureBoxSizeMode.StretchImage;
             ReaderPic.TabIndex = 46;
             ReaderPic.TabStop = false;
             ReaderPic.Visible = false;
@@ -406,19 +419,6 @@
             label11.Size = new Size(122, 20);
             label11.TabIndex = 47;
             label11.Text = "Publication Date:";
-            // 
-            // ReaderDetailsLabel
-            // 
-            ReaderDetailsLabel.AutoSize = true;
-            ReaderDetailsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            ReaderDetailsLabel.ForeColor = Color.FromArgb(0, 102, 140);
-            ReaderDetailsLabel.ImeMode = ImeMode.NoControl;
-            ReaderDetailsLabel.Location = new Point(1382, 12);
-            ReaderDetailsLabel.Name = "ReaderDetailsLabel";
-            ReaderDetailsLabel.Size = new Size(19, 20);
-            ReaderDetailsLabel.TabIndex = 49;
-            ReaderDetailsLabel.Text = "X";
-            ReaderDetailsLabel.Click += ReaderDetailsLabel_Click;
             // 
             // ReaderDetails
             // 

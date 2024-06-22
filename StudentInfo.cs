@@ -12,6 +12,7 @@ namespace Library
         //private string connectionString = "server=127.0.0.1;port=3306;database=LMS;uid=root;pwd=maazsiddiqui12;";
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+        public string email { get; private set; }
         public byte[] Photo { get; private set; }
         private static readonly Lazy<StudentInfo> instance = new Lazy<StudentInfo>(() => new StudentInfo());
         private static readonly object loadLock = new object();

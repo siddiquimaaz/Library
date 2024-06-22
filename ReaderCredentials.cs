@@ -42,7 +42,7 @@ namespace Library
         {
             try
             {
-                int userId = Form1.SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
+                int userId = SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
                 if (userId != -1)
                 {
                     await LoadStudentInfo(userId);
@@ -213,8 +213,6 @@ namespace Library
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        {}
     }
 }

@@ -71,13 +71,13 @@ namespace Library
             {
                 int studentId = await userManager.RegisterUserAsync(firstName, lastName, email, hashedPassword, phoneNumber, imageBytes);
                 MessageBox.Show("Registration Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Form1.SessionInfo.CurrentStudentId = studentId;
+                SessionInfo.CurrentStudentId = studentId;
 
                 // Set session details
                 FormManager.SetSession(studentId);
 
                 // Debug output to verify the ID
-                MessageBox.Show($"Current Student ID: {Form1.SessionInfo.CurrentStudentId}");
+                MessageBox.Show($"Current Student ID: {SessionInfo.CurrentStudentId}");
                 FormManager.CloseCurrentForm();
                 FormManager.Show(new home());
             }

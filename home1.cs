@@ -28,7 +28,7 @@ namespace Library
         {
             try
             {
-                int userId = Form1.SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
+                int userId = SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
                 if (userId != -1)
                 {
                     await StudentInfo.Instance.LoadStudentInfoAsync(userId, connectionString);
@@ -85,7 +85,7 @@ namespace Library
 
         private void addbk_Click(object sender, EventArgs e)
         {
-            int studentId = Form1.SessionInfo.CurrentStudentId;
+            int studentId = SessionInfo.CurrentStudentId;
             FormManager.CloseCurrentForm();
             FormManager.Show(new AddBook());
             FormManager.RecordUserActivity();
