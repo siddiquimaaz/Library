@@ -26,6 +26,7 @@ namespace Library
             printIdCard.Click += new EventHandler(printIdCard_Click);
             printDocument1 = new PrintDocument();
             printDocument1.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
+            FormManager.AttachUserActivityHandlers(this);
 
         }
 
@@ -36,6 +37,7 @@ namespace Library
         private async void ReaderCredentials_Load(object sender, EventArgs e)
         {
             await LoadUserData();
+            FormManager.AttachUserActivityHandlers(this);
         }
 
         private async Task LoadUserData()
@@ -148,6 +150,7 @@ namespace Library
 
         private async void printIdCard_Click(object? sender, EventArgs? e)
         {
+            FormManager.RecordUserActivity();
             using (PrintDialog printDialog = new PrintDialog())
             {
                 printDialog.Document = printDocument1;

@@ -16,6 +16,7 @@ namespace Library
         {
             InitializeComponent();
             FormManager.Show(this);
+            FormManager.AttachUserActivityHandlers(this);
         }
         private async Task<int> ValidateCredentialsAsync(string email, string password, bool isAdmin)
         {
@@ -134,6 +135,7 @@ namespace Library
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             text2.UseSystemPasswordChar = !checkBox1.Checked;
+            FormManager.RecordUserActivity();
         }
 
         private void label3_Click(object sender, EventArgs e) { }

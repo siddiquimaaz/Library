@@ -118,28 +118,9 @@ namespace Library
 
         private void AdminAddBookBackBtn_Click(object sender, EventArgs e)
         {
-            FormManager.AttachUserActivityHandlers(this);
             FormManager.RecordUserActivity();
             FormManager.CloseCurrentForm();
             FormManager.Show(new adminpanel());
-        }
-        private void AttachUserActivityHandlers(Control control)
-        {
-            control.Click += UserActivityDetected;
-            control.KeyPress += UserActivityDetected;
-            control.MouseMove += UserActivityDetected;
-            control.KeyDown += UserActivityDetected;
-
-            foreach (Control child in control.Controls)
-            {
-                AttachUserActivityHandlers(child);
-            }
-        }
-
-        private void UserActivityDetected(object sender, EventArgs e)
-        {
-
-            FormManager.RecordUserActivity();
         }
     }
 }

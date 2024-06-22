@@ -29,12 +29,14 @@ namespace Library
 
         public Signup()
         {
+            FormManager.AttachUserActivityHandlers(this);
             InitializeComponent();
-            userManager = new UserManager(connectionString);
+            userManager = new UserManager();
         }
 
         private async void SignUpBtn_Click(object sender, EventArgs e)
         {
+            FormManager.RecordUserActivity();
             string firstName = firstnametxt.Text;
             string lastName = lastnametxt.Text;
             string phoneNumber = phonenumbertxt.Text;
@@ -78,6 +80,7 @@ namespace Library
 
                 // Debug output to verify the ID
                 MessageBox.Show($"Current Student ID: {SessionInfo.CurrentStudentId}");
+                FormManager.RecordUserActivity();
                 FormManager.CloseCurrentForm();
                 FormManager.Show(new home());
             }
@@ -117,6 +120,7 @@ namespace Library
 
         private void selectimg_Click(object sender, EventArgs e)
         {
+            FormManager.RecordUserActivity();
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Title = "Select Image";
@@ -146,11 +150,12 @@ namespace Library
 
         private void Signup_Load(object sender, EventArgs e)
         {
-
+            FormManager.AttachUserActivityHandlers(this);
         }
 
         private void ReaderBackBtn_Click(object sender, EventArgs e)
         {
+            FormManager.RecordUserActivity();
             FormManager.CloseCurrentForm();
             FormManager.Show(new Form1());
         }

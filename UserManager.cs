@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -7,29 +8,26 @@ namespace Library
 {
     public class UserManager
     {
-        private readonly string _connectionString;
 
-        public UserManager(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
+
+        private string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
 
         public async Task<int> RegisterUserAsync(string firstName, string lastName, string email, string hashedPassword, string phoneNumber, byte[] image)
         {
             int studentId = 0;
-            using (var connection = new MySqlConnection(_connectionString))
+
+            try
             {
-                try
+                using (var connection = new MySqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
+
                     using (var cmd = new MySqlCommand())
                     {
                         cmd.Connection = connection;
                         cmd.CommandText = @"INSERT INTO Students 
                                             (FirstName, LastName, Email, HashedPassword, PhoneNumber, Photo, MembershipExpiration) 
                                             VALUES (@FirstName, @LastName, @Email, @HashedPassword, @PhoneNumber, @Photo, @MembershipExpiration)";
-                        cmd.Parameters.Clear();
-
                         cmd.Parameters.AddWithValue("@FirstName", firstName);
                         cmd.Parameters.AddWithValue("@LastName", lastName);
                         cmd.Parameters.AddWithValue("@Email", email);
@@ -39,25 +37,27 @@ namespace Library
                         cmd.Parameters.AddWithValue("@MembershipExpiration", DateTime.Now.AddDays(1)); // Membership expiration set to 1 day
 
                         await cmd.ExecuteNonQueryAsync();
-                        studentId = Convert.ToInt32(cmd.LastInsertedId);
+                        studentId = (int)cmd.LastInsertedId;
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Failed to insert student data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    throw;
-                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to insert student data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+
             return studentId;
         }
 
         public async Task DeleteExpiredMembershipsAsync()
         {
-            using (var connection = new MySqlConnection(_connectionString))
+            try
             {
-                try
+                using (var connection = new MySqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
+
                     using (var cmd = new MySqlCommand())
                     {
                         cmd.Connection = connection;
@@ -67,9 +67,79 @@ namespace Library
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
-                catch (Exception ex)
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to delete expired memberships: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+        }
+
+        public async Task ReturnOverdueBooksAsync()
+        {
+            try
+            {
+                using (var connection = new MySqlConnection(connectionString))
                 {
-                    MessageBox.Show("Failed to delete expired memberships: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await connection.OpenAsync();
+
+                    string selectOverdueBooksQuery = @"SELECT BookID, StudentID FROM BorrowedBooks 
+                                                       WHERE DueDate <= @CurrentTime AND ReturnedDate IS NULL";
+
+                    using (var cmd = new MySqlCommand(selectOverdueBooksQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@CurrentTime", DateTime.Now);
+
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                int bookId = reader.GetInt32("BookID");
+                                int studentId = reader.GetInt32("StudentID");
+
+                                await ReturnAndSetBookAvailableAsync(connection, bookId, studentId);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error returning overdue books: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+        }
+
+        private async Task ReturnAndSetBookAvailableAsync(MySqlConnection connection, int bookId, int studentId)
+        {
+            using (var transaction = await connection.BeginTransactionAsync())
+            {
+                try
+                {
+                    string returnBookQuery = "UPDATE BorrowedBooks SET ReturnedDate = @ReturnedDate WHERE BookID = @BookID AND StudentID = @StudentID AND ReturnedDate IS NULL";
+
+                    using (var returnCmd = new MySqlCommand(returnBookQuery, connection, transaction))
+                    {
+                        returnCmd.Parameters.AddWithValue("@ReturnedDate", DateTime.Now);
+                        returnCmd.Parameters.AddWithValue("@BookID", bookId);
+                        returnCmd.Parameters.AddWithValue("@StudentID", studentId);
+
+                        await returnCmd.ExecuteNonQueryAsync();
+                    }
+
+                    string updateBooksQuery = "UPDATE Books SET IsAvailable = TRUE WHERE BookID = @BookID";
+
+                    using (var updateCmd = new MySqlCommand(updateBooksQuery, connection, transaction))
+                    {
+                        updateCmd.Parameters.AddWithValue("@BookID", bookId);
+                        await updateCmd.ExecuteNonQueryAsync();
+                    }
+
+                    await transaction.CommitAsync();
+                }
+                catch (Exception)
+                {
+                    await transaction.RollbackAsync();
                     throw;
                 }
             }

@@ -17,30 +17,11 @@ namespace Library
 
         public AdminRemoveStudent()
         {
+            FormManager.AttachUserActivityHandlers(this); // Attach activity handlers to the form and its controls
             InitializeComponent();
             this.Load += new EventHandler(AdminRemoveStudent_Load);
             TerminateMemberSearchbtn.Click += new EventHandler(TerminateMemberSearchbtn_Click);
             TerminateBtn.Click += new EventHandler(TerminateBtn_Click);
-            FormManager.AttachUserActivityHandlers(this); // Attach activity handlers to the form and its controls
-            FormManager.RecordUserActivity();
-        }
-        private void AttachUserActivityHandlers(Control control)
-        {
-            control.Click += UserActivityDetected;
-            control.KeyPress += UserActivityDetected;
-            control.MouseMove += UserActivityDetected;
-            control.KeyDown += UserActivityDetected;
-
-            foreach (Control child in control.Controls)
-            {
-                AttachUserActivityHandlers(child);
-            }
-        }
-
-        private void UserActivityDetected(object sender, EventArgs e)
-        {
-
-            FormManager.RecordUserActivity();
         }
         private async Task LoadStudentsAsync()
         {
@@ -79,13 +60,13 @@ namespace Library
 
         private async void TerminateMemberSearchbtn_Click(object sender, EventArgs e)
         {
+            FormManager.RecordUserActivity();
             string readerID = ReaderID.Text.Trim();
             if (string.IsNullOrEmpty(readerID))
             {
                 MessageBox.Show("Please enter a Reader ID.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            FormManager.AttachUserActivityHandlers(this);
             await SearchStudentAsync(readerID);
         }
 
@@ -127,7 +108,7 @@ namespace Library
 
         private async void TerminateBtn_Click(object? sender, EventArgs? e)
         {
-            FormManager.AttachUserActivityHandlers(this);
+            FormManager.RecordUserActivity();
             var selectedStudentIDs = TerminateMembershipAdminPanel.Rows
                .Cast<DataGridViewRow>()
                .Where(row => Convert.ToBoolean(row.Cells["Select"].Value))
@@ -151,7 +132,6 @@ namespace Library
         {
             try
             {
-                FormManager.AttachUserActivityHandlers(this);
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
@@ -203,7 +183,6 @@ namespace Library
 
         private void LogStudentTermination(int studentID)
         {
-            FormManager.AttachUserActivityHandlers(this);
             string logMessage = $"StudentID: {studentID}, Termination Time: {DateTime.Now}";
             File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
         }
@@ -216,25 +195,22 @@ namespace Library
 
         private void TerminateMemberBackBtn_Click(object sender, EventArgs e)
         {
+            FormManager.RecordUserActivity();
             FormManager.CloseCurrentForm();
             FormManager.Show(new adminpanel());
-            FormManager.AttachUserActivityHandlers(this);
-            FormManager.RecordUserActivity();
         }
 
         private async void AdminRemoveStudent_Load(object sender, EventArgs e)
         {
             FormManager.AttachUserActivityHandlers(this);
-            FormManager.RecordUserActivity();
             await LoadStudentsAsync();
         }
 
         private void AdminRemoveReaderBackBtn_Click(object sender, EventArgs e)
         {
-            FormManager.AttachUserActivityHandlers(this);
+            FormManager.RecordUserActivity();
             FormManager.CloseCurrentForm();
             FormManager.Show(new adminpanel());
-            FormManager.RecordUserActivity();
         }
 
         private void AdminRemoveStudentCloseLabel_Click(object sender, EventArgs e)

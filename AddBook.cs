@@ -23,6 +23,7 @@ namespace Library
 
         public AddBook()
         {
+            FormManager.AttachUserActivityHandlers(this);
             InitializeComponent();
             currentStudentId = SessionInfo.CurrentStudentId; // Access the user ID from SessionInfo
 
@@ -81,16 +82,19 @@ namespace Library
         private async void AddBook_Load(object? sender, EventArgs? e)
         {
             LoadUserData();
+            FormManager.AttachUserActivityHandlers(this);
         }
 
         private void backbtn_Click(object sender, EventArgs e)
         {
+            FormManager.RecordUserActivity();
             FormManager.CloseCurrentForm();
             FormManager.Show(new home());
         }
 
         private async void cancel_Click(object sender, EventArgs e)
         {
+            FormManager.RecordUserActivity();
             booktitltxt.Text = "";
             authortxt.Text = "";
             await LoadBooksAsync();
@@ -100,6 +104,7 @@ namespace Library
 
         private void SearchBtn_Click(object? sender, EventArgs? e)
         {
+            FormManager.RecordUserActivity();
             SearchBooksAsync();
         }
         private async void LoadUserData()
@@ -227,6 +232,7 @@ namespace Library
         {
             try
             {
+                FormManager.RecordUserActivity();
                 booksView.AutoGenerateColumns = false;
                 booksView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 booksView.ReadOnly = false; // Allow editing for checkboxes
@@ -329,6 +335,7 @@ namespace Library
         {
             try
             {
+                FormManager.RecordUserActivity();
                 if (e.ColumnIndex == booksView.Columns["IsAvailable"].Index && e.RowIndex >= 0)
                 {
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)booksView.Rows[e.RowIndex].Cells[e.ColumnIndex];
@@ -354,6 +361,7 @@ namespace Library
         {
             try
             {
+                FormManager.RecordUserActivity();
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -377,6 +385,7 @@ namespace Library
 
         private async void addToStdbtn_Click(object sender, EventArgs e)
         {
+            FormManager.RecordUserActivity();
             booksView.Refresh();
             bool anyBookSelected = false;
             bool allSuccessfullyBorrowed = true;
@@ -443,13 +452,18 @@ namespace Library
                                 }
                             }
 
+                            // Calculate due date (2 days from now)
+                            DateTime dueDate = DateTime.Now.AddDays(2);
+
                             // Insert a new record into BorrowedBooks
-                            string borrowQuery = "INSERT INTO BorrowedBooks (StudentID, BookID, DateBorrowed) VALUES (@StudentID, @BookID, @DateBorrowed)";
+                            string borrowQuery = "INSERT INTO BorrowedBooks (StudentID, BookID, DateBorrowed, DueDate) VALUES (@StudentID, @BookID, @DateBorrowed, @DueDate)";
                             using (var borrowCmd = new MySqlCommand(borrowQuery, connection, transaction))
                             {
                                 borrowCmd.Parameters.AddWithValue("@StudentID", currentStudentId);
                                 borrowCmd.Parameters.AddWithValue("@BookID", bookId);
                                 borrowCmd.Parameters.AddWithValue("@DateBorrowed", DateTime.Now);
+                                borrowCmd.Parameters.AddWithValue("@DueDate", DateTime.Now.AddMinutes(5));
+                                //borrowCmd.Parameters.AddWithValue("@DueDate", dueDate);
 
                                 await borrowCmd.ExecuteNonQueryAsync();
                             }
@@ -480,6 +494,7 @@ namespace Library
                 return false;
             }
         }
+
 
         private void DisplayStudentInfo()
         {

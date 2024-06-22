@@ -16,7 +16,7 @@ namespace Library
         public home()
         {
             InitializeComponent();
-            FormManager.RecordUserActivity();
+            FormManager.AttachUserActivityHandlers(this);
         }
 
         private void home_Load(object sender, EventArgs e)
@@ -101,33 +101,33 @@ namespace Library
 
         public void Logout()
         {
+            FormManager.RecordUserActivity();
             FormManager.ClearSession();
             FormManager.CloseCurrentForm();
             FormManager.Show(new Form1());
-            FormManager.RecordUserActivity();
         }
 
         private void DetailsBtn_Click(object sender, EventArgs e)
         {
+            FormManager.RecordUserActivity();
             FormManager.CloseCurrentForm();
             FormManager.Show(new ReaderCredentials());
-            FormManager.RecordUserActivity();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e) { }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            FormManager.RecordUserActivity();
             FormManager.CloseCurrentForm();
             FormManager.Show(new ReaderDetails());
-            FormManager.RecordUserActivity();
         }
 
         private void ReaderReturnBookBtn_Click(object sender, EventArgs e)
         {
-            FormManager.Show(new ReaderReturnBook());
             FormManager.RecordUserActivity();
-            FormManager.AttachUserActivityHandlers(this);
+            FormManager.CloseCurrentForm();
+            FormManager.Show(new ReaderReturnBook());
         }
 
         private void label4_Click(object sender, EventArgs e)

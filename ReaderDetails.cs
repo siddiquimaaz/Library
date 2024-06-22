@@ -20,6 +20,7 @@ namespace Library
             InitializeComponent();
             currentStudentId = SessionInfo.CurrentStudentId; // Capture the current student ID
             LoadUserDetailsAsync(); // Call the async method to load user details
+            FormManager.AttachUserActivityHandlers(this);
         }
 
         private async Task LoadUserDetailsAsync()
@@ -66,12 +67,14 @@ namespace Library
 
         private void ReaderBackBtn_Click(object? sender, EventArgs? e)
         {
+            FormManager.RecordUserActivity();
             FormManager.CloseCurrentForm();
             FormManager.Show(new home());
         }
 
         private void ReadersDetailsCancelBtn_Click(object? sender, EventArgs? e)
         {
+            FormManager.RecordUserActivity();
             FirstNameTxt.Text = string.Empty;
             LastNameTxt.Text = string.Empty;
             PhoneNumberTxt.Text = string.Empty;
@@ -81,6 +84,7 @@ namespace Library
 
         private void BrowseBtn_Click(object? sender, EventArgs? e)
         {
+            FormManager.RecordUserActivity();
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Title = "Select Image";
@@ -121,6 +125,7 @@ namespace Library
 
         private async void ReadersDetailsUpdateBtn_Click(object? sender, EventArgs? e)
         {
+            FormManager.RecordUserActivity();
             // Prompt user to enter the current password
             string enteredPassword = PromptForPassword();
 
@@ -151,14 +156,15 @@ namespace Library
                 passwordForm.Height = 150;
 
                 Label label = new Label() { Left = 50, Top = 20, Text = "Current Password", Width = 300 };
-                TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 280, PasswordChar = '*' };
-                Button confirmation = new Button() { Text = "Ok", Left = 250, Width = 100, Top = 100 };
+                TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 210, PasswordChar = '*' };
+                Button confirmation = new Button() { Text = "Ok", Left = 250, Width = 100, Top = 80 };
 
                 confirmation.Click += (sender, e) =>
                 {
                     password = textBox.Text;
                     passwordForm.DialogResult = DialogResult.OK;
                     passwordForm.Close();
+                    FormManager.RecordUserActivity();
                 };
 
                 passwordForm.Controls.Add(textBox);
@@ -168,6 +174,7 @@ namespace Library
                 passwordForm.AcceptButton = confirmation;
 
                 passwordForm.ShowDialog();
+                FormManager.RecordUserActivity();
             }
 
             return password;

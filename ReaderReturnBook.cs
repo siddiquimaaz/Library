@@ -20,10 +20,13 @@ namespace Library
             currentStudentId = SessionInfo.CurrentStudentId; // Assuming this is correctly set in your application
             InitializeDataGridView();
             Task task = LoadBorrowedBooksAsync(currentStudentId);
+            FormManager.AttachUserActivityHandlers(this);
         }
 
         private void ReturnBookbackbtn_Click(object sender, EventArgs e)
         {
+            FormManager.RecordUserActivity();
+            FormManager.CloseCurrentForm();
             FormManager.Show(new home());
         }
 
@@ -56,8 +59,9 @@ namespace Library
       
         
 
-        private async void BookIDSearchBtn_Click(object sender, EventArgs e)
+        private async void BookIDSearchBtn_Click(object? sender, EventArgs? e)
         {
+            FormManager.RecordUserActivity();
             int bookId;
             if (int.TryParse(BookIdTxt.Text, out bookId))
             {
@@ -133,6 +137,7 @@ namespace Library
 
         private async void ReturnBookBtn_Click(object sender, EventArgs e)
         {
+            FormManager.RecordUserActivity();
             // Check if ReturnBookDataGrid and its DataSource are initialized
             if (ReturnBookDataGrid == null || ReturnBookDataGrid.DataSource == null || !(ReturnBookDataGrid.DataSource is DataTable dataTable))
             {

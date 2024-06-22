@@ -14,42 +14,23 @@ namespace Library
 
         public adminpanel()
         {
+            FormManager.AttachUserActivityHandlers(this);
             InitializeComponent();
             SetupDataGridView();
             this.Load += adminpanel_Load;
-            AttachUserActivityHandlers(this); // Attach activity handlers to the form and its controls
-            FormManager.RecordUserActivity();
-        }
 
-        private void AttachUserActivityHandlers(Control control)
-        {
-            control.Click += UserActivityDetected;
-            control.KeyPress += UserActivityDetected;
-            control.MouseMove += UserActivityDetected;
-            control.KeyDown += UserActivityDetected;
-
-            foreach (Control child in control.Controls)
-            {
-                AttachUserActivityHandlers(child);
-            }
-        }
-
-        private void UserActivityDetected(object sender, EventArgs e)
-        {
-
-            FormManager.RecordUserActivity();
         }
 
         private void iconButton3_Click(object? sender, EventArgs? e)
         {
-            FormManager.AttachUserActivityHandlers(this);
+            FormManager.RecordUserActivity();
             FormManager.CloseCurrentForm();
             FormManager.Show(new BookManagerAdmin());
-            FormManager.RecordUserActivity();
         }
 
         private async void adminpanel_Load(object sender, EventArgs e)
         {
+            FormManager.AttachUserActivityHandlers(this);
             await LoadAllStudentsAsync();
         }
 
@@ -58,10 +39,9 @@ namespace Library
             DialogResult check = MessageBox.Show("Are you sure you want to logout?", "Confirmation Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (check == DialogResult.Yes)
             {
-                FormManager.AttachUserActivityHandlers(this);
+                FormManager.RecordUserActivity();
                 FormManager.CloseCurrentForm();
                 FormManager.Show(new Form1());
-                FormManager.RecordUserActivity();
             }
         }
 
@@ -72,23 +52,29 @@ namespace Library
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
-                    var query = "SELECT * FROM Students";
+                    var query = "SELECT StudentID, FirstName, LastName, Email, PhoneNumber, MembershipExpiration FROM Students";
                     using (var command = new MySqlCommand(query, connection))
                     using (var adapter = new MySqlDataAdapter(command))
                     {
                         var dataTable = new DataTable();
                         adapter.Fill(dataTable);
+
+                        // Debug: Output row count and sample data
+                        Console.WriteLine($"Rows retrieved: {dataTable.Rows.Count}");
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            Console.WriteLine($"{row["StudentID"]}, {row["FirstName"]}, {row["LastName"]}, {row["Email"]}, {row["PhoneNumber"]}, {row["MembershipExpiration"]}");
+                        }
+
                         if (dataTable.Rows.Count > 0)
                         {
                             adminDataGridView.DataSource = dataTable;
                             adminDataGridView.Refresh();
                             MessageBox.Show("Data loaded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Console.WriteLine("Data loaded successfully.");
                         }
                         else
                         {
                             MessageBox.Show("No students found.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Console.WriteLine("No data found.");
                         }
                     }
                 }
@@ -100,20 +86,21 @@ namespace Library
             }
         }
 
+
         private void showAllStdBtn_Click(object sender, EventArgs e) { }
 
         private void ShowBorrrwedBookAdmin_Click(object sender, EventArgs e)
         {
-            FormManager.AttachUserActivityHandlers(this);
-            FormManager.Show(new AdminBorrowedBook());
             FormManager.RecordUserActivity();
+            FormManager.CloseCurrentForm();
+            FormManager.Show(new AdminBorrowedBook());
         }
 
         private void RemoveStdBtn_Click(object sender, EventArgs e)
         {
-            FormManager.AttachUserActivityHandlers(this);
-            FormManager.Show(new AdminRemoveStudent());
             FormManager.RecordUserActivity();
+            FormManager.CloseCurrentForm();
+            FormManager.Show(new AdminRemoveStudent());
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e) { }
@@ -132,11 +119,12 @@ namespace Library
                 adminDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 adminDataGridView.ReadOnly = true;
 
-                AddColumnIfMissing("StudentID", "Student ID");
-                AddColumnIfMissing("FirstName", "First Name");
-                AddColumnIfMissing("LastName", "Last Name");
-                AddColumnIfMissing("Email", "Email");
-                AddColumnIfMissing("PhoneNumber", "Phone Number");
+                AddColumnIfMissing("StudentID", "Student ID", "StudentID");
+                AddColumnIfMissing("FirstName", "First Name", "FirstName");
+                AddColumnIfMissing("LastName", "Last Name", "LastName");
+                AddColumnIfMissing("Email", "Email", "Email");
+                AddColumnIfMissing("PhoneNumber", "Phone Number", "PhoneNumber");
+                AddColumnIfMissing("MembershipExpiration", "Membership Expiration", "MembershipExpiration");
 
                 adminDataGridView.Refresh();
             }
@@ -146,18 +134,30 @@ namespace Library
             }
         }
 
-        private void AddColumnIfMissing(string columnName, string headerText)
+        private void AddColumnIfMissing(string columnName, string headerText, string dataPropertyName)
         {
             if (!adminDataGridView.Columns.Contains(columnName))
             {
-                adminDataGridView.Columns.Add(columnName, headerText);
+                var column = new DataGridViewTextBoxColumn
+                {
+                    Name = columnName,
+                    HeaderText = headerText,
+                    DataPropertyName = dataPropertyName // Bind this column to the corresponding property
+                };
+                adminDataGridView.Columns.Add(column);
             }
         }
+
 
         private void CloseAdminPanel_Click(object sender, EventArgs e)
         {
             FormManager.ClearSession();
             Application.Exit();
+        }
+
+        private void adminDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

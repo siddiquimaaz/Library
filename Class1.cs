@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
@@ -15,8 +14,10 @@ namespace Library
         private static System.Timers.Timer inactivityTimer;
         private static DateTime lastActivityTime;
         private static System.Timers.Timer membershipCheckTimer;
+        private static System.Timers.Timer overdueBooksCheckTimer;
         private const int InactivityLimitMinutes = 5; // Inactivity limit in minutes
         private const int MembershipExpirationDays = 1; // Membership expiration duration in days
+        private static UserManager userManager;
 
         static FormManager()
         {
@@ -26,6 +27,12 @@ namespace Library
             membershipCheckTimer = new System.Timers.Timer(60000); // Check membership expiration every minute
             membershipCheckTimer.Elapsed += OnMembershipCheck;
             membershipCheckTimer.Start(); // Start membership check timer
+
+            overdueBooksCheckTimer = new System.Timers.Timer(60000); // Check for overdue books every minute
+            overdueBooksCheckTimer.Elapsed += OnOverdueBooksCheck;
+            overdueBooksCheckTimer.Start(); // Start overdue books check timer
+
+            userManager = new UserManager();
         }
 
         public static void Show(Form newForm)
@@ -147,6 +154,21 @@ namespace Library
             ResetInactivityTimer();
         }
 
+        private static async void OnOverdueBooksCheck(object sender, ElapsedEventArgs e)
+        {
+            if (IsSessionActive())
+            {
+                try
+                {
+                    await userManager.ReturnOverdueBooksAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error checking for overdue books: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private static async Task CloseAllFormsAsync()
         {
             try
@@ -194,6 +216,7 @@ namespace Library
                 control.KeyPress += UserActivityDetected;
                 control.MouseMove += UserActivityDetected;
                 control.KeyDown += UserActivityDetected;
+                control.MouseHover += UserActivityDetected;
 
                 // Recursively attach to child controls if needed
                 if (control.Controls.Count > 0)

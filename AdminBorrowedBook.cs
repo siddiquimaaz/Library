@@ -19,6 +19,7 @@ namespace Library
 
         public AdminBorrowedBook()
         {
+            FormManager.AttachUserActivityHandlers(this);
             InitializeComponent();
             BorrowBookSearch.Click += new EventHandler(BorrowBookSearch_Click);
             DeleteBoorowBookBtn.Click += new EventHandler(DeleteBoorowBookBtn_Click);
@@ -26,13 +27,13 @@ namespace Library
             BorrowedBookAdminPanel.MultiSelect = false;
             CustomizeDataGridView();
             this.Load += AdminBorrowedBook_Load;
-            FormManager.RecordUserActivity();
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e) { }
 
         private async void DeleteBoorowBookBtn_Click(object? sender, EventArgs? e)
         {
+            FormManager.RecordUserActivity();
             if (BorrowedBookAdminPanel.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select a book record to delete.");
@@ -79,6 +80,7 @@ namespace Library
         }
         private async void BorrowBookSearch_Click(object? sender, EventArgs? e)
         {
+            FormManager.RecordUserActivity();
             string bookName = BorrowedBook.Text;
             if (string.IsNullOrEmpty(bookName))
             {
@@ -189,9 +191,8 @@ namespace Library
 
         private async void AdminBorrowedBook_Load(object sender, EventArgs e)
         {
-
+            FormManager.AttachUserActivityHandlers(this);
             await ShowAllBorrowedBooksAsync();
-            FormManager.RecordUserActivity();
         }
 
         private async Task ShowAllBorrowedBooksAsync()
@@ -226,44 +227,20 @@ namespace Library
             }
         }
 
-        private void BorrowedBookAdminPanel_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        private void BorrowedBookAdminPanel_CellContentClick(object sender, DataGridViewCellEventArgs e){}
 
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void label2_Click(object sender, EventArgs e){}
 
         private void AdminBorrowedBackBtn_Click(object sender, EventArgs e)
         {
+            FormManager.RecordUserActivity();
             FormManager.CloseCurrentForm();
             FormManager.Show(new adminpanel());
-            FormManager.RecordUserActivity();
         }
 
         private void AdminBorrowedBookCloseLabel_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
-        }
-        private void AttachUserActivityHandlers(Control control)
-        {
-            control.Click += UserActivityDetected;
-            control.KeyPress += UserActivityDetected;
-            control.MouseMove += UserActivityDetected;
-            control.KeyDown += UserActivityDetected;
-
-            foreach (Control child in control.Controls)
-            {
-                AttachUserActivityHandlers(child);
-            }
-        }
-
-        private void UserActivityDetected(object sender, EventArgs e)
-        {
-
-            FormManager.RecordUserActivity();
         }
     }
 }
