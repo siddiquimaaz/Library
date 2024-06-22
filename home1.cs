@@ -127,6 +127,7 @@ namespace Library
         {
             FormManager.Show(new ReaderReturnBook());
             FormManager.RecordUserActivity();
+            FormManager.AttachUserActivityHandlers(this);
         }
 
         private void label4_Click(object sender, EventArgs e)
