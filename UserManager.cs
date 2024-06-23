@@ -84,7 +84,9 @@ namespace Library
                     await connection.OpenAsync();
 
                     string selectOverdueBooksQuery = @"SELECT BookID, StudentID FROM BorrowedBooks 
-                                                       WHERE DueDate <= @CurrentTime AND ReturnedDate IS NULL";
+                                               WHERE DueDate <= @CurrentTime AND ReturnedDate IS NULL";
+
+                    List<(int bookId, int studentId)> overdueBooks = new List<(int, int)>();
 
                     using (var cmd = new MySqlCommand(selectOverdueBooksQuery, connection))
                     {
@@ -96,10 +98,28 @@ namespace Library
                             {
                                 int bookId = reader.GetInt32("BookID");
                                 int studentId = reader.GetInt32("StudentID");
-
-                                await ReturnAndSetBookAvailableAsync(connection, bookId, studentId);
+                                overdueBooks.Add((bookId, studentId));
                             }
                         }
+                    }
+
+                    if (overdueBooks.Count > 0)
+                    {
+                        MessageBox.Show($"Collected {overdueBooks.Count} overdue books. Returning them now...");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No overdue books found.");
+                    }
+
+                    foreach (var overdueBook in overdueBooks)
+                    {
+                        await ReturnAndSetBookAvailableAsync(connection, overdueBook.bookId, overdueBook.studentId);
+                    }
+
+                    if (overdueBooks.Count > 0)
+                    {
+                        MessageBox.Show("Successfully returned all overdue books and updated their availability.");
                     }
                 }
             }

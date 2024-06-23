@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace Library
 {
@@ -15,7 +16,7 @@ namespace Library
         private static DateTime lastActivityTime;
         private static System.Timers.Timer membershipCheckTimer;
         private static System.Timers.Timer overdueBooksCheckTimer;
-        private const int InactivityLimitMinutes = 5; // Inactivity limit in minutes
+        private const int InactivityLimitMinutes = 5; // Inactivity limit in minutes (for testing)
         private const int MembershipExpirationDays = 1; // Membership expiration duration in days
         private static UserManager userManager;
 
@@ -61,7 +62,8 @@ namespace Library
         public static void SetSession(int studentId)
         {
             currentStudentId = studentId;
-            membershipExpiration = DateTime.Now.AddDays(MembershipExpirationDays); // Set membership expiration to 1 day from now
+            membershipExpiration = DateTime.Now.AddMinutes(MembershipExpirationDays); // Set membership expiration to 1 day from now
+            Console.WriteLine($"Session started for student {studentId}, membership expires at {membershipExpiration}");
             StartExpirationCheck();
             StartInactivityTimer();
             ResetInactivityTimer();
@@ -69,7 +71,14 @@ namespace Library
 
         public static bool IsSessionActive()
         {
-            return currentStudentId != 0 && DateTime.Now < membershipExpiration;
+            return currentStudentId != 0 && IsMembershipActive();
+        }
+
+        public static bool IsMembershipActive()
+        {
+            bool isActive = DateTime.Now < membershipExpiration;
+            Console.WriteLine($"Membership active: {isActive}, current time: {DateTime.Now}, membership expiration: {membershipExpiration}");
+            return isActive;
         }
 
         public static bool IsMembershipExpiring(int minutesBeforeExpiration)
@@ -101,7 +110,7 @@ namespace Library
 
                 if (!IsSessionActive())
                 {
-                    MessageBox.Show("Your membership has expired.", "Session Expired", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Your Session has been expired.", "Session Expired", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await CloseAllFormsAsync();
                     ClearSession();
                     break;
@@ -139,13 +148,14 @@ namespace Library
             }
         }
 
-        private static void OnMembershipCheck(object sender, ElapsedEventArgs e)
+        private static async void OnMembershipCheck(object sender, ElapsedEventArgs e)
         {
-            if (!IsSessionActive())
+            await userManager.DeleteExpiredMembershipsAsync();
+            if (!IsMembershipActive())
             {
                 MessageBox.Show("Your membership has expired.", "Session Expired", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearSession();
-                CloseAllFormsAsync().GetAwaiter().GetResult();
+                await CloseAllFormsAsync();
             }
         }
 
