@@ -62,7 +62,7 @@ namespace Library
         public static void SetSession(int studentId)
         {
             currentStudentId = studentId;
-            membershipExpiration = DateTime.Now.AddMinutes(MembershipExpirationDays); // Set membership expiration to 1 day from now
+            membershipExpiration = DateTime.Now.AddDays(MembershipExpirationDays); // Set membership expiration to 1 day from now
             Console.WriteLine($"Session started for student {studentId}, membership expires at {membershipExpiration}");
             StartExpirationCheck();
             StartInactivityTimer();

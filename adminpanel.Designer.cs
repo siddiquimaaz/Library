@@ -160,6 +160,7 @@
             adminDataGridView.BackgroundColor = Color.White;
             adminDataGridView.BorderStyle = BorderStyle.Fixed3D;
             adminDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            adminDataGridView.GridColor = SystemColors.MenuHighlight;
             resources.ApplyResources(adminDataGridView, "adminDataGridView");
             adminDataGridView.Name = "adminDataGridView";
             adminDataGridView.ReadOnly = true;
@@ -169,13 +170,13 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(245, 244, 241);
+            panel2.Controls.Add(adminDataGridView);
             panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(RemoveStdBtn);
             panel2.Controls.Add(AdminLogOutBtn);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(ShowBorrrwedBookAdmin);
             panel2.Controls.Add(AddBookBtnAdmin);
-            panel2.Controls.Add(adminDataGridView);
             resources.ApplyResources(panel2, "panel2");
             panel2.Name = "panel2";
             panel2.Paint += panel2_Paint;
