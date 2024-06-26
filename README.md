@@ -10,7 +10,8 @@ This Library Management System (LMS) is a collaborative university project desig
 - **Search and Filter**: Users can search for books based on various criteria like title, author, or genre, and results can be filtered accordingly.
 - **Admin Panel**: A dedicated interface for administrators to manage users, books, and view borrowing statistics.
 - **User Profile Management**: Students can update their profiles, including password changes and photo updates.
-- **Notification System**: Automated notifications for due dates, book availability, and other alerts.
+## Future Contribution
+-  **Notification System**: Automated notifications for due dates, book availability, and other alerts.
 
 ## Technologies Used
 - **C# / .NET Framework**: For creating the application logic and user interface using Windows Forms.
