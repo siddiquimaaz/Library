@@ -20,7 +20,7 @@ This Library Management System (LMS) is a collaborative university project desig
 ## Setup and Installation
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/LMS-Project.git
+   git clone https://github.com/siddiquimaaz/LMS-Project.git
    ```
 2. **Database Setup**:
    - Install MySQL and set up the `LMS` database using the provided SQL scripts in the `DatabaseScripts` folder.
