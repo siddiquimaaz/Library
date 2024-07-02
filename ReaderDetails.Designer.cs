@@ -126,7 +126,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(863, 285);
+            label3.Location = new Point(788, 285);
             label3.Name = "label3";
             label3.Size = new Size(85, 20);
             label3.TabIndex = 20;
@@ -135,7 +135,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(863, 331);
+            label4.Location = new Point(788, 331);
             label4.Name = "label4";
             label4.Size = new Size(84, 20);
             label4.TabIndex = 21;
@@ -144,7 +144,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(863, 375);
+            label5.Location = new Point(788, 375);
             label5.Name = "label5";
             label5.Size = new Size(113, 20);
             label5.TabIndex = 22;
@@ -153,7 +153,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(863, 419);
+            label6.Location = new Point(788, 419);
             label6.Name = "label6";
             label6.Size = new Size(49, 20);
             label6.TabIndex = 23;
@@ -162,7 +162,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(863, 470);
+            label7.Location = new Point(788, 470);
             label7.Name = "label7";
             label7.Size = new Size(73, 20);
             label7.TabIndex = 24;
@@ -173,7 +173,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Verdana", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = Color.FromArgb(0, 102, 140);
-            label8.Location = new Point(896, 98);
+            label8.Location = new Point(927, 68);
             label8.Name = "label8";
             label8.Size = new Size(237, 53);
             label8.TabIndex = 25;
@@ -190,10 +190,10 @@
             ReadersDetailsUpdateBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             ReadersDetailsUpdateBtn.IconSize = 20;
             ReadersDetailsUpdateBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            ReadersDetailsUpdateBtn.Location = new Point(863, 674);
+            ReadersDetailsUpdateBtn.Location = new Point(1109, 667);
             ReadersDetailsUpdateBtn.Margin = new Padding(3, 4, 3, 4);
             ReadersDetailsUpdateBtn.Name = "ReadersDetailsUpdateBtn";
-            ReadersDetailsUpdateBtn.Size = new Size(103, 36);
+            ReadersDetailsUpdateBtn.Size = new Size(91, 36);
             ReadersDetailsUpdateBtn.TabIndex = 31;
             ReadersDetailsUpdateBtn.Text = "Update";
             ReadersDetailsUpdateBtn.TextAlign = ContentAlignment.MiddleRight;
@@ -211,7 +211,7 @@
             ReadersDetailsCancelBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             ReadersDetailsCancelBtn.IconSize = 24;
             ReadersDetailsCancelBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            ReadersDetailsCancelBtn.Location = new Point(1109, 674);
+            ReadersDetailsCancelBtn.Location = new Point(998, 667);
             ReadersDetailsCancelBtn.Margin = new Padding(3, 4, 3, 4);
             ReadersDetailsCancelBtn.Name = "ReadersDetailsCancelBtn";
             ReadersDetailsCancelBtn.Size = new Size(91, 36);
@@ -249,6 +249,7 @@
             // FirstNameTxt
             // 
             FirstNameTxt.BackColor = Color.FromArgb(224, 224, 224);
+            FirstNameTxt.BorderStyle = BorderStyle.FixedSingle;
             FirstNameTxt.Font = new Font("Verdana", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
             FirstNameTxt.ForeColor = Color.FromArgb(0, 0, 0, 7);
             FirstNameTxt.Location = new Point(998, 282);
@@ -262,6 +263,7 @@
             // LastNameTxt
             // 
             LastNameTxt.BackColor = Color.FromArgb(224, 224, 224);
+            LastNameTxt.BorderStyle = BorderStyle.FixedSingle;
             LastNameTxt.Font = new Font("Verdana", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
             LastNameTxt.ForeColor = Color.FromArgb(0, 0, 0, 7);
             LastNameTxt.Location = new Point(998, 328);
@@ -275,6 +277,7 @@
             // PasswordTxt
             // 
             PasswordTxt.BackColor = Color.FromArgb(224, 224, 224);
+            PasswordTxt.BorderStyle = BorderStyle.FixedSingle;
             PasswordTxt.Font = new Font("Verdana", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
             PasswordTxt.ForeColor = Color.FromArgb(0, 0, 0, 7);
             PasswordTxt.Location = new Point(998, 467);
@@ -288,6 +291,7 @@
             // EmailTxt
             // 
             EmailTxt.BackColor = Color.FromArgb(224, 224, 224);
+            EmailTxt.BorderStyle = BorderStyle.FixedSingle;
             EmailTxt.Font = new Font("Verdana", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
             EmailTxt.ForeColor = Color.FromArgb(0, 0, 0, 7);
             EmailTxt.Location = new Point(998, 416);
@@ -301,6 +305,7 @@
             // PhoneNumberTxt
             // 
             PhoneNumberTxt.BackColor = Color.FromArgb(224, 224, 224);
+            PhoneNumberTxt.BorderStyle = BorderStyle.FixedSingle;
             PhoneNumberTxt.Font = new Font("Verdana", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
             PhoneNumberTxt.ForeColor = Color.FromArgb(0, 0, 0, 7);
             PhoneNumberTxt.Location = new Point(998, 372);
@@ -334,6 +339,7 @@
             // ReWritePasswordTxt
             // 
             ReWritePasswordTxt.BackColor = Color.FromArgb(224, 224, 224);
+            ReWritePasswordTxt.BorderStyle = BorderStyle.FixedSingle;
             ReWritePasswordTxt.Font = new Font("Verdana", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
             ReWritePasswordTxt.ForeColor = Color.FromArgb(0, 0, 0, 7);
             ReWritePasswordTxt.Location = new Point(998, 515);
@@ -347,7 +353,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(863, 518);
+            label9.Location = new Point(788, 518);
             label9.Name = "label9";
             label9.Size = new Size(129, 20);
             label9.TabIndex = 41;
@@ -356,10 +362,10 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.BackColor = Color.FromArgb(0, 102, 140);
+            label10.BackColor = Color.Transparent;
             label10.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.ForeColor = Color.White;
-            label10.Location = new Point(863, 634);
+            label10.ForeColor = Color.Black;
+            label10.Location = new Point(788, 626);
             label10.Name = "label10";
             label10.Size = new Size(166, 23);
             label10.TabIndex = 44;
@@ -376,10 +382,10 @@
             BrowseBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             BrowseBtn.IconSize = 24;
             BrowseBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            BrowseBtn.Location = new Point(1102, 620);
+            BrowseBtn.Location = new Point(1102, 616);
             BrowseBtn.Margin = new Padding(3, 4, 3, 4);
             BrowseBtn.Name = "BrowseBtn";
-            BrowseBtn.Size = new Size(98, 37);
+            BrowseBtn.Size = new Size(98, 33);
             BrowseBtn.TabIndex = 45;
             BrowseBtn.Text = "Browse";
             BrowseBtn.TextAlign = ContentAlignment.MiddleRight;
@@ -390,7 +396,7 @@
             // 
             ReaderPic.BackColor = Color.Transparent;
             ReaderPic.InitialImage = (Image)resources.GetObject("ReaderPic.InitialImage");
-            ReaderPic.Location = new Point(985, 153);
+            ReaderPic.Location = new Point(788, 150);
             ReaderPic.Margin = new Padding(3, 2, 3, 2);
             ReaderPic.Name = "ReaderPic";
             ReaderPic.Size = new Size(120, 100);
@@ -414,11 +420,11 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label11.ForeColor = Color.Black;
-            label11.Location = new Point(863, 568);
+            label11.Location = new Point(788, 568);
             label11.Name = "label11";
-            label11.Size = new Size(122, 20);
+            label11.Size = new Size(162, 20);
             label11.TabIndex = 47;
-            label11.Text = "Publication Date:";
+            label11.Text = "Membership Due Date:";
             // 
             // ReaderDetails
             // 
