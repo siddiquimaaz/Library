@@ -156,9 +156,9 @@
             backbtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
             backbtn.IconSize = 20;
             backbtn.ImageAlign = ContentAlignment.MiddleLeft;
-            backbtn.Location = new Point(32, 734);
+            backbtn.Location = new Point(176, 447);
             backbtn.Name = "backbtn";
-            backbtn.Size = new Size(73, 41);
+            backbtn.Size = new Size(83, 29);
             backbtn.TabIndex = 8;
             backbtn.Text = "Back";
             backbtn.TextAlign = ContentAlignment.MiddleRight;

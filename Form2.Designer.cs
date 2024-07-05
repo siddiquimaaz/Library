@@ -44,9 +44,9 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Verdana", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.FromArgb(31, 58, 95);
-            label1.Location = new Point(49, 38);
+            label1.Location = new Point(56, 51);
             label1.Name = "label1";
-            label1.Size = new Size(478, 35);
+            label1.Size = new Size(616, 45);
             label1.TabIndex = 0;
             label1.Text = "Library Management System";
             label1.TextAlign = ContentAlignment.TopCenter;
@@ -54,25 +54,29 @@
             // panel1
             // 
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 321);
+            panel1.Location = new Point(0, 428);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(570, 29);
+            panel1.Size = new Size(651, 39);
             panel1.TabIndex = 1;
             // 
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(15, 28, 46);
-            panel2.Location = new Point(0, 321);
+            panel2.Location = new Point(0, 428);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(122, 29);
+            panel2.Size = new Size(139, 39);
             panel2.TabIndex = 2;
+            panel2.Paint += panel2_Paint_1;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(188, 89);
+            pictureBox1.Location = new Point(215, 119);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(200, 200);
+            pictureBox1.Size = new Size(229, 267);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
@@ -84,15 +88,16 @@
             // 
             // Form2
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 244, 241);
-            ClientSize = new Size(570, 350);
+            ClientSize = new Size(651, 467);
             Controls.Add(pictureBox1);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form2";
             Text = "Form2";
             Load += Form2_Load;
