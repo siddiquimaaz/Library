@@ -10,8 +10,8 @@ namespace Library
     public partial class ReaderReturnBook : Form
     {
         //string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
-
-        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
+        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=Zain1234;";
+        //string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
         private int currentStudentId;
 
         public ReaderReturnBook()
@@ -56,8 +56,8 @@ namespace Library
             ReturnBookDataGrid.AllowUserToAddRows = false;
         }
 
-      
-        
+
+
 
         private async void BookIDSearchBtn_Click(object? sender, EventArgs? e)
         {
@@ -266,6 +266,11 @@ namespace Library
         {
             FormManager.ClearSession();
             Application.Exit();
+        }
+
+        private void ReaderReturnBook_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

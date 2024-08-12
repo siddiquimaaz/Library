@@ -8,8 +8,8 @@ namespace Library
 {
     public class UserManager
     {
-        private string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
-
+        //private string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
+        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=Zain1234;";
         public async Task<int> RegisterUserAsync(string firstName, string lastName, string email, string hashedPassword, string phoneNumber, byte[] image)
         {
             int studentId = 0;

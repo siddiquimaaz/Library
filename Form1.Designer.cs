@@ -59,7 +59,7 @@
             text1.Margin = new Padding(3, 4, 3, 4);
             text1.Name = "text1";
             text1.PlaceholderText = "Enter username";
-            text1.Size = new Size(228, 23);
+            text1.Size = new Size(228, 20);
             text1.TabIndex = 0;
             text1.TextAlign = HorizontalAlignment.Center;
             // 
@@ -72,7 +72,7 @@
             text2.Margin = new Padding(2, 10, 2, 3);
             text2.Name = "text2";
             text2.PlaceholderText = "Enter your Password";
-            text2.Size = new Size(228, 23);
+            text2.Size = new Size(228, 20);
             text2.TabIndex = 1;
             text2.TextAlign = HorizontalAlignment.Center;
             text2.UseSystemPasswordChar = true;
@@ -85,7 +85,7 @@
             userName.ForeColor = Color.White;
             userName.Location = new Point(854, 243);
             userName.Name = "userName";
-            userName.Size = new Size(92, 17);
+            userName.Size = new Size(76, 13);
             userName.TabIndex = 2;
             userName.Text = "User-Name:";
             // 
@@ -97,7 +97,7 @@
             Pass.ForeColor = Color.White;
             Pass.Location = new Point(854, 290);
             Pass.Name = "Pass";
-            Pass.Size = new Size(81, 17);
+            Pass.Size = new Size(66, 13);
             Pass.TabIndex = 3;
             Pass.Text = "Password:";
             // 
@@ -123,7 +123,7 @@
             hehe.ForeColor = Color.White;
             hehe.Location = new Point(953, 479);
             hehe.Name = "hehe";
-            hehe.Size = new Size(258, 17);
+            hehe.Size = new Size(209, 13);
             hehe.TabIndex = 7;
             hehe.Text = "Don't have account? Register here:";
             // 
@@ -151,7 +151,7 @@
             checkBox1.Location = new Point(1136, 314);
             checkBox1.Margin = new Padding(3, 1, 3, 1);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(141, 21);
+            checkBox1.Size = new Size(115, 17);
             checkBox1.TabIndex = 11;
             checkBox1.Text = "Show Password";
             checkBox1.TextAlign = ContentAlignment.MiddleCenter;
@@ -167,7 +167,7 @@
             checkadmin.Location = new Point(1030, 346);
             checkadmin.Margin = new Padding(3, 1, 3, 1);
             checkadmin.Name = "checkadmin";
-            checkadmin.Size = new Size(74, 21);
+            checkadmin.Size = new Size(62, 17);
             checkadmin.TabIndex = 12;
             checkadmin.Text = "Admin";
             checkadmin.TextAlign = ContentAlignment.MiddleCenter;
@@ -195,7 +195,7 @@
             LoginCloseBtn.ImeMode = ImeMode.NoControl;
             LoginCloseBtn.Location = new Point(1339, 7);
             LoginCloseBtn.Name = "LoginCloseBtn";
-            LoginCloseBtn.Size = new Size(19, 20);
+            LoginCloseBtn.Size = new Size(15, 15);
             LoginCloseBtn.TabIndex = 18;
             LoginCloseBtn.Text = "X";
             LoginCloseBtn.Click += LoginCloseBtn_Click;
@@ -207,7 +207,7 @@
             label4.ForeColor = Color.White;
             label4.Location = new Point(5, 7);
             label4.Name = "label4";
-            label4.Size = new Size(360, 20);
+            label4.Size = new Size(275, 16);
             label4.TabIndex = 17;
             label4.Text = "Library Management System | Login ";
             // 
@@ -218,7 +218,7 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(1470, 7);
             label1.Name = "label1";
-            label1.Size = new Size(19, 20);
+            label1.Size = new Size(15, 15);
             label1.TabIndex = 14;
             label1.Text = "X";
             // 
@@ -243,7 +243,7 @@
             label2.ForeColor = Color.FromArgb(224, 224, 224);
             label2.Location = new Point(961, 124);
             label2.Name = "label2";
-            label2.Size = new Size(191, 54);
+            label2.Size = new Size(154, 45);
             label2.TabIndex = 15;
             label2.Text = "Welcome";
             label2.Click += label2_Click;
@@ -264,7 +264,7 @@
             label3.ForeColor = Color.White;
             label3.Location = new Point(63, 92);
             label3.Name = "label3";
-            label3.Size = new Size(569, 106);
+            label3.Size = new Size(451, 84);
             label3.TabIndex = 0;
             label3.Text = "LIBRARY MANAGEMENT \r\nSYSTEM";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -272,7 +272,7 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 23F);
+            AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(15, 28, 46);
             BackgroundImageLayout = ImageLayout.Stretch;
@@ -300,6 +300,7 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LMS";
+            Load += Form1_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

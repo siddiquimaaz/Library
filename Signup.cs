@@ -21,8 +21,8 @@ namespace Library
 {
     public partial class Signup : Form
     {
-         private string connectionString = "server=127.0.0.1;port=3306;database=LMS;uid=root;pwd=maazsiddiqui12;";
-       
+        //private string connectionString = "server=127.0.0.1;port=3306;database=LMS;uid=root;pwd=maazsiddiqui12;";
+        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=Zain1234;";
         //private string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
 
         private UserManager userManager;

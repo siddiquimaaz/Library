@@ -11,8 +11,8 @@ namespace Library
     public partial class AdminRemoveStudent : Form
     {
         //string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
-
-        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
+        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=Zain1234;";
+        //string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
         private readonly string logFilePath = "student_termination_log.txt";
 
         public AdminRemoveStudent()

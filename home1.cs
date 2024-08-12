@@ -10,9 +10,9 @@ namespace Library
 {
     public partial class home : Form
     {
-        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
+        //string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
         //string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
-
+        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=Zain1234;";
         public home()
         {
             InitializeComponent();

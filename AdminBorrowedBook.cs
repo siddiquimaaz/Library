@@ -14,8 +14,8 @@ namespace Library
     public partial class AdminBorrowedBook : Form
     {
         //string connectionString = "Server=sql5.freesqldatabase.com;Database=sql5714226;Uid=sql5714226;Pwd=IgWUKSnxY1;Port=3306;";
-
-        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
+        string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=Zain1234;";
+        //string connectionString = "server=127.0.0.1;port=3306;database=LMS;user=root;password=maazsiddiqui12;";
 
         public AdminBorrowedBook()
         {
@@ -227,9 +227,9 @@ namespace Library
             }
         }
 
-        private void BorrowedBookAdminPanel_CellContentClick(object sender, DataGridViewCellEventArgs e){}
+        private void BorrowedBookAdminPanel_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
 
-        private void label2_Click(object sender, EventArgs e){}
+        private void label2_Click(object sender, EventArgs e) { }
 
         private void AdminBorrowedBackBtn_Click(object sender, EventArgs e)
         {
@@ -241,6 +241,11 @@ namespace Library
         private void AdminBorrowedBookCloseLabel_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
+        }
+
+        private void AdminBorrowedBook_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
