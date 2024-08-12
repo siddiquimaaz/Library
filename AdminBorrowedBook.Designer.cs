@@ -162,10 +162,12 @@
             // BorrowedBookAdminPanel
             // 
             BorrowedBookAdminPanel.BackgroundColor = Color.White;
-            BorrowedBookAdminPanel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            BorrowedBookAdminPanel.ColumnHeadersHeight = 29;
+            BorrowedBookAdminPanel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             BorrowedBookAdminPanel.Location = new Point(352, 56);
             BorrowedBookAdminPanel.Margin = new Padding(3, 4, 3, 4);
             BorrowedBookAdminPanel.Name = "BorrowedBookAdminPanel";
+            BorrowedBookAdminPanel.ReadOnly = true;
             BorrowedBookAdminPanel.RowHeadersWidth = 51;
             BorrowedBookAdminPanel.RowTemplate.Height = 25;
             BorrowedBookAdminPanel.Size = new Size(1205, 884);

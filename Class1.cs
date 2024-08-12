@@ -16,7 +16,7 @@ namespace Library
         private static DateTime lastActivityTime;
         private static System.Timers.Timer membershipCheckTimer;
         private static System.Timers.Timer overdueBooksCheckTimer;
-        private const int InactivityLimitMinutes = 5; // Inactivity limit in minutes (for testing)
+        private const int InactivityLimitMinutes = 10; // Inactivity limit in minutes (for testing)
         private const int MembershipExpirationDays = 1; // Membership expiration duration in days
         private static UserManager userManager;
 
